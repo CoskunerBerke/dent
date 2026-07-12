@@ -51,20 +51,19 @@ export default function CinematicStats() {
     <section
       ref={containerRef}
       id="istatistikler"
-      className="relative py-16 lg:py-24 bg-[#04090d] overflow-hidden"
+      className="relative w-full bg-[#04090d] border-t border-b border-[rgba(202,168,105,0.18)] py-12 lg:py-0 lg:min-h-[180px] flex items-center"
     >
-      {/* Top clean divider line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--color-border)] to-transparent" />
-
-      <div className="max-w-[1400px] mx-auto px-8 lg:px-20 relative z-10">
-        {/* Clean, evenly spaced 4-column horizontal stats row */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 text-center lg:text-left">
+      <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 lg:px-[64px] relative z-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 items-center">
           {STATS.map((stat, i) => (
             <div
               key={i}
-              className="flex flex-col items-center lg:items-start justify-center lg:border-l lg:border-[var(--color-border)] lg:pl-10 first:border-none first:pl-0"
+              className="relative flex flex-col items-center lg:items-start justify-center"
             >
-              <p className="font-display text-4xl lg:text-5xl text-[var(--color-accent)] font-light tracking-tight">
+              <p 
+                className="font-display text-[var(--color-accent)] font-light tracking-tight"
+                style={{ fontSize: "clamp(48px, 5vw, 76px)", lineHeight: "0.95" }}
+              >
                 <span
                   ref={(el) => {
                     countersRef.current[i] = el;
@@ -75,9 +74,14 @@ export default function CinematicStats() {
                 </span>
                 <span>{stat.suffix}</span>
               </p>
-              <p className="text-[9px] tracking-[0.25em] uppercase text-[var(--color-muted)] mt-2 font-medium">
+              <p className="text-[11px] tracking-[0.22em] uppercase text-[#f0ebe3]/70 mt-[14px] font-medium">
                 {stat.label}
               </p>
+              
+              {/* Subtle vertical separator for desktop */}
+              {i < 3 && (
+                <div className="hidden lg:block absolute right-[-24px] top-1/2 -translate-y-1/2 w-px h-12 bg-[rgba(202,168,105,0.15)]" />
+              )}
             </div>
           ))}
         </div>
