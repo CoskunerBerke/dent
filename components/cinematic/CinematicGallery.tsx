@@ -36,24 +36,21 @@ export default function CinematicGallery() {
       const viewWidth = window.innerWidth;
       const maxScroll = totalWidth - viewWidth;
       
-      // We multiply the scroll distance by 2.2 to make horizontal scrolling slower,
-      // more deliberate, premium and highly controllable.
       const scrollDistance = maxScroll * 2.2;
 
-      const animation = gsap.to(track, {
+      gsap.to(track, {
         x: -maxScroll,
         ease: "none",
         scrollTrigger: {
           trigger: pinnedContainerRef.current,
-          start: "top top",
+          start: "top 80px", // Pin exactly below the 80px navbar to prevent overlaps
           end: () => `+=${scrollDistance}`,
           pin: true,
           pinSpacing: true,
-          scrub: 1.5, // slightly higher scrub duration for silk-smooth damping
+          scrub: 1.5,
           anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
-            // Track active slide based on scroll progress
             const progress = self.progress;
             const step = 1 / (GALLERY_ITEMS.length - 1);
             const currentItem = Math.min(
@@ -66,7 +63,6 @@ export default function CinematicGallery() {
       });
     }, sectionRef);
 
-    // Initial cursor setup
     gsap.set(cursorRef.current, { scale: 0, opacity: 0 });
 
     return () => ctx.revert();
@@ -106,17 +102,17 @@ export default function CinematicGallery() {
       {/* Premium Glassmorphic Custom Follower Cursor */}
       <div
         ref={cursorRef}
-        className="fixed pointer-events-none z-[9999] hidden lg:flex items-center justify-center border border-[rgba(202,168,105,0.4)] bg-[rgba(4,9,12,0.85)] backdrop-blur-[8px] shadow-[0_15px_35px_rgba(0,0,0,0.5)]"
+        className="fixed pointer-events-none z-[9999] hidden lg:flex items-center justify-center border border-[rgba(202,168,105,0.35)] bg-[rgba(4,9,12,0.85)] backdrop-blur-[6px] shadow-[0_15px_35px_rgba(0,0,0,0.5)]"
         style={{
-          width: 80,
-          height: 80,
+          width: 76,
+          height: 76,
           borderRadius: "50%",
           left: 0,
           top: 0,
           transform: "translate(-50%, -50%)",
         }}
       >
-        <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-accent)] font-semibold">
+        <span className="text-[9px] tracking-[0.25em] uppercase text-[var(--color-accent)] font-medium">
           Gör
         </span>
       </div>
@@ -124,24 +120,24 @@ export default function CinematicGallery() {
       {/* Pinned horizontal wrapper */}
       <div
         ref={pinnedContainerRef}
-        className="w-full min-h-screen flex flex-col justify-center py-20 lg:py-0"
+        className="w-full pt-16 pb-20 lg:pt-[100px] lg:pb-[110px]"
       >
         {/* Section title container */}
-        <div className="w-full max-w-[1400px] mx-auto px-8 lg:px-20 mb-12 lg:mb-16">
+        <div className="w-full max-w-[1400px] mx-auto px-8 lg:px-20 mb-8 lg:mb-12">
           <div className="flex items-end justify-between">
             <div>
               <p className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-3 flex items-center gap-4">
                 <span className="w-8 h-[1px] bg-[var(--color-accent)]" />
                 DİJİTAL GÜLÜŞ GALERİSİ
               </p>
-              <h2 className="font-display text-[7vw] lg:text-[4vw] font-light text-[var(--color-text)] leading-[1.1]"
+              <h2 className="font-display text-[6vw] lg:text-[3.2vw] font-light text-[var(--color-text)] leading-tight"
                   style={{ letterSpacing: "-0.02em" }}>
                 Seçili Vakalarımız
               </h2>
             </div>
             
             {/* Elegant active slide index counter */}
-            <div className="hidden lg:flex items-baseline gap-2 font-mono text-[14px]">
+            <div className="hidden lg:flex items-baseline gap-2 font-mono text-[13px]">
               <span className="text-[var(--color-accent)] font-semibold">
                 {(activeIndex + 1).toString().padStart(2, "0")}
               </span>
@@ -156,7 +152,7 @@ export default function CinematicGallery() {
         {/* Desktop: Horizontal container */}
         <div
           ref={trackRef}
-          className="hidden lg:flex gap-12 px-[25vw]" // cömert yan boşluklar
+          className="hidden lg:flex gap-10 px-[25vw]"
           style={{ width: "max-content" }}
         >
           {GALLERY_ITEMS.map((item, index) => (
@@ -169,7 +165,7 @@ export default function CinematicGallery() {
         </div>
 
         {/* Mobile: Vertical list */}
-        <div className="lg:hidden flex flex-col gap-8 px-6 pb-12">
+        <div className="lg:hidden flex flex-col gap-8 px-6 pb-6">
           {GALLERY_ITEMS.map((item) => (
             <MobileGalleryCard key={item.num} item={item} />
           ))}
@@ -187,11 +183,11 @@ function GalleryCard({ item, isActive }: { item: typeof GALLERY_ITEMS[0]; isActi
       ref={cardRef}
       className="relative flex-shrink-0 overflow-hidden border transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]"
       style={{ 
-        width: "clamp(300px, 25vw, 420px)", 
-        height: "clamp(400px, 55vh, 560px)",
+        width: "clamp(260px, 18vw, 340px)", 
+        height: "clamp(350px, 46vh, 450px)",
         borderColor: isActive ? "rgba(202,168,105,0.4)" : "rgba(255,255,255,0.05)",
-        opacity: isActive ? 1 : 0.35,
-        transform: isActive ? "scale(1.04)" : "scale(0.96)",
+        opacity: isActive ? 1 : 0.3,
+        transform: isActive ? "scale(1.03)" : "scale(0.97)",
       }}
     >
       {/* Image */}
@@ -202,7 +198,7 @@ function GalleryCard({ item, isActive }: { item: typeof GALLERY_ITEMS[0]; isActi
         unoptimized
         className="object-cover transition-all duration-1000"
         style={{ 
-          filter: isActive ? "grayscale(0%)" : "grayscale(30%) blur(1px)",
+          filter: isActive ? "grayscale(0%)" : "grayscale(40%) blur(1px)",
           transform: isActive ? "scale(1.02)" : "scale(1.0)",
         }}
       />
@@ -211,23 +207,23 @@ function GalleryCard({ item, isActive }: { item: typeof GALLERY_ITEMS[0]; isActi
         className="absolute inset-0 transition-opacity duration-1000"
         style={{ 
           background: "linear-gradient(to top, rgba(4,9,12,0.96) 0%, rgba(4,9,12,0.4) 50%, transparent 100%)",
-          opacity: isActive ? 1 : 0.8,
+          opacity: isActive ? 1 : 0.85,
         }} 
       />
 
       {/* Info details */}
       <div 
-        className="absolute bottom-0 left-0 right-0 p-8 transition-transform duration-700"
+        className="absolute bottom-0 left-0 right-0 p-6 lg:p-8 transition-transform duration-700"
         style={{
           transform: isActive ? "translateY(0)" : "translateY(10px)",
         }}
       >
         <p className="text-[9px] tracking-[0.25em] uppercase text-[var(--color-accent)] mb-2">{item.cat}</p>
-        <h3 className="font-display text-base lg:text-lg font-light text-[var(--color-text)] leading-snug">{item.title}</h3>
+        <h3 className="font-display text-sm lg:text-base font-light text-[var(--color-text)] leading-snug">{item.title}</h3>
       </div>
 
       {/* Top index marker */}
-      <div className="absolute top-6 left-6">
+      <div className="absolute top-5 left-5">
         <span className="font-mono text-[9px] text-[var(--color-accent)] tracking-widest opacity-60">{item.num}</span>
       </div>
     </div>
