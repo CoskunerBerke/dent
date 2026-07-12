@@ -22,6 +22,8 @@ export default function CinematicGallery() {
   const trackRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const isMobileRef = useRef(false);
+  
+  const [activeIndex, setActiveIndex] = useState(0);
   const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
@@ -29,25 +31,42 @@ export default function CinematicGallery() {
     if (isMobileRef.current || !pinnedContainerRef.current || !trackRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Pin the inner wrapper instead of the root section element.
-      // This prevents React from losing track of DOM child nodes when cleaning up pins.
-      gsap.to(trackRef.current, {
-        x: () => -(trackRef.current!.scrollWidth - window.innerWidth),
+      const track = trackRef.current!;
+      const totalWidth = track.scrollWidth;
+      const viewWidth = window.innerWidth;
+      const maxScroll = totalWidth - viewWidth;
+      
+      // We multiply the scroll distance by 2.2 to make horizontal scrolling slower,
+      // more deliberate, premium and highly controllable.
+      const scrollDistance = maxScroll * 2.2;
+
+      const animation = gsap.to(track, {
+        x: -maxScroll,
         ease: "none",
         scrollTrigger: {
           trigger: pinnedContainerRef.current,
           start: "top top",
-          end: () => `+=${trackRef.current!.scrollWidth - window.innerWidth}`,
+          end: () => `+=${scrollDistance}`,
           pin: true,
           pinSpacing: true,
-          scrub: 1,
+          scrub: 1.5, // slightly higher scrub duration for silk-smooth damping
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            // Track active slide based on scroll progress
+            const progress = self.progress;
+            const step = 1 / (GALLERY_ITEMS.length - 1);
+            const currentItem = Math.min(
+              Math.max(Math.round(progress / step), 0),
+              GALLERY_ITEMS.length - 1
+            );
+            setActiveIndex(currentItem);
+          },
         },
       });
     }, sectionRef);
 
-    // Initial state for cursor
+    // Initial cursor setup
     gsap.set(cursorRef.current, { scale: 0, opacity: 0 });
 
     return () => ctx.revert();
@@ -58,7 +77,7 @@ export default function CinematicGallery() {
     gsap.to(cursorRef.current, {
       x: e.clientX,
       y: e.clientY,
-      duration: 0.2,
+      duration: 0.3,
       ease: "power2.out",
     });
   };
@@ -79,66 +98,78 @@ export default function CinematicGallery() {
     <section
       ref={sectionRef}
       id="galeri"
-      className="relative bg-[#060606] overflow-hidden"
+      className="relative bg-[#04090d] overflow-hidden"
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnterSection}
       onMouseLeave={handleMouseLeaveSection}
     >
-      {/* Premium Glassmorphic Follower Cursor */}
+      {/* Premium Glassmorphic Custom Follower Cursor */}
       <div
         ref={cursorRef}
-        className="fixed pointer-events-none z-[9999] hidden lg:flex items-center justify-center border border-[rgba(201,169,110,0.3)] bg-[rgba(6,6,6,0.65)] backdrop-blur-[6px] shadow-2xl"
+        className="fixed pointer-events-none z-[9999] hidden lg:flex items-center justify-center border border-[rgba(202,168,105,0.4)] bg-[rgba(4,9,12,0.85)] backdrop-blur-[8px] shadow-[0_15px_35px_rgba(0,0,0,0.5)]"
         style={{
-          width: 90,
-          height: 90,
+          width: 80,
+          height: 80,
           borderRadius: "50%",
           left: 0,
           top: 0,
           transform: "translate(-50%, -50%)",
         }}
       >
-        <span className="text-[10px] tracking-[0.25em] uppercase text-[var(--color-accent)] font-medium">
+        <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-accent)] font-semibold">
           Gör
         </span>
       </div>
 
-      {/* Inner container to pin */}
+      {/* Pinned horizontal wrapper */}
       <div
         ref={pinnedContainerRef}
-        className="w-full min-h-screen flex flex-col justify-center py-16 lg:py-0"
+        className="w-full min-h-screen flex flex-col justify-center py-20 lg:py-0"
       >
-        {/* Section header */}
-        <div className="w-full max-w-[1400px] mx-auto px-8 lg:px-20 mb-8 lg:mb-12">
+        {/* Section title container */}
+        <div className="w-full max-w-[1400px] mx-auto px-8 lg:px-20 mb-12 lg:mb-16">
           <div className="flex items-end justify-between">
             <div>
               <p className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-3 flex items-center gap-4">
                 <span className="w-8 h-[1px] bg-[var(--color-accent)]" />
-                Klinik Çalışmaları
+                DİJİTAL GÜLÜŞ GALERİSİ
               </p>
-              <h2 className="font-display text-[7vw] lg:text-[4vw] font-light text-[var(--color-text)] leading-[1.1] "
+              <h2 className="font-display text-[7vw] lg:text-[4vw] font-light text-[var(--color-text)] leading-[1.1]"
                   style={{ letterSpacing: "-0.02em" }}>
-                Seçili Galerimiz
+                Seçili Vakalarımız
               </h2>
             </div>
-            <p className="text-[10px] tracking-[0.2em] uppercase text-[var(--color-muted)] hidden lg:block font-mono">
-              [ {GALLERY_ITEMS.length} vaka ]
-            </p>
+            
+            {/* Elegant active slide index counter */}
+            <div className="hidden lg:flex items-baseline gap-2 font-mono text-[14px]">
+              <span className="text-[var(--color-accent)] font-semibold">
+                {(activeIndex + 1).toString().padStart(2, "0")}
+              </span>
+              <span className="text-white/20">/</span>
+              <span className="text-white/40">
+                {GALLERY_ITEMS.length.toString().padStart(2, "0")}
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Desktop: horizontal track */}
+        {/* Desktop: Horizontal container */}
         <div
           ref={trackRef}
-          className="hidden lg:flex gap-8 px-20"
+          className="hidden lg:flex gap-12 px-[25vw]" // cömert yan boşluklar
           style={{ width: "max-content" }}
         >
-          {GALLERY_ITEMS.map((item) => (
-            <GalleryCard key={item.num} item={item} />
+          {GALLERY_ITEMS.map((item, index) => (
+            <GalleryCard 
+              key={item.num} 
+              item={item} 
+              isActive={index === activeIndex} 
+            />
           ))}
         </div>
 
-        {/* Mobile: vertical stack */}
-        <div className="lg:hidden flex flex-col gap-6 px-8 pb-10">
+        {/* Mobile: Vertical list */}
+        <div className="lg:hidden flex flex-col gap-8 px-6 pb-12">
           {GALLERY_ITEMS.map((item) => (
             <MobileGalleryCard key={item.num} item={item} />
           ))}
@@ -148,23 +179,20 @@ export default function CinematicGallery() {
   );
 }
 
-function GalleryCard({ item }: { item: typeof GALLERY_ITEMS[0] }) {
+function GalleryCard({ item, isActive }: { item: typeof GALLERY_ITEMS[0]; isActive: boolean }) {
   const cardRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseEnter = () => {
-    gsap.to(cardRef.current, { scale: 1.015, duration: 0.6, ease: "power2.out" });
-  };
-  const handleMouseLeave = () => {
-    gsap.to(cardRef.current, { scale: 1, duration: 0.6, ease: "power2.out" });
-  };
 
   return (
     <div
       ref={cardRef}
-      className="relative flex-shrink-0 overflow-hidden group border border-[var(--color-border)]"
-      style={{ width: "clamp(290px, 22vw, 380px)", height: "clamp(380px, 54vh, 520px)" }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      className="relative flex-shrink-0 overflow-hidden border transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]"
+      style={{ 
+        width: "clamp(300px, 25vw, 420px)", 
+        height: "clamp(400px, 55vh, 560px)",
+        borderColor: isActive ? "rgba(202,168,105,0.4)" : "rgba(255,255,255,0.05)",
+        opacity: isActive ? 1 : 0.35,
+        transform: isActive ? "scale(1.04)" : "scale(0.96)",
+      }}
     >
       {/* Image */}
       <Image
@@ -172,22 +200,35 @@ function GalleryCard({ item }: { item: typeof GALLERY_ITEMS[0] }) {
         alt={item.title}
         fill
         unoptimized
-        className="object-cover transition-transform duration-1000 group-hover:scale-103"
-        style={{ filter: "grayscale(15%)" }}
+        className="object-cover transition-all duration-1000"
+        style={{ 
+          filter: isActive ? "grayscale(0%)" : "grayscale(30%) blur(1px)",
+          transform: isActive ? "scale(1.02)" : "scale(1.0)",
+        }}
       />
-      {/* Elegant overlay gradient */}
-      <div className="absolute inset-0"
-           style={{ background: "linear-gradient(to top, rgba(6,6,6,0.95) 0%, rgba(6,6,6,0.3) 50%, transparent 100%)" }} />
+      {/* Dynamic light gradient overlay */}
+      <div 
+        className="absolute inset-0 transition-opacity duration-1000"
+        style={{ 
+          background: "linear-gradient(to top, rgba(4,9,12,0.96) 0%, rgba(4,9,12,0.4) 50%, transparent 100%)",
+          opacity: isActive ? 1 : 0.8,
+        }} 
+      />
 
-      {/* Info */}
-      <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8">
+      {/* Info details */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 p-8 transition-transform duration-700"
+        style={{
+          transform: isActive ? "translateY(0)" : "translateY(10px)",
+        }}
+      >
         <p className="text-[9px] tracking-[0.25em] uppercase text-[var(--color-accent)] mb-2">{item.cat}</p>
         <h3 className="font-display text-base lg:text-lg font-light text-[var(--color-text)] leading-snug">{item.title}</h3>
       </div>
 
-      {/* Top index */}
+      {/* Top index marker */}
       <div className="absolute top-6 left-6">
-        <span className="font-mono text-[9px] text-[var(--color-accent)] tracking-widest opacity-50">{item.num}</span>
+        <span className="font-mono text-[9px] text-[var(--color-accent)] tracking-widest opacity-60">{item.num}</span>
       </div>
     </div>
   );
@@ -195,7 +236,7 @@ function GalleryCard({ item }: { item: typeof GALLERY_ITEMS[0] }) {
 
 function MobileGalleryCard({ item }: { item: typeof GALLERY_ITEMS[0] }) {
   return (
-    <div className="relative overflow-hidden border border-[var(--color-border)]" style={{ height: "65vw" }}>
+    <div className="relative overflow-hidden border border-white/5" style={{ height: "70vw" }}>
       <Image
         src={item.src}
         alt={item.title}
@@ -204,7 +245,7 @@ function MobileGalleryCard({ item }: { item: typeof GALLERY_ITEMS[0] }) {
         className="object-cover"
       />
       <div className="absolute inset-0"
-           style={{ background: "linear-gradient(to top, rgba(6,6,6,0.9) 0%, transparent 65%)" }} />
+           style={{ background: "linear-gradient(to top, rgba(4,9,12,0.92) 0%, transparent 60%)" }} />
       <div className="absolute bottom-5 left-5">
         <p className="text-[9px] tracking-widest uppercase text-[var(--color-accent)] mb-1.5">{item.cat}</p>
         <h3 className="font-display text-base font-light text-[var(--color-text)]">{item.title}</h3>
