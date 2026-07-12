@@ -1,65 +1,121 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
+import dynamic from "next/dynamic";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
-export default function Home() {
+// Components
+import LoadingScreen from "@/components/layout/LoadingScreen";
+import CustomCursor from "@/components/ui/CustomCursor";
+import ScrollProgress from "@/components/ui/ScrollProgress";
+import Navigation from "@/components/layout/Navigation";
+import Footer from "@/components/layout/Footer";
+
+// Cinematic System
+const SmoothScrollProvider = dynamic(
+  () => import("@/components/animations/SmoothScrollProvider"),
+  { ssr: false }
+);
+
+const CinematicScrollExperience = dynamic(
+  () => import("@/components/cinematic/CinematicScrollExperience"),
+  { ssr: false }
+);
+
+const CinematicGallery = dynamic(
+  () => import("@/components/cinematic/CinematicGallery"),
+  { ssr: false }
+);
+
+const CinematicStats = dynamic(
+  () => import("@/components/cinematic/CinematicStats"),
+  { ssr: false }
+);
+
+// Standard detailed sections
+const ImageComparison = dynamic(() => import("@/components/sections/ImageComparison"));
+const CTASection = dynamic(() => import("@/components/sections/CTASection"));
+
+// JSON-LD Schema
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  name: "DENTA Premium Diş Kliniği",
+  description:
+    "İstanbul Nişantaşı'nda premium diş kliniği. İmplant, veneer, ortodonti ve estetik diş hekimliği.",
+  url: "https://denta.com.tr",
+  telephone: "+90-212-555-00-00",
+  email: "info@denta.com.tr",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Abdi İpekçi Cad. No:42",
+    addressLocality: "Şişli",
+    addressRegion: "İstanbul",
+    postalCode: "34367",
+    addressCountry: "TR",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
+      opens: "09:00",
+      closes: "19:00",
+    },
+  ],
+  image: "https://denta.com.tr/images/og-image.png",
+  priceRange: "₺₺₺",
+  currenciesAccepted: "TRY",
+  paymentAccepted: "Nakit, Kredi Kartı, Taksit",
+};
+
+export default function HomePage() {
+  const [loaded, setLoaded] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      {/* JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+
+      {/* Loading screen */}
+      <LoadingScreen onComplete={() => setLoaded(true)} />
+
+      {/* Main app */}
+      {loaded && (
+        <SmoothScrollProvider prefersReducedMotion={prefersReducedMotion}>
+          <CustomCursor />
+          <ScrollProgress />
+          <Navigation />
+
+          <main id="main" tabIndex={-1}>
+            {/* The Master Cinematic pinned sequence (600vh) */}
+            <CinematicScrollExperience />
+
+            {/* Editorial Showcase Comparison */}
+            <ImageComparison />
+
+            {/* Cinematic Horizontal Gallery */}
+            <CinematicGallery />
+
+            {/* Interactive Stats & Narrative */}
+            <CinematicStats />
+
+            {/* Expanded elegant form section */}
+            <CTASection />
+          </main>
+
+          <Footer />
+        </SmoothScrollProvider>
+      )}
+    </>
   );
 }

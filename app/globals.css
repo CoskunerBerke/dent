@@ -1,26 +1,243 @@
 @import "tailwindcss";
 
+/* ── Design Tokens ─────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-bg: #0a0a0a;
+  --color-surface: #111111;
+  --color-text: #f0ebe3;
+  --color-muted: #8a8278;
+  --color-accent: #c9a96e;
+  --color-accent-light: #dfc08e;
+  --color-border: rgba(201, 169, 110, 0.15);
+
+  --font-inter: "Inter", system-ui, sans-serif;
+  --font-cormorant: "Cormorant Garamond", Georgia, serif;
+
+  --ease-cinematic: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --nav-height: 80px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Reset & Base ───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: auto;
+  overflow-x: hidden;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-inter);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Typography Scale ───────────────────────────────────────── */
+.display-hero {
+  font-family: var(--font-cormorant);
+  font-size: clamp(2.5rem, 6.5vw, 6.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.display-xl {
+  font-family: var(--font-cormorant);
+  font-size: clamp(2rem, 5vw, 5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.display-lg {
+  font-family: var(--font-cormorant);
+  font-size: clamp(1.8rem, 3.8vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.display-md {
+  font-family: var(--font-cormorant);
+  font-size: clamp(1.4rem, 2.5vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.text-label {
+  font-family: var(--font-inter);
+  font-size: clamp(0.6rem, 1vw, 0.7rem);
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.text-body {
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+  line-height: 1.65;
+}
+
+/* ── Custom Scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 99px;
+}
+
+/* ── Selection ──────────────────────────────────────────────── */
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* ── Grain Texture ──────────────────────────────────────────── */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -200%;
+  width: 400%;
+  height: 400%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -3%); }
+  20% { transform: translate(3%, 2%); }
+  30% { transform: translate(-1%, 4%); }
+  40% { transform: translate(4%, -1%); }
+  50% { transform: translate(-3%, 1%); }
+  60% { transform: translate(2%, -4%); }
+  70% { transform: translate(-4%, 2%); }
+  80% { transform: translate(1%, -2%); }
+  90% { transform: translate(3%, 3%); }
+}
+
+/* ── Utility: Clip Reveal ───────────────────────────────────── */
+.clip-reveal {
+  clip-path: inset(0 100% 0 0);
+}
+.clip-revealed {
+  clip-path: inset(0 0% 0 0);
+}
+
+/* ── Horizontal Scroll Track ────────────────────────────────── */
+.horizontal-track {
+  display: flex;
+  will-change: transform;
+}
+
+/* ── Magnetic Button Base ───────────────────────────────────── */
+.magnetic {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+}
+
+/* ── Custom Cursor ──────────────────────────────────────────── */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, background 0.3s, opacity 0.3s;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 169, 110, 0.5);
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s var(--ease-out-expo), height 0.4s var(--ease-out-expo);
+}
+
+/* ── Scroll Progress Bar ────────────────────────────────────── */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+  transform-origin: left;
+  z-index: 99997;
+}
+
+/* ── Section Divider Line ───────────────────────────────────── */
+.section-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--color-accent), transparent);
+}
+
+/* ── Scroll Line Animation ───────────────────────────────────── */
+@keyframes scrollLine {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+.animate-scroll-line {
+  animation: scrollLine 2.2s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+}
+
+/* ── Reduced Motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .grain::after {
+    display: none;
+  }
+}
+
+/* ── Mobile: prevent overflow ───────────────────────────────── */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
 }
