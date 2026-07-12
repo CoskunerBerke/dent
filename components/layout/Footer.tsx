@@ -28,7 +28,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative pt-16 pb-8 border-t border-[var(--color-border)] bg-[var(--color-bg)] overflow-hidden"
+      className="relative pt-24 pb-12 border-t border-[var(--color-border)] bg-[#04090d] overflow-hidden"
       aria-label="Site altbilgisi"
     >
       {/* Grain overlay */}
