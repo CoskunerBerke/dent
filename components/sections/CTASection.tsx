@@ -153,15 +153,25 @@ export default function CTASection() {
               </div>
             </div>
 
-            {/* Quick Actions */}
-            <div className="flex gap-8 pt-2">
-              <a href={`tel:${siteConfig.contact.phone}`} className="text-[10px] tracking-[0.2em] uppercase text-white hover:text-[var(--color-accent)] transition-all duration-300 flex items-center gap-2 group font-semibold">
+            {/* Quick Action Buttons — prominent and clickable */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <a
+                href={`tel:${siteConfig.contact.phone}`}
+                className="h-[52px] px-8 rounded-[12px] border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 hover:bg-[var(--color-accent)] hover:text-[#04090d] text-white text-[12px] tracking-[0.18em] uppercase font-bold flex items-center justify-center gap-3 transition-all duration-300 group"
+              >
+                <Phone size={15} />
                 KLİNİĞİ ARA
-                <ArrowRight size={10} className="group-hover:translate-x-1.5 transition-transform text-[var(--color-accent)]" />
+                <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
               </a>
-              <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="text-[10px] tracking-[0.2em] uppercase text-white hover:text-[var(--color-accent)] transition-all duration-300 flex items-center gap-2 group font-semibold">
+              <a
+                href="https://www.google.com/maps/search/YDA+Center+A2+Blok+Kat+12+No+507+K%C4%B1z%C4%B1l%C4%B1rmak+%C3%87ankaya+Ankara"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-[52px] px-8 rounded-[12px] border border-white/10 hover:border-[var(--color-accent)]/40 bg-white/[0.03] hover:bg-white/[0.06] text-white text-[12px] tracking-[0.18em] uppercase font-bold flex items-center justify-center gap-3 transition-all duration-300 group"
+              >
+                <MapPin size={15} />
                 HARİTADA AÇ
-                <ArrowRight size={10} className="group-hover:translate-x-1.5 transition-transform text-[var(--color-accent)]" />
+                <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
           </div>
