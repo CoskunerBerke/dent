@@ -170,7 +170,7 @@ export default function CinematicScrollExperience() {
         >
           <div className="max-w-[85vw] lg:max-w-[45vw]">
             <p className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-6 font-semibold">
-              DENTA PREMIUM DENTAL CLINIC
+              DİŞ HEKİMİ HAKAN SAYLAM
             </p>
             <h1 className="font-display text-[9vw] lg:text-[5vw] leading-[1.05] font-light text-[var(--color-text)] tracking-tight">
               Gülüşünüzü
@@ -180,7 +180,7 @@ export default function CinematicScrollExperience() {
               Tasarlıyoruz.
             </h1>
             <p className="mt-6 text-xs lg:text-sm text-[var(--color-muted)] max-w-sm leading-relaxed">
-              Modern teknoloji, uzman hekimler ve size özel tedavi yaklaşımı.
+              İleri teknoloji, sterilizasyon standartları ve kişiye özel tedavi yaklaşımı.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <a
@@ -190,10 +190,10 @@ export default function CinematicScrollExperience() {
                 Randevu Oluştur
               </a>
               <a
-                href="#hizmetler-anchor"
+                href="#hizmetler"
                 onClick={(e) => {
                   e.preventDefault();
-                  document.getElementById("post-cinematic")?.scrollIntoView({ behavior: "smooth" });
+                  document.getElementById("hizmetler")?.scrollIntoView({ behavior: "smooth" });
                 }}
                 className="border border-white/20 text-white hover:bg-white/5 transition-all duration-300 px-8 py-3.5 text-[10px] tracking-[0.2em] uppercase"
               >
@@ -218,7 +218,7 @@ export default function CinematicScrollExperience() {
               <span className="italic text-[var(--color-accent)]">Uyum</span>
             </h2>
             <p className="mt-4 text-xs lg:text-sm text-[var(--color-muted)] leading-relaxed">
-              3D tarayıcılar ve dijital gülüş prototipleri kullanarak, milimetrik hata payı ile doğal diş formunuza kavuşmanızı sağlıyoruz.
+              3D tarayıcılar ve steril laboratuvar ortamlarında hazırlanan restorasyonlarla doğal diş formunuza kavuşmanızı sağlıyoruz.
             </p>
           </div>
 
@@ -230,7 +230,7 @@ export default function CinematicScrollExperience() {
             <div className="w-16 h-px bg-[var(--color-accent)]/60" />
             <div className="bg-black/85 border border-[var(--color-border)] px-4 py-2.5 backdrop-blur-md">
               <p className="text-[9px] tracking-widest text-[var(--color-accent)] uppercase font-semibold">
-                Doğal Enamel Formu
+                Otoklav & Steril Enamel
               </p>
             </div>
           </div>
@@ -247,9 +247,9 @@ export default function CinematicScrollExperience() {
             </p>
             <div className="space-y-0">
               {[
-                { title: "İmplant Tedavisi", label: "01" },
+                { title: "Muayene ve Teşhis", label: "01" },
                 { title: "Estetik Diş Hekimliği", label: "02" },
-                { title: "Ortodonti (Şeffaf Plak)", label: "03" },
+                { title: "Kanal Tedavisi", label: "03" },
               ].map((svc) => (
                 <div
                   key={svc.label}
@@ -273,7 +273,7 @@ export default function CinematicScrollExperience() {
           className="absolute inset-0 flex flex-col items-center justify-center text-center px-8 z-20 pointer-events-none"
         >
           <p className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-6 font-semibold">
-            DENTA CLINIC
+            HAKAN SAYLAM DİŞ MUAYENEHANESİ
           </p>
           <h2 className="font-display text-[8vw] lg:text-[4.5vw] leading-[1.1] font-light text-[var(--color-text)] tracking-tight">
             Hayalinizdeki Gülüşe
@@ -288,14 +288,14 @@ export default function CinematicScrollExperience() {
               Randevu Al
             </a>
             <a
-              href="tel:+902125550000"
+              href="tel:+903125020230"
               className="border border-white/20 text-white hover:bg-white/5 transition-all duration-300 px-8 py-3.5 text-[10px] tracking-[0.2em] uppercase"
             >
-              +90 212 555 00 00
+              0 (312) 502 02 30
             </a>
           </div>
           <p className="mt-8 text-[10px] tracking-wider text-[var(--color-muted)]">
-            Abdi İpekçi Cad. No:42, Nişantaşı · İstanbul
+            YDA Center, Dumlupınar Blv. Kat:12 No:507 · Ankara
           </p>
         </div>
       </div>

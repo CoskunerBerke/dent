@@ -9,11 +9,11 @@ if (typeof window !== "undefined") {
 }
 
 const GALLERY_ITEMS = [
-  { num: "01", title: "Tam Ağız Rehabilitasyonu", cat: "Restoratif", src: "/images/projects/gallery-1.png" },
-  { num: "02", title: "Hollywood Gülüş Tasarımı", cat: "Estetik", src: "/images/projects/gallery-2.png" },
-  { num: "03", title: "Dijital İmplant Köprü", cat: "Cerrahi", src: "/images/projects/gallery-3.png" },
-  { num: "04", title: "Veneer Dönüşümü", cat: "Kozmetik", src: "/images/projects/veneer.png" },
-  { num: "05", title: "Çocuk Diş Sağlığı", cat: "Pedodonti", src: "/images/projects/gallery-5.png" },
+  { num: "01", title: "Rayscan Görüntüleme Cihazı", cat: "Teknoloji", src: "/images/projects/device.jpg" },
+  { num: "02", title: "Muayenehane Girişi", cat: "Hakan Saylam", src: "/images/projects/entrance.jpg" },
+  { num: "03", title: "Karşılama Bankosu", cat: "Sekretarya", src: "/images/projects/reception.jpg" },
+  { num: "04", title: "Sterilizasyon Laboratuvarı", cat: "Hijyen", src: "/images/projects/sterilization.jpg" },
+  { num: "05", title: "Klinik Tedavi Odası", cat: "Tedavi", src: "/images/projects/chair.jpg" },
 ];
 
 export default function CinematicGallery() {

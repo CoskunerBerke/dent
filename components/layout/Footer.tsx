@@ -21,10 +21,10 @@ export default function Footer() {
               {siteConfig.name}
             </h2>
             <p className="text-[11px] tracking-[0.22em] uppercase text-[var(--color-accent)] mb-6 font-semibold">
-              PREMIUM DİŞ KLİNİĞİ
+              DİŞ MUAYENEHANESİ
             </p>
             <p className="text-[14px] text-[#8a8278] max-w-xs leading-relaxed font-light">
-              Kusursuz gülüş tasarımı hedeflerimizle, ileri teknolojik altyapı ve uzman hekim kadromuzu Nişantaşı merkezimizde bir araya getiriyoruz.
+              Kusursuz gülüş tasarımı hedeflerimizle, ileri teknolojik altyapı ve sterilizasyon standartlarımızı Ankara YDA Center muayenehanemizde bir araya getiriyoruz.
             </p>
           </div>
 
@@ -65,7 +65,7 @@ export default function Footer() {
                 {siteConfig.contact.email}
               </a>
               <p className="max-w-[240px]">
-                Nişantaşı Mahallesi, Abdi İpekçi Cad. No:42, Şişli / İstanbul
+                YDA Center, Dumlupınar Blv. Kat:12 No:507, 06530 Çankaya / Ankara
               </p>
             </div>
           </div>
@@ -75,7 +75,7 @@ export default function Footer() {
         {/* Bottom copyright and social links */}
         <div className="mt-12 lg:mt-[72px] pt-[24px] border-t border-[rgba(255,255,255,0.08)] flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-[11px] tracking-wider text-[#8a8278]">
-            © 2026 DENTA Premium Dental. Tüm hakları saklıdır.
+            © 2026 DİŞ HEKİMİ HAKAN SAYLAM. Tüm hakları saklıdır.
           </p>
 
           {/* Plain Text Social Links & Back to top button */}

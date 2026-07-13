@@ -3,46 +3,26 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { introContent } from "@/data/content";
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function IntroductionSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const linesRef = useRef<HTMLDivElement>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
+  const imageWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
     const ctx = gsap.context(() => {
-      // Each line reveals on scroll
-      const lines = section.querySelectorAll(".reveal-line");
-      lines.forEach((line, i) => {
-        gsap.fromTo(
-          line,
-          { y: 80, opacity: 0, clipPath: "inset(0 0 100% 0)" },
-          {
-            y: 0,
-            opacity: 1,
-            clipPath: "inset(0 0 0% 0)",
-            duration: 1,
-            delay: i * 0.1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: line,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      });
-
-      // Moving visual panel parallax
-      gsap.to(panelRef.current, {
-        y: -80,
+      // Gentle parallax scroll on doctor portrait
+      gsap.to(imageWrapperRef.current, {
+        y: -30,
         ease: "none",
         scrollTrigger: {
           trigger: section,
@@ -59,100 +39,105 @@ export default function IntroductionSection() {
   return (
     <section
       ref={sectionRef}
-      id="tanitim"
-      className="relative py-32 lg:py-48 overflow-hidden"
+      id="hikayemiz"
+      className="relative py-24 lg:py-36 bg-[#04090d] overflow-hidden"
       aria-label="Tanıtım bölümü"
     >
-      {/* Background accent */}
+      {/* Subtle background light spotlight */}
       <div
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0 opacity-20 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at 80% 20%, rgba(201,169,110,0.06) 0%, transparent 60%)",
+            "radial-gradient(circle at 15% 45%, rgba(202,168,105,0.12) 0%, transparent 60%)",
         }}
         aria-hidden="true"
       />
 
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          {/* Left — editorial text */}
-          <div>
-            <motion.p
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="text-label text-[var(--color-accent)] mb-10 flex items-center gap-4"
+      <div className="max-w-[1440px] mx-auto px-8 lg:px-[64px]">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.3fr] gap-16 lg:gap-[110px] items-center">
+          
+          {/* Left Column — Hakan Saylam Portrait */}
+          <div className="relative">
+            <div
+              ref={imageWrapperRef}
+              className="relative overflow-hidden border border-[rgba(202,168,105,0.22)] rounded-[8px] bg-[#020507] shadow-2xl"
+              style={{ height: "clamp(480px, 60vh, 680px)" }}
             >
-              <span className="w-8 h-px bg-[var(--color-accent)]" />
-              {introContent.eyebrow}
-            </motion.p>
-
-            <div ref={linesRef} className="mb-12">
-              {introContent.lines.map((line, i) => (
-                <div key={i} className="overflow-hidden">
-                  <h2
-                    className={`reveal-line display-lg text-[var(--color-text)] ${
-                      i % 2 === 1 ? "pl-12 text-[var(--color-accent)] italic" : ""
-                    }`}
-                  >
-                    {line}
-                  </h2>
-                </div>
-              ))}
+              <Image
+                src="/images/projects/hakan_saylam.png"
+                alt="Diş Hekimi Hakan Saylam"
+                fill
+                unoptimized
+                className="object-cover object-top transition-transform duration-[1.5s]"
+                priority
+              />
+              <div 
+                className="absolute inset-0"
+                style={{
+                  background: "linear-gradient(to top, rgba(4,9,12,0.95) 0%, rgba(4,9,12,0.3) 45%, transparent 100%)",
+                }}
+              />
+              
+              {/* Doctor Details Badge */}
+              <div className="absolute bottom-8 left-8">
+                <p className="text-[10px] tracking-[0.25em] uppercase text-[var(--color-accent)] mb-1 font-semibold">
+                  KURUCU HEKİM
+                </p>
+                <h3 className="font-display text-[26px] font-light text-white tracking-wide">
+                  Dt. Hakan Saylam
+                </h3>
+              </div>
             </div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-body text-[var(--color-muted)] max-w-md leading-relaxed"
-            >
-              {introContent.body}
-            </motion.p>
           </div>
 
-          {/* Right — stats grid + decorative panel */}
-          <div className="relative">
-            {/* Decorative border panel */}
-            <div
-              ref={panelRef}
-              className="absolute -top-8 -right-4 w-48 h-48 border border-[var(--color-border)] opacity-40 hidden lg:block"
-              aria-hidden="true"
-            />
+          {/* Right Column — Professional Content */}
+          <div className="space-y-10">
+            <div>
+              <p className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-4 font-semibold flex items-center gap-3">
+                <span className="w-6 h-px bg-[var(--color-accent)]" />
+                {introContent.eyebrow}
+              </p>
+              
+              <h2 
+                className="font-display text-white tracking-tight mb-8"
+                style={{
+                  fontSize: "clamp(40px, 4vw, 56px)",
+                  lineHeight: "1.1",
+                }}
+              >
+                Gülüşünüzü <span className="italic text-[var(--color-accent)] font-normal">Sağlıkla</span>
+                <br />
+                Yeniden Şekillendiriyoruz
+              </h2>
 
-            <div className="grid grid-cols-2 gap-8 lg:gap-12">
+              <p 
+                className="text-[#8c857b] leading-relaxed max-w-xl font-light"
+                style={{ fontSize: "16px", lineHeight: "1.75" }}
+              >
+                {introContent.body}
+              </p>
+            </div>
+
+            {/* Success Counters Grid */}
+            <div className="grid grid-cols-2 gap-8 lg:gap-12 pt-4 border-t border-white/[0.06]">
               {introContent.stats.map((stat, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.7 }}
-                  className="border-t border-[var(--color-border)] pt-6"
-                >
-                  <div className="display-md text-[var(--color-accent)] mb-2">
+                <div key={i}>
+                  <div className="font-display text-[36px] lg:text-[42px] font-light text-[var(--color-accent)] mb-1.5 leading-none">
                     <AnimatedCounter
                       value={stat.value}
                       suffix={stat.suffix}
                       className="font-display font-light"
                     />
                   </div>
-                  <p className="text-label text-[var(--color-muted)]">{stat.label}</p>
-                </motion.div>
+                  <p className="text-[10px] tracking-[0.2em] uppercase text-[#8c857b] font-medium">
+                    {stat.label}
+                  </p>
+                </div>
               ))}
             </div>
 
-            {/* Gold line */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 1 }}
-              className="mt-12 h-px bg-[var(--color-accent)] origin-left opacity-40"
-            />
           </div>
+
         </div>
       </div>
     </section>

@@ -32,25 +32,24 @@ const CinematicStats = dynamic(
 );
 
 // Standard detailed sections
-const ImageComparison = dynamic(() => import("@/components/sections/ImageComparison"));
 const CTASection = dynamic(() => import("@/components/sections/CTASection"));
 
 // JSON-LD Schema
 const schema = {
   "@context": "https://schema.org",
   "@type": "Dentist",
-  name: "DENTA Premium Diş Kliniği",
+  name: "DİŞ HEKİMİ HAKAN SAYLAM",
   description:
-    "İstanbul Nişantaşı'nda premium diş kliniği. İmplant, veneer, ortodonti ve estetik diş hekimliği.",
-  url: "https://denta.com.tr",
-  telephone: "+90-212-555-00-00",
-  email: "info@denta.com.tr",
+    "Ankara YDA Center'da uzman diş hekimliği muayenehanesi. İmplant, estetik diş hekimliği, kanal tedavisi ve ortodonti.",
+  url: "https://hakansaylam.com",
+  telephone: "+90-312-502-02-30",
+  email: "info@hakansaylam.com",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Abdi İpekçi Cad. No:42",
-    addressLocality: "Şişli",
-    addressRegion: "İstanbul",
-    postalCode: "34367",
+    streetAddress: "YDA Center, Dumlupınar Blv. Kat:12 No:507",
+    addressLocality: "Çankaya",
+    addressRegion: "Ankara",
+    postalCode: "06530",
     addressCountry: "TR",
   },
   openingHoursSpecification: [
@@ -68,7 +67,7 @@ const schema = {
       closes: "19:00",
     },
   ],
-  image: "https://denta.com.tr/images/og-image.png",
+  image: "https://hakansaylam.com/images/og-image.png",
   priceRange: "₺₺₺",
   currenciesAccepted: "TRY",
   paymentAccepted: "Nakit, Kredi Kartı, Taksit",
@@ -99,9 +98,6 @@ export default function HomePage() {
           <main id="main" tabIndex={-1}>
             {/* The Master Cinematic pinned sequence (600vh) */}
             <CinematicScrollExperience />
-
-            {/* Editorial Showcase Comparison */}
-            <ImageComparison />
 
             {/* Cinematic Horizontal Gallery */}
             <CinematicGallery />

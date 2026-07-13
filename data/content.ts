@@ -2,168 +2,195 @@
 // Metinleri, hizmetleri, projeleri, iletişim bilgilerini buradan düzenleyin.
 
 export const siteConfig = {
-  name: "DENTA",
-  tagline: "Premium Diş Kliniği",
+  name: "DİŞ HEKİMİ HAKAN SAYLAM",
+  tagline: "Diş Muayenehanesi",
   description:
-    "İstanbul'un en seçkin diş kliniği. Uzman kadromuz ve ileri teknolojimizle sağlıklı ve estetik gülüşler tasarlıyoruz.",
-  url: "https://denta.com.tr",
+    "Ankara'nın öncü diş muayenehanesi. Uzman kadromuz, ileri teknolojik altyapımız ve kişiye özel tedavi yaklaşımımızla sağlıklı ve estetik gülüşler tasarlıyoruz.",
+  url: "https://hakansaylam.com",
   locale: "tr_TR",
   contact: {
-    phone: "+90 212 555 00 00",
-    email: "info@denta.com.tr",
-    address: "Nişantaşı Mahallesi, Abdi İpekçi Cad. No:42, Şişli / İstanbul",
+    phone: "0 (312) 502 02 30",
+    email: "info@hakansaylam.com",
+    address: "YDA Center, Dumlupınar Blv. Kat:12 No:507, 06530 Çankaya/Ankara",
     hours: "Pazartesi – Cumartesi: 09:00 – 19:00",
   },
   social: {
-    instagram: "https://instagram.com/dentaklinik",
-    facebook: "https://facebook.com/dentaklinik",
-    twitter: "https://twitter.com/dentaklinik",
+    instagram: "https://instagram.com/dentahakansaylam",
+    facebook: "https://facebook.com/dentahakansaylam",
+    twitter: "https://twitter.com/dentahakansaylam",
   },
 };
 
 export const heroContent = {
-  eyebrow: "İstanbul'un Lider Kliniği",
+  eyebrow: "Ankara YDA Center",
   headline: ["Kusursuz", "Gülüşler", "Tasarlıyoruz"],
   subtext:
-    "25 yılı aşkın deneyim, ileri teknoloji ve kişiselleştirilmiş tedavi yaklaşımıyla estetik diş hekimliğinde yeni bir standart belirliyoruz.",
+    "İleri teknoloji, sterilizasyon standartları ve kişiselleştirilmiş tedavi yaklaşımıyla Çankaya'daki modern muayenehanemizde diş hekimliğinde yeni bir standart belirliyoruz.",
   cta: "Randevu Al",
   ctaSecondary: "Hizmetlerimizi Keşfet",
   scrollLabel: "Keşfet",
 };
 
 export const introContent = {
-  eyebrow: "Biz Kimiz",
+  eyebrow: "Hakkımızda",
   lines: [
     "Güzel gülüşler",
     "tesadüfen oluşmaz —",
     "onlar özenle",
     "tasarlanır.",
   ],
-  body: "Denta olarak her hastamızı biricik görüyor, tedavi planını onun hayaline özel şekillendiriyoruz. Estetik diş hekimliğini bir bilim ve sanat olarak benimsiyoruz.",
+  body: "Diş Hekimi Hakan Saylam liderliğindeki kliniğimizde, her hastamızı biricik görüyor, tedavi planını onun hayaline özel şekillendiriyoruz. Estetik diş hekimliğini bir bilim ve sanat olarak benimsiyoruz.",
   stats: [
     { value: 25, suffix: "+", label: "Yıllık Deneyim" },
     { value: 12000, suffix: "+", label: "Mutlu Hasta" },
-    { value: 8, suffix: "", label: "Uzman Hekim" },
+    { value: 15, suffix: "+", label: "Teknolojik Cihaz" },
     { value: 98, suffix: "%", label: "Hasta Memnuniyeti" },
   ],
 };
 
 export const services = [
   {
-    id: "implant",
+    id: "muayene",
     number: "01",
-    category: "Cerrahi",
-    title: "Dental İmplant",
+    category: "Teşhis",
+    title: "Muayene ve Teşhis",
     description:
-      "Eksik dişlerinizi doğal görünümlü, ömür boyu süren implantlarla tamamlıyoruz. Dijital planlama ile milimetrik hassasiyet sağlıyoruz.",
-    image: "/images/projects/implant.png",
-    tag: "Kalıcı Çözüm",
+      "Ağız ve diş sağlığınızı detaylı bir şekilde inceleyerek her sorununuz için en doğru ve kişiye özel tedavi planını sunuyoruz.",
+    image: "/images/projects/device.jpg",
+    tag: "Doğru Planlama",
   },
   {
     id: "estetik",
     number: "02",
     category: "Estetik",
-    title: "Porselen Laminat Veneer",
+    title: "Estetik Diş Hekimliği",
     description:
-      "İnce porselen yapraklarla dişlerinizin şeklini, rengini ve boyutunu mükemmelleştiriyoruz. Minimum madde kaybıyla maksimum estetik.",
-    image: "/images/projects/veneer.png",
+      "Gülümsemenizi yeniden keşfedin! Diş beyazlatma ve porselen kaplama ile dişlerinizin mükemmel görünmesini sağlıyoruz.",
+    image: "/images/projects/entrance.jpg",
     tag: "Hollywood Gülüşü",
   },
   {
-    id: "ortodonti",
+    id: "kanal",
     number: "03",
-    category: "Ortodonti",
-    title: "Şeffaf Plak Tedavisi",
+    category: "Endodonti",
+    title: "Kanal Tedavisi",
     description:
-      "Invisalign ve ClearCorrect sistemleriyle görünmez, konforlu ve hızlı ortodontik tedavi. Sosyal hayatınızı kısıtlamadan düzgün dişlere kavuşun.",
-    image: "/images/projects/invisalign.png",
-    tag: "Görünmez Tedavi",
+      "İçsel enfeksiyonları kökünden temizleyerek ağrıdan ve iltihaplardan kalıcı olarak kurtulmanızı sağlıyoruz.",
+    image: "/images/projects/chair.jpg",
+    tag: "Diş Tasarrufu",
   },
   {
-    id: "beyazlatma",
+    id: "hijyen",
     number: "04",
-    category: "Kozmetik",
-    title: "Profesyonel Diş Beyazlatma",
+    category: "Koruyucu",
+    title: "Profesyonel Diş Hijyeni",
     description:
-      "Klinik ortamında uygulanan Zoom ve Opalescence sistemleriyle dişlerinizi 8 tona kadar beyazlatıyoruz. Tek seansta fark yaratın.",
-    image: "/images/projects/whitening.png",
-    tag: "Anında Sonuç",
+      "Diş temizliği ile ağız hijyeninizi korumak, diş eti problemlerini önlemek ve dişlerinizin sağlığını uzun süre korumak için gereklidir.",
+    image: "/images/projects/sterilization.jpg",
+    tag: "Sağlıklı Diş Etleri",
+  },
+  {
+    id: "implant",
+    number: "05",
+    category: "Cerrahi",
+    title: "İmplant Tedavisi",
+    description:
+      "En son teknolojiyi kullanarak implant tedavisi uyguluyoruz. Uzman ekibimiz, size özel bir tedavi planı oluşturur ve işlemi rahatça tamamlamanızı sağlar.",
+    image: "/images/projects/reception.jpg",
+    tag: "Kalıcı Çözüm",
+  },
+  {
+    id: "ortodonti",
+    number: "06",
+    category: "Ortodonti",
+    title: "Ortodonti",
+    description:
+      "Diş teli ve benzeri tedavilerle, dişlerin düzeltilmesi ve çene yapısının geliştirilmesi için en iyi uzmanlarımız hizmetinizdedir.",
+    image: "/images/projects/lounge.jpg",
+    tag: "Düzgün Hizalama",
   },
 ];
 
 export const galleryItems = [
   {
     id: 1,
-    title: "Tam Ağız Rehabilitasyonu",
-    category: "Restoratif",
-    description: "20 adet porselen kron ile gerçekleştirilen kapsamlı estetik rehabilitasyon.",
-    image: "/images/projects/gallery-1.png",
+    title: "Görüntüleme Cihazı",
+    category: "Görüntüleme",
+    description: "3D Tomografi ve Rayscan ağız yapısı tarama teknolojisi.",
+    image: "/images/projects/device.jpg",
   },
   {
     id: 2,
-    title: "Dijital Gülüş Tasarımı",
-    category: "Estetik",
-    description: "DSD protokolüyle tasarlanmış kişiselleştirilmiş gülüş planlaması.",
-    image: "/images/projects/gallery-2.png",
+    title: "Klinik Giriş",
+    category: "Muayenehane",
+    description: "Diş Hekimi Hakan Saylam YDA Center modern giriş alanı.",
+    image: "/images/projects/entrance.jpg",
   },
   {
     id: 3,
-    title: "İmplant Destekli Köprü",
-    category: "Cerrahi",
-    description: "Çoklu diş eksikliğinde implant üstü sabit köprü uygulaması.",
-    image: "/images/projects/gallery-3.png",
+    title: "Hasta Bekleme Alanı",
+    category: "Karşılama",
+    description: "Konforlu oturma köşesi ve şık bekleme salonu.",
+    image: "/images/projects/lounge.jpg",
   },
   {
     id: 4,
-    title: "Kompozit Bonding",
-    category: "Kozmetik",
-    description: "Tek seanslık kompozit bonding ile diş form ve renk düzeltmesi.",
-    image: "/images/projects/gallery-4.png",
+    title: "Sekretarya & Banko",
+    category: "Kayıt",
+    description: "Karşılama bankosu ve sterilizasyon standartları danışması.",
+    image: "/images/projects/reception.jpg",
   },
   {
     id: 5,
-    title: "Gece Plağı Tedavisi",
-    category: "Fonksiyonel",
-    description: "Bruksizm kaynaklı diş aşınmalarının önlenmesi ve estetik restorasyon.",
-    image: "/images/projects/gallery-5.png",
+    title: "Sterilizasyon Laboratuvarı",
+    category: "Hijyen",
+    description: "Cihazların ve aletlerin tam otomatik otoklav sterilizasyon odası.",
+    image: "/images/projects/sterilization.jpg",
+  },
+  {
+    id: 6,
+    title: "Tedavi Odası & Ünit",
+    category: "Klinik",
+    description: "En son teknoloji tedavi koltuğu ve aydınlık klinik ünitimiz.",
+    image: "/images/projects/chair.jpg",
   },
 ];
 
 export const storySteps = [
   {
     step: "01",
-    title: "Dijital Analiz",
+    title: "Teknolojik Analiz",
     description:
-      "3D tomografi ve dijital ölçü sistemleriyle ağız yapınızı eksiksiz değerlendiriyoruz.",
-    image: "/images/projects/story-1.png",
-    color: "#0a0a0a",
-    stat: { value: 100, suffix: "%", label: "Dijital Planlama" },
+      "Modern ağız tarayıcılarımızla ağız yapınızı eksiksiz analiz edip tedavi planı hazırlıyoruz.",
+    image: "/images/projects/device.jpg",
+    color: "#04090d",
+    stat: { value: 100, suffix: "%", label: "Dijital Tarama" },
   },
   {
     step: "02",
-    title: "Gülüş Tasarımı",
+    title: "Tam Sterilizasyon",
     description:
-      "DSD (Dijital Gülüş Tasarımı) ile tedavi öncesi sonucunuzu görsel olarak sunuyoruz.",
-    image: "/images/projects/story-2.png",
-    color: "#0f0f0d",
-    stat: { value: 200, suffix: "+", label: "Tasarım Simülasyonu" },
+      "Aletlerimiz her hastadan sonra otoklav cihazlarımızda Avrupa standartlarında sterilize edilir.",
+    image: "/images/projects/sterilization.jpg",
+    color: "#070e12",
+    stat: { value: 100, suffix: "%", label: "Steril Standart" },
   },
   {
     step: "03",
-    title: "Hassas Uygulama",
+    title: "Tedavi Süreci",
     description:
-      "Deneyimli uzman ekibimiz, son teknoloji ekipmanlarla en hassas uygulamayı gerçekleştirir.",
-    image: "/images/projects/story-3.png",
-    color: "#0d0c0a",
-    stat: { value: 15, suffix: "+", label: "Teknolojik Cihaz" },
+      "Lüks ve konforlu klinik odalarımızda hekimimiz eşliğinde acısız tedavileri tamamlıyoruz.",
+    image: "/images/projects/chair.jpg",
+    color: "#020507",
+    stat: { value: 25, suffix: "+", label: "Deneyim Yılı" },
   },
   {
     step: "04",
-    title: "Yaşam Boyu Takip",
+    title: "Hasta Konforu",
     description:
-      "Tedavi sonrası düzenli kontrol ve bakım programıyla sağlığınızı sürekli koruyoruz.",
-    image: "/images/projects/story-4.png",
-    color: "#0a0a0a",
+      "Tedavi öncesi ve sonrasında kahve ikram köşemizde bekleme sürenizi keyfe dönüştürüyoruz.",
+    image: "/images/projects/coffee.jpg",
+    color: "#04090d",
     stat: { value: 98, suffix: "%", label: "Hasta Memnuniyeti" },
   },
 ];
@@ -171,53 +198,35 @@ export const storySteps = [
 export const testimonials = [
   {
     id: 1,
-    name: "Ayşe Kaya",
-    title: "Yazılım Girişimcisi",
+    name: "Murat Özkan",
+    title: "Yönetici",
     quote:
-      "Yıllardır gülümsemekten çekiniyordum. Denta'nın veneer tedavisiyle hayatım değişti. Artık her fotoğrafta gülümseyebiliyorum.",
+      "YDA Center'daki muayenehane son derece şık ve steril. Hakan Bey'in tecrübesi sayesinde tedavilerim çok rahat geçti.",
     rating: 5,
-    treatment: "Porselen Veneer",
+    treatment: "Estetik Diş Hekimliği",
   },
   {
     id: 2,
-    name: "Mehmet Yılmaz",
-    title: "İş İnsanı",
+    name: "Selin Yılmaz",
+    title: "Mimar",
     quote:
-      "İmplant sürecinden çok korkuyordum. Ama Denta'nın ekibi her adımda yanımdaydı. Sonuç harika, hiç acısız geçti.",
+      "İmplant tedavisi için doğru yer olduğunu ilk girdiğiniz an hissettiriyor. Ekip güler yüzlü ve sterilizasyon mükemmel.",
     rating: 5,
-    treatment: "Dental İmplant",
-  },
-  {
-    id: 3,
-    name: "Zeynep Arslan",
-    title: "Moda Fotoğrafçısı",
-    quote:
-      "Profesyonel görünüm her şeydir. Zoom beyazlatma ile dişlerim hem sağlıklı hem de parlak. Tek seansta inanılmaz fark.",
-    rating: 5,
-    treatment: "Zoom Beyazlatma",
-  },
-  {
-    id: 4,
-    name: "Can Demir",
-    title: "Televizyon Sunucusu",
-    quote:
-      "Ekranın karşısındayım, gülüşüm işimin bir parçası. Denta'nın dijital gülüş tasarımıyla tam istediğim görünüme kavuştum.",
-    rating: 5,
-    treatment: "Dijital Gülüş Tasarımı",
+    treatment: "İmplant Tedavisi",
   },
 ];
 
 export const trustStats = [
   { value: 25, suffix: "+", label: "Yıllık Deneyim" },
   { value: 12000, suffix: "+", label: "Mutlu Hasta" },
-  { value: 8, suffix: "", label: "Uzman Hekim" },
+  { value: 15, suffix: "+", label: "Teknolojik Cihaz" },
   { value: 98, suffix: "%", label: "Memnuniyet" },
 ];
 
 export const navLinks = [
   { label: "Hizmetler", href: "#hizmetler" },
-  { label: "Projeler", href: "#projeler" },
-  { label: "Ekibimiz", href: "#hikayemiz" },
+  { label: "Klinik", href: "#galeri" },
+  { label: "Süreç", href: "#hikayemiz" },
   { label: "Referanslar", href: "#referanslar" },
   { label: "İletişim", href: "#iletisim" },
 ];
