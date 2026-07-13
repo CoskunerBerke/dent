@@ -51,9 +51,9 @@ export default function CinematicGallery() {
       className="relative bg-[#04090d] py-24 lg:py-36 overflow-visible border-t border-[rgba(202,168,105,0.15)]"
       aria-label="Klinik Fotoğraf Galerisi"
     >
-      <div className="w-full max-w-[1440px] mx-auto px-8 lg:px-[64px]">
+      <div className="w-full px-5 sm:px-8 lg:px-12 xl:px-16">
         
-        {/* Full-width Section Header */}
+        {/* Section Header */}
         <div className="max-w-2xl mb-16">
           <p className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-3 flex items-center gap-4">
             <span className="w-8 h-[1px] bg-[var(--color-accent)]" />
@@ -67,16 +67,16 @@ export default function CinematicGallery() {
           </p>
         </div>
 
-        {/* 2-Column Grid Layout for photos (desktop) / 1-Column on mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12">
+        {/* 2-Column Grid — edge to edge with minimal padding */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
           {GALLERY_ITEMS.map((item, index) => (
             <div
               key={item.num}
               onClick={() => openLightbox(index)}
-              className="group cursor-pointer space-y-5 bg-[rgba(255,255,255,0.015)] border border-white/5 p-5 lg:p-7 rounded-[12px] shadow-lg hover:border-[rgba(202,168,105,0.25)] hover:bg-[rgba(255,255,255,0.03)] transition-all duration-500"
+              className="group cursor-pointer space-y-5 bg-[rgba(255,255,255,0.015)] border border-white/5 p-4 lg:p-5 rounded-[12px] shadow-lg hover:border-[rgba(202,168,105,0.25)] hover:bg-[rgba(255,255,255,0.03)] transition-all duration-500"
             >
               {/* Image Frame */}
-              <div className="relative w-full h-[240px] sm:h-[300px] lg:h-[360px] rounded-[8px] overflow-hidden">
+              <div className="relative w-full h-[240px] sm:h-[300px] lg:h-[360px] xl:h-[400px] rounded-[8px] overflow-hidden">
                 <Image
                   src={item.src}
                   alt={item.title}
