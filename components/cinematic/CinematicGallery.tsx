@@ -1,8 +1,9 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -25,6 +26,7 @@ export default function CinematicGallery() {
   
   const [activeIndex, setActiveIndex] = useState(0);
   const [hovered, setHovered] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
     isMobileRef.current = window.innerWidth < 768;
@@ -90,6 +92,37 @@ export default function CinematicGallery() {
     gsap.to(cursorRef.current, { scale: 0, opacity: 0, duration: 0.3 });
   };
 
+  // Lightbox Navigation Controls
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index);
+    document.body.style.overflow = "hidden"; // Prevent scrolling
+  };
+
+  const closeLightbox = () => {
+    setLightboxIndex(null);
+    document.body.style.overflow = ""; // Restore scrolling
+  };
+
+  const prevSlide = useCallback(() => {
+    setLightboxIndex((prev) => (prev !== null ? (prev - 1 + GALLERY_ITEMS.length) % GALLERY_ITEMS.length : null));
+  }, []);
+
+  const nextSlide = useCallback(() => {
+    setLightboxIndex((prev) => (prev !== null ? (prev + 1) % GALLERY_ITEMS.length : null));
+  }, []);
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") prevSlide();
+      if (e.key === "ArrowRight") nextSlide();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightboxIndex, prevSlide, nextSlide]);
+
   return (
     <section
       ref={sectionRef}
@@ -104,8 +137,8 @@ export default function CinematicGallery() {
         ref={cursorRef}
         className="fixed pointer-events-none z-[9999] hidden lg:flex items-center justify-center border border-[rgba(202,168,105,0.35)] bg-[rgba(4,9,12,0.85)] backdrop-blur-[6px] shadow-[0_15px_35px_rgba(0,0,0,0.5)]"
         style={{
-          width: 76,
-          height: 76,
+          width: 80,
+          height: 80,
           borderRadius: "50%",
           left: 0,
           top: 0,
@@ -113,7 +146,7 @@ export default function CinematicGallery() {
         }}
       >
         <span className="text-[9px] tracking-[0.25em] uppercase text-[var(--color-accent)] font-medium">
-          Gör
+          İncele
         </span>
       </div>
 
@@ -149,10 +182,10 @@ export default function CinematicGallery() {
           </div>
         </div>
 
-        {/* Desktop: Horizontal container */}
+        {/* Desktop: Horizontal container with much larger sizes */}
         <div
           ref={trackRef}
-          className="hidden lg:flex gap-10 px-[25vw]"
+          className="hidden lg:flex gap-12 px-[20vw] items-center"
           style={{ width: "max-content" }}
         >
           {GALLERY_ITEMS.map((item, index) => (
@@ -160,65 +193,129 @@ export default function CinematicGallery() {
               key={item.num} 
               item={item} 
               isActive={index === activeIndex} 
+              onClick={() => openLightbox(index)}
             />
           ))}
         </div>
 
         {/* Mobile: Vertical list */}
         <div className="lg:hidden flex flex-col gap-8 px-6 pb-6">
-          {GALLERY_ITEMS.map((item) => (
-            <MobileGalleryCard key={item.num} item={item} />
+          {GALLERY_ITEMS.map((item, index) => (
+            <MobileGalleryCard 
+              key={item.num} 
+              item={item} 
+              onClick={() => openLightbox(index)}
+            />
           ))}
         </div>
       </div>
+
+      {/* LIGHTBOX MODAL — Fullscreen HD Details View */}
+      {lightboxIndex !== null && (
+        <div className="fixed inset-0 z-[99999] bg-[#020507]/96 backdrop-blur-md flex flex-col items-center justify-center select-none animate-fade-in">
+          {/* Close button */}
+          <button
+            onClick={closeLightbox}
+            className="absolute top-6 right-6 w-12 h-12 rounded-full border border-white/10 bg-white/[0.03] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] text-white flex items-center justify-center transition-colors duration-300 z-50 cursor-pointer"
+            aria-label="Kapat"
+          >
+            <X size={20} />
+          </button>
+
+          {/* Left Navigation Arrow */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-6 w-12 h-12 rounded-full border border-white/10 bg-white/[0.03] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] text-white flex items-center justify-center transition-colors duration-300 z-50 cursor-pointer"
+            aria-label="Önceki"
+          >
+            <ChevronLeft size={22} />
+          </button>
+
+          {/* Large High-Res Image Container */}
+          <div className="relative w-[90vw] max-w-[1000px] h-[70vh] flex items-center justify-center p-4">
+            <Image
+              src={GALLERY_ITEMS[lightboxIndex].src}
+              alt={GALLERY_ITEMS[lightboxIndex].title}
+              fill
+              unoptimized
+              className="object-contain"
+            />
+          </div>
+
+          {/* Details Bar at the bottom */}
+          <div className="text-center mt-6 z-50 px-4">
+            <p className="text-[10px] tracking-[0.25em] uppercase text-[var(--color-accent)] mb-2">
+              {GALLERY_ITEMS[lightboxIndex].cat}
+            </p>
+            <h3 className="font-display text-xl lg:text-2xl font-light text-white tracking-wide">
+              {GALLERY_ITEMS[lightboxIndex].title}
+            </h3>
+            <p className="text-xs text-white/40 mt-1 font-mono">
+              {(lightboxIndex + 1).toString().padStart(2, "0")} / {GALLERY_ITEMS.length.toString().padStart(2, "0")}
+            </p>
+          </div>
+
+          {/* Right Navigation Arrow */}
+          <button
+            onClick={nextSlide}
+            className="absolute right-6 w-12 h-12 rounded-full border border-white/10 bg-white/[0.03] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] text-white flex items-center justify-center transition-colors duration-300 z-50 cursor-pointer"
+            aria-label="Sonraki"
+          >
+            <ChevronRight size={22} />
+          </button>
+        </div>
+      )}
     </section>
   );
 }
 
-function GalleryCard({ item, isActive }: { item: typeof GALLERY_ITEMS[0]; isActive: boolean }) {
+function GalleryCard({ item, isActive, onClick }: { item: typeof GALLERY_ITEMS[0]; isActive: boolean; onClick: () => void }) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   return (
     <div
       ref={cardRef}
-      className="relative flex-shrink-0 overflow-hidden border transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+      onClick={onClick}
+      className="relative flex-shrink-0 overflow-hidden border transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer group"
       style={{ 
-        width: "clamp(260px, 18vw, 340px)", 
-        height: "clamp(350px, 46vh, 450px)",
+        width: "clamp(340px, 24vw, 480px)", // Made cards significantly wider
+        height: "clamp(450px, 58vh, 600px)", // Made cards significantly taller
         borderColor: isActive ? "rgba(202,168,105,0.4)" : "rgba(255,255,255,0.05)",
-        opacity: isActive ? 1 : 0.8, // Inactive cards are now beautifully visible (0.8 instead of 0.3)
-        transform: isActive ? "scale(1.04)" : "scale(0.96)",
+        opacity: isActive ? 1 : 0.8,
+        transform: isActive ? "scale(1.03)" : "scale(0.97)",
       }}
     >
-      {/* Image in full original colors, no grayscale filter, to prevent harsh color jumps */}
+      {/* Image in full original colors */}
       <Image
         src={item.src}
         alt={item.title}
         fill
         unoptimized
-        className="object-cover transition-all duration-700"
-        style={{ 
-          transform: isActive ? "scale(1.02)" : "scale(1.0)",
-        }}
+        className="object-cover transition-all duration-1000 group-hover:scale-105"
       />
       {/* Softer light gradient overlay for maximum image visibility */}
       <div 
         className="absolute inset-0 transition-opacity duration-700"
         style={{ 
-          background: "linear-gradient(to top, rgba(4,9,12,0.85) 0%, rgba(4,9,12,0.15) 50%, transparent 100%)",
+          background: "linear-gradient(to top, rgba(4,9,12,0.85) 0%, rgba(4,9,12,0.1) 50%, transparent 100%)",
         }} 
       />
 
       {/* Info details */}
       <div 
-        className="absolute bottom-0 left-0 right-0 p-6 lg:p-8 transition-all duration-500"
+        className="absolute bottom-0 left-0 right-0 p-8 transition-all duration-500"
         style={{
           transform: isActive ? "translateY(0)" : "translateY(5px)",
-          opacity: isActive ? 1 : 0.75,
+          opacity: isActive ? 1 : 0.8,
         }}
       >
         <p className="text-[9px] tracking-[0.25em] uppercase text-[var(--color-accent)] mb-2">{item.cat}</p>
-        <h3 className="font-display text-sm lg:text-base font-light text-[var(--color-text)] leading-snug">{item.title}</h3>
+        <h3 className="font-display text-base lg:text-lg font-light text-[var(--color-text)] leading-snug group-hover:text-[var(--color-accent)] transition-colors duration-300">{item.title}</h3>
+      </div>
+
+      {/* Hover visual maximize hint */}
+      <div className="absolute top-5 right-5 w-8 h-8 rounded-full border border-white/10 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <Maximize2 size={12} className="text-white" />
       </div>
 
       {/* Top index marker */}
@@ -229,9 +326,13 @@ function GalleryCard({ item, isActive }: { item: typeof GALLERY_ITEMS[0]; isActi
   );
 }
 
-function MobileGalleryCard({ item }: { item: typeof GALLERY_ITEMS[0] }) {
+function MobileGalleryCard({ item, onClick }: { item: typeof GALLERY_ITEMS[0]; onClick: () => void }) {
   return (
-    <div className="relative overflow-hidden border border-white/5" style={{ height: "70vw" }}>
+    <div 
+      onClick={onClick}
+      className="relative overflow-hidden border border-white/5 cursor-pointer" 
+      style={{ height: "70vw" }}
+    >
       <Image
         src={item.src}
         alt={item.title}
@@ -245,7 +346,8 @@ function MobileGalleryCard({ item }: { item: typeof GALLERY_ITEMS[0] }) {
         <p className="text-[9px] tracking-widest uppercase text-[var(--color-accent)] mb-1.5">{item.cat}</p>
         <h3 className="font-display text-base font-light text-[var(--color-text)]">{item.title}</h3>
       </div>
-      <div className="absolute top-4 right-4">
+      <div className="absolute top-4 right-4 flex items-center gap-2">
+        <Maximize2 size={10} className="text-[var(--color-accent)] opacity-60" />
         <span className="font-mono text-[9px] text-[var(--color-accent)] opacity-55">{item.num}</span>
       </div>
     </div>
