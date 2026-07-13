@@ -9,6 +9,7 @@ const GALLERY_ITEMS = [
   { num: "03", title: "Karşılama Bankosu", cat: "Sekretarya", desc: "Kayıt ve danışma işlemlerinizin steril koşullarda, hızlıca yapıldığı karşılama bankomuz.", src: "/images/projects/reception.jpg" },
   { num: "04", title: "Sterilizasyon Laboratuvarı", cat: "Hijyen", desc: "Avrupa standartlarında tam otomatik otoklav ve sterilizasyon cihazlarımızın yer aldığı hijyen odamız.", src: "/images/projects/sterilization.jpg" },
   { num: "05", title: "Klinik Tedavi Odası", cat: "Tedavi", desc: "En son teknoloji ünitlerimiz ile konforlu ve acısız tedavilerin gerçekleştirildiği odamız.", src: "/images/projects/chair.jpg" },
+  { num: "06", title: "Klinik Geçiş Koridoru ve Mimari", cat: "Mimari", desc: "Hastalarımızın konforu ve gizliliği düşünülerek modern akustik cam bölmelerle tasarlanmış ferah klinik koridorumuz.", src: "/images/projects/corridor.jpg" },
 ];
 
 export default function CinematicGallery() {
