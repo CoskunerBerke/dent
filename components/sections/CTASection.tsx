@@ -49,22 +49,22 @@ export default function CTASection() {
   return (
     <section
       id="iletisim"
-      className="relative w-full bg-[#04090d] pt-16 pb-24 lg:pt-28 lg:pb-36 px-6 sm:px-8 overflow-visible"
+      className="relative w-full bg-[#04090d] pt-20 pb-28 lg:pt-28 lg:pb-36 px-8 lg:px-[64px] overflow-visible"
       aria-label="İletişim ve randevu bölümü"
     >
       {/* Background ambient lighting — safe pointer-events-none */}
       <div
-        className="absolute right-[-10%] bottom-[-10%] w-[500px] h-[500px] rounded-full pointer-events-none opacity-15 filter blur-[120px] z-0"
+        className="absolute right-[-10%] bottom-[-10%] w-[600px] h-[600px] rounded-full pointer-events-none opacity-15 filter blur-[120px] z-0"
         style={{
           background: "radial-gradient(circle, rgba(202,168,105,0.15) 0%, transparent 70%)",
         }}
       />
 
-      {/* Main container with standard centered max-width */}
-      <div className="w-full max-w-[1200px] mx-auto relative z-10">
+      {/* Main container matching standard 1440px alignment of other sections */}
+      <div className="w-full max-w-[1440px] mx-auto relative z-10">
         
-        {/* Main 2-column grid layout: Left 38%, Right 62% on Desktop */}
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(280px,0.85fr)_minmax(520px,1.35fr)] gap-12 lg:gap-16 items-start">
+        {/* Main 2-column grid layout: Left 35%, Right 65% to beautifully fill the space */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.85fr] gap-12 lg:gap-20 items-start">
           
           {/* LEFT COLUMN — Contact Details & Brand Info */}
           <div className="space-y-10 lg:sticky lg:top-[120px] h-fit">
@@ -94,7 +94,7 @@ export default function CTASection() {
               </p>
             </div>
 
-            {/* Clean structured contact info items (no cheap dividers, generous spacing) */}
+            {/* Clean structured contact info items */}
             <div className="flex flex-col gap-8 max-w-[480px]">
               
               {/* Row: Phone Numbers */}
@@ -217,7 +217,7 @@ export default function CTASection() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN — Premium Expanded Form Card */}
+          {/* RIGHT COLUMN — Premium Fully Stretched Form Card */}
           <div
             className="w-full bg-[rgba(10,18,22,0.45)] border border-[rgba(202,168,105,0.22)] rounded-[22px] p-6 sm:p-10 lg:p-12 shadow-[0_25px_60px_rgba(0,0,0,0.55)] backdrop-blur-md relative"
           >
@@ -228,7 +228,7 @@ export default function CTASection() {
               <h3 className="font-display text-[32px] lg:text-[40px] font-light text-white leading-tight mb-3">
                 Ön Randevu Formu
               </h3>
-              <p className="text-[13px] text-[#8c857b] leading-[1.6] font-light max-w-xl">
+              <p className="text-[13px] text-[#8c857b] leading-[1.6] font-light">
                 Tedavi planınızı oluşturmak için bilgilerinizi bırakın. Ekibimiz en kısa sürede sizinle iletişime geçsin.
               </p>
             </div>
