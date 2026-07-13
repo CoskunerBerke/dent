@@ -20,17 +20,18 @@ const GALLERY_ITEMS = [
 
 export default function CinematicGallery() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const toothRef = useRef<SVGSVGElement>(null);
+  const toothWrapperRef = useRef<HTMLDivElement>(null);
   
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  // Smooth rotation animation for the tooth as the user scrolls down the section
+  // Smooth rotation animation on the wrapper div instead of the SVG directly.
+  // Animating rotateY on a div with perspective prevents the SVG from squashing flat.
   useEffect(() => {
-    if (typeof window === "undefined" || !containerRef.current || !toothRef.current) return;
+    if (typeof window === "undefined" || !containerRef.current || !toothWrapperRef.current) return;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        toothRef.current,
+        toothWrapperRef.current,
         { rotateY: 0, rotateZ: -5 },
         {
           rotateY: 280,
@@ -38,8 +39,8 @@ export default function CinematicGallery() {
           ease: "none",
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top bottom",
-            end: "bottom top",
+            start: "top 20%",
+            end: "bottom 80%",
             scrub: 0.5,
           },
         }
@@ -88,27 +89,37 @@ export default function CinematicGallery() {
     >
       <div className="w-full max-w-[1440px] mx-auto px-8 lg:px-[64px]">
         
-        {/* 2-Column layout: Sticky Tooth on Left, Scrollable Stack on Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1.8fr] gap-16 lg:gap-[100px] items-start">
+        {/* 2-Column layout: Stretched outer left column to enable long sticky track */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1.8fr] gap-16 lg:gap-[100px]">
           
-          {/* LEFT COLUMN — Sticky Brand & Rotating Tooth */}
-          <div className="lg:sticky lg:top-[120px] space-y-8 z-20">
-            <div>
-              <p className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-3 flex items-center gap-4">
-                <span className="w-8 h-[1px] bg-[var(--color-accent)]" />
-                KLİNİĞİMİZDEN KARELER
-              </p>
-              <h2 className="font-display text-[36px] lg:text-[48px] font-light text-[var(--color-text)] leading-tight tracking-tight">
-                Seçili Vakalarımız
-              </h2>
-              <p className="text-sm text-[var(--color-muted)] mt-4 leading-relaxed max-w-sm">
-                YDA Center'daki kliniğimizin sterilizasyon standartlarını, ileri görüntüleme odalarımızı ve tedavi birimlerimizi yakından inceleyin.
-              </p>
-            </div>
+          {/* LEFT COLUMN — Container stretches to grid height, enabling sticky inside it */}
+          <div className="h-full relative">
+            {/* Sticky Wrapper: Pins the header and rotating tooth for the entire right column scroll */}
+            <div className="lg:sticky lg:top-[140px] space-y-12 z-20 py-4">
+              <div>
+                <p className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-3 flex items-center gap-4">
+                  <span className="w-8 h-[1px] bg-[var(--color-accent)]" />
+                  KLİNİĞİMİZDEN KARELER
+                </p>
+                <h2 className="font-display text-[36px] lg:text-[48px] font-light text-[var(--color-text)] leading-tight tracking-tight">
+                  Seçili Vakalarımız
+                </h2>
+                <p className="text-sm text-[var(--color-muted)] mt-4 leading-relaxed max-w-sm">
+                  YDA Center'daki kliniğimizin sterilizasyon standartlarını, ileri görüntüleme odalarımızı ve tedavi birimlerimizi yakından inceleyin.
+                </p>
+              </div>
 
-            {/* Rotating 3D Enamel Tooth Object */}
-            <div className="w-[240px] h-[280px] mx-auto lg:mx-0 flex items-center justify-center">
-              <ToothSVG ref={toothRef} glowIntensity={0.3} className="w-full h-full" />
+              {/* 3D Container Wrapper with perspective to avoid flat squashing */}
+              <div 
+                ref={toothWrapperRef}
+                className="w-[240px] h-[280px] mx-auto lg:mx-0 flex items-center justify-center pointer-events-none"
+                style={{
+                  perspective: "1000px",
+                  transformStyle: "preserve-3d",
+                }}
+              >
+                <ToothSVG glowIntensity={0.35} className="w-full h-full" />
+              </div>
             </div>
           </div>
 
