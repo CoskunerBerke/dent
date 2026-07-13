@@ -56,16 +56,24 @@ export default function Footer() {
                 href={`tel:${siteConfig.contact.phone}`}
                 className="hover:text-[var(--color-accent)] transition-colors"
               >
-                {siteConfig.contact.phone}
+                Tel: {siteConfig.contact.phone}
               </a>
+              {siteConfig.contact.phone2 && (
+                <a
+                  href={`tel:${siteConfig.contact.phone2}`}
+                  className="hover:text-[var(--color-accent)] transition-colors"
+                >
+                  GSM: {siteConfig.contact.phone2}
+                </a>
+              )}
               <a
                 href={`mailto:${siteConfig.contact.email}`}
                 className="hover:text-[var(--color-accent)] transition-colors"
               >
                 {siteConfig.contact.email}
               </a>
-              <p className="max-w-[240px]">
-                YDA Center, Dumlupınar Blv. Kat:12 No:507, 06530 Çankaya / Ankara
+              <p className="max-w-[260px] leading-relaxed">
+                {siteConfig.contact.address}
               </p>
             </div>
           </div>

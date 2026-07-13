@@ -26,11 +26,6 @@ const CinematicGallery = dynamic(
   { ssr: false }
 );
 
-const CinematicStats = dynamic(
-  () => import("@/components/cinematic/CinematicStats"),
-  { ssr: false }
-);
-
 // Standard detailed sections
 const CTASection = dynamic(() => import("@/components/sections/CTASection"));
 
@@ -41,15 +36,15 @@ const schema = {
   name: "DİŞ HEKİMİ HAKAN SAYLAM",
   description:
     "Ankara YDA Center'da uzman diş hekimliği muayenehanesi. İmplant, estetik diş hekimliği, kanal tedavisi ve ortodonti.",
-  url: "https://hakansaylam.com",
+  url: "https://dthakansaylam.com",
   telephone: "+90-312-502-02-30",
-  email: "info@hakansaylam.com",
+  email: "dthakansaylam@gmail.com",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "YDA Center, Dumlupınar Blv. Kat:12 No:507",
+    streetAddress: "YDA Center A2 Blok Kat:12 No:507, Kızılırmak",
     addressLocality: "Çankaya",
     addressRegion: "Ankara",
-    postalCode: "06530",
+    postalCode: "06510",
     addressCountry: "TR",
   },
   openingHoursSpecification: [
@@ -67,7 +62,7 @@ const schema = {
       closes: "19:00",
     },
   ],
-  image: "https://hakansaylam.com/images/og-image.png",
+  image: "https://dthakansaylam.com/images/og-image.png",
   priceRange: "₺₺₺",
   currenciesAccepted: "TRY",
   paymentAccepted: "Nakit, Kredi Kartı, Taksit",
@@ -101,9 +96,6 @@ export default function HomePage() {
 
             {/* Cinematic Horizontal Gallery */}
             <CinematicGallery />
-
-            {/* Interactive Stats & Narrative */}
-            <CinematicStats />
 
             {/* Expanded elegant form section */}
             <CTASection />

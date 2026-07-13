@@ -6,18 +6,19 @@ export const siteConfig = {
   tagline: "Diş Muayenehanesi",
   description:
     "Ankara'nın öncü diş muayenehanesi. Uzman kadromuz, ileri teknolojik altyapımız ve kişiye özel tedavi yaklaşımımızla sağlıklı ve estetik gülüşler tasarlıyoruz.",
-  url: "https://hakansaylam.com",
+  url: "https://dthakansaylam.com",
   locale: "tr_TR",
   contact: {
     phone: "0 (312) 502 02 30",
-    email: "info@hakansaylam.com",
-    address: "YDA Center, Dumlupınar Blv. Kat:12 No:507, 06530 Çankaya/Ankara",
+    phone2: "0 (544) 691 18 77",
+    email: "dthakansaylam@gmail.com",
+    address: "YDA Center A2 Blok Kat:12 No:507, Kızılırmak, 06510 Çankaya / Ankara",
     hours: "Pazartesi – Cumartesi: 09:00 – 19:00",
   },
   social: {
-    instagram: "https://instagram.com/dentahakansaylam",
-    facebook: "https://facebook.com/dentahakansaylam",
-    twitter: "https://twitter.com/dentahakansaylam",
+    instagram: "https://instagram.com/dthakansaylam",
+    facebook: "https://facebook.com/dthakansaylam",
+    twitter: "https://twitter.com/dthakansaylam",
   },
 };
 
