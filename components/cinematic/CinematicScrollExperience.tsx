@@ -112,7 +112,8 @@ export default function CinematicScrollExperience() {
         .to(scene3Ref.current, { opacity: 0, y: -40, duration: 1.2, ease: "power2.inOut" }, 6.5)
         .to(toothWrapRef.current, {
           x: 0,
-          scale: isMobile ? 1.0 : 1.15,
+          y: isMobile ? "-18vh" : "-22vh",
+          scale: isMobile ? 0.8 : 0.9,
           rotateY: 0,
           rotateZ: 0,
           duration: 2.0,
@@ -230,7 +231,7 @@ export default function CinematicScrollExperience() {
             <div className="w-16 h-px bg-[var(--color-accent)]/60" />
             <div className="bg-black/85 border border-[var(--color-border)] px-4 py-2.5 backdrop-blur-md">
               <p className="text-[9px] tracking-widest text-[var(--color-accent)] uppercase font-semibold">
-                Otoklav & Steril Enamel
+                Otoklav &amp; Steril Enamel
               </p>
             </div>
           </div>
@@ -267,15 +268,15 @@ export default function CinematicScrollExperience() {
           </div>
         </div>
 
-        {/* ── SCENE 4: Clean, high-impact final CTA ── */}
+        {/* ── SCENE 4: Final CTA — text sits BELOW the tooth ── */}
         <div
           ref={scene4Ref}
-          className="absolute inset-0 flex flex-col items-center justify-center text-center px-8 z-20 pointer-events-none"
+          className="absolute inset-0 flex flex-col items-center justify-end pb-[10vh] lg:pb-[12vh] text-center px-8 z-30 pointer-events-none"
         >
-          <p className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-6 font-semibold">
+          <p className="text-[11px] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-5 font-semibold">
             HAKAN SAYLAM DİŞ MUAYENEHANESİ
           </p>
-          <h2 className="font-display text-[8vw] lg:text-[4.5vw] leading-[1.1] font-light text-[var(--color-text)] tracking-tight">
+          <h2 className="font-display text-[7vw] lg:text-[4vw] leading-[1.1] font-light text-[var(--color-text)] tracking-tight">
             Hayalinizdeki Gülüşe
             <br />
             <span className="italic text-[var(--color-accent)]">Bugün Kavuşun</span>
@@ -283,19 +284,19 @@ export default function CinematicScrollExperience() {
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center pointer-events-auto">
             <a
               href="#iletisim"
-              className="bg-[var(--color-accent)] text-[#04090d] hover:bg-[var(--color-accent-light)] transition-all duration-300 px-8 py-3.5 text-[10px] tracking-[0.2em] uppercase font-semibold"
+              className="bg-[var(--color-accent)] text-[#04090d] hover:bg-[var(--color-accent-light)] transition-all duration-300 px-10 py-4 text-[11px] tracking-[0.2em] uppercase font-bold rounded-[8px]"
             >
               Randevu Al
             </a>
             <a
               href="tel:+903125020230"
-              className="border border-white/20 text-white hover:bg-white/5 transition-all duration-300 px-8 py-3.5 text-[10px] tracking-[0.2em] uppercase"
+              className="border border-white/20 text-white hover:bg-white/5 transition-all duration-300 px-10 py-4 text-[11px] tracking-[0.2em] uppercase font-semibold rounded-[8px]"
             >
               0 (312) 502 02 30
             </a>
           </div>
-          <p className="mt-8 text-[10px] tracking-wider text-[var(--color-muted)]">
-            YDA Center, Dumlupınar Blv. Kat:12 No:507 · Ankara
+          <p className="mt-6 text-[12px] tracking-wider text-[var(--color-muted)]">
+            YDA Center A2 Blok Kat:12 No:507, Kızılırmak · Çankaya / Ankara
           </p>
         </div>
       </div>
