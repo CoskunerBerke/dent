@@ -1,14 +1,7 @@
 "use client";
-import { useRef, useEffect, useState, useCallback } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
-import ToothSVG from "./ToothSVG";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 const GALLERY_ITEMS = [
   { num: "01", title: "Rayscan Görüntüleme Cihazı", cat: "Teknoloji", desc: "3D tomografi ve dijital tarama teknolojisi ile milimetrik teşhis imkanı sunuyoruz.", src: "/images/projects/device.jpg" },
@@ -19,36 +12,7 @@ const GALLERY_ITEMS = [
 ];
 
 export default function CinematicGallery() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const toothWrapperRef = useRef<HTMLDivElement>(null);
-  
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-
-  // Smooth rotation animation on the wrapper div instead of the SVG directly.
-  // Animating rotateY on a div with perspective prevents the SVG from squashing flat.
-  useEffect(() => {
-    if (typeof window === "undefined" || !containerRef.current || !toothWrapperRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        toothWrapperRef.current,
-        { rotateY: 0, rotateZ: -5 },
-        {
-          rotateY: 280,
-          rotateZ: 10,
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 20%",
-            end: "bottom 80%",
-            scrub: 0.5,
-          },
-        }
-      );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
 
   // Lightbox Handlers
   const openLightbox = (index: number) => {
@@ -82,96 +46,72 @@ export default function CinematicGallery() {
 
   return (
     <section
-      ref={containerRef}
       id="galeri"
       className="relative bg-[#04090d] py-24 lg:py-36 overflow-visible border-t border-[rgba(202,168,105,0.15)]"
       aria-label="Klinik Fotoğraf Galerisi"
     >
       <div className="w-full max-w-[1440px] mx-auto px-8 lg:px-[64px]">
         
-        {/* 2-Column layout: Stretched outer left column to enable long sticky track */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1.8fr] gap-16 lg:gap-[100px]">
-          
-          {/* LEFT COLUMN — Container stretches to grid height, enabling sticky inside it */}
-          <div className="h-full relative">
-            {/* Sticky Wrapper: Pins the header and rotating tooth for the entire right column scroll */}
-            <div className="lg:sticky lg:top-[140px] space-y-12 z-20 py-4">
-              <div>
-                <p className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-3 flex items-center gap-4">
-                  <span className="w-8 h-[1px] bg-[var(--color-accent)]" />
-                  KLİNİĞİMİZDEN KARELER
-                </p>
-                <h2 className="font-display text-[36px] lg:text-[48px] font-light text-[var(--color-text)] leading-tight tracking-tight">
-                  Seçili Vakalarımız
-                </h2>
-                <p className="text-sm text-[var(--color-muted)] mt-4 leading-relaxed max-w-sm">
-                  YDA Center'daki kliniğimizin sterilizasyon standartlarını, ileri görüntüleme odalarımızı ve tedavi birimlerimizi yakından inceleyin.
-                </p>
+        {/* Full-width Section Header */}
+        <div className="max-w-2xl mb-16">
+          <p className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-3 flex items-center gap-4">
+            <span className="w-8 h-[1px] bg-[var(--color-accent)]" />
+            KLİNİĞİMİZDEN KARELER
+          </p>
+          <h2 className="font-display text-[36px] lg:text-[48px] font-light text-[var(--color-text)] leading-tight tracking-tight">
+            Seçili Vakalarımız
+          </h2>
+          <p className="text-sm text-[var(--color-muted)] mt-4 leading-relaxed">
+            YDA Center'daki kliniğimizin sterilizasyon standartlarını, ileri görüntüleme odalarımızı ve tedavi birimlerimizi yakından inceleyin.
+          </p>
+        </div>
+
+        {/* 2-Column Grid Layout for photos (desktop) / 1-Column on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12">
+          {GALLERY_ITEMS.map((item, index) => (
+            <div
+              key={item.num}
+              onClick={() => openLightbox(index)}
+              className="group cursor-pointer space-y-5 bg-[rgba(255,255,255,0.015)] border border-white/5 p-5 lg:p-7 rounded-[12px] shadow-lg hover:border-[rgba(202,168,105,0.25)] hover:bg-[rgba(255,255,255,0.03)] transition-all duration-500"
+            >
+              {/* Image Frame */}
+              <div className="relative w-full h-[240px] sm:h-[300px] lg:h-[360px] rounded-[8px] overflow-hidden">
+                <Image
+                  src={item.src}
+                  alt={item.title}
+                  fill
+                  unoptimized
+                  className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#04090d]/80 via-transparent to-transparent opacity-85" />
+                
+                {/* Top indicators */}
+                <div className="absolute top-4 left-4 font-mono text-[9px] text-[var(--color-accent)] tracking-widest bg-[#04090d]/85 px-3 py-1 rounded-sm border border-white/5">
+                  {item.num}
+                </div>
+                
+                {/* Maximize Icon on Hover */}
+                <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[var(--color-accent)] text-[#04090d] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-90 group-hover:scale-100 shadow-lg">
+                  <Maximize2 size={13} />
+                </div>
               </div>
 
-              {/* 3D Container Wrapper with perspective to avoid flat squashing */}
-              <div 
-                ref={toothWrapperRef}
-                className="w-[240px] h-[280px] mx-auto lg:mx-0 flex items-center justify-center pointer-events-none"
-                style={{
-                  perspective: "1000px",
-                  transformStyle: "preserve-3d",
-                }}
-              >
-                <ToothSVG glowIntensity={0.35} className="w-full h-full" />
+              {/* Info Text */}
+              <div className="space-y-2">
+                <span className="text-[9px] tracking-[0.2em] uppercase text-[var(--color-accent)] font-semibold">
+                  {item.cat}
+                </span>
+                <h3 className="font-display text-lg lg:text-xl font-light text-white group-hover:text-[var(--color-accent)] transition-colors duration-300">
+                  {item.title}
+                </h3>
+                <p className="text-xs text-[var(--color-muted)] leading-relaxed">
+                  {item.desc}
+                </p>
               </div>
             </div>
-          </div>
-
-          {/* RIGHT COLUMN — Vertical Scrollable Stack of Large Detailed Photos */}
-          <div className="space-y-16">
-            {GALLERY_ITEMS.map((item, index) => (
-              <div
-                key={item.num}
-                onClick={() => openLightbox(index)}
-                className="group cursor-pointer space-y-5 bg-[rgba(255,255,255,0.015)] border border-white/5 p-6 lg:p-8 rounded-[12px] shadow-lg hover:border-[rgba(202,168,105,0.25)] hover:bg-[rgba(255,255,255,0.03)] transition-all duration-500"
-              >
-                {/* Large Responsive Image Frame */}
-                <div className="relative w-full h-[260px] sm:h-[360px] lg:h-[420px] rounded-[8px] overflow-hidden">
-                  <Image
-                    src={item.src}
-                    alt={item.title}
-                    fill
-                    unoptimized
-                    className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#04090d]/80 via-transparent to-transparent opacity-80" />
-                  
-                  {/* Top indicators */}
-                  <div className="absolute top-4 left-4 font-mono text-[10px] text-[var(--color-accent)] tracking-widest bg-[#04090d]/80 px-3 py-1 rounded-sm border border-white/5">
-                    {item.num}
-                  </div>
-                  
-                  {/* Maximize Icon on Hover */}
-                  <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[var(--color-accent)] text-[#04090d] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-90 group-hover:scale-100 shadow-lg">
-                    <Maximize2 size={14} />
-                  </div>
-                </div>
-
-                {/* Info Text below image */}
-                <div className="flex justify-between items-start gap-4">
-                  <div className="space-y-2">
-                    <span className="text-[10px] tracking-[0.2em] uppercase text-[var(--color-accent)] font-semibold">
-                      {item.cat}
-                    </span>
-                    <h3 className="font-display text-lg lg:text-xl font-light text-white group-hover:text-[var(--color-accent)] transition-colors duration-300">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-[var(--color-muted)] leading-relaxed max-w-xl">
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
+          ))}
         </div>
+
       </div>
 
       {/* LIGHTBOX MODAL — Fullscreen HD Details View */}
