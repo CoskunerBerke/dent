@@ -43,7 +43,7 @@ export default function CinematicGallery() {
         ease: "none",
         scrollTrigger: {
           trigger: pinnedContainerRef.current,
-          start: "top 80px", // Pin exactly below the 80px navbar to prevent overlaps
+          start: "top 80px",
           end: () => `+=${scrollDistance}`,
           pin: true,
           pinSpacing: true,
@@ -128,7 +128,7 @@ export default function CinematicGallery() {
             <div>
               <p className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-3 flex items-center gap-4">
                 <span className="w-8 h-[1px] bg-[var(--color-accent)]" />
-                DİJİTAL GÜLÜŞ GALERİSİ
+                KLİNİĞİMİZDEN KARELER
               </p>
               <h2 className="font-display text-[6vw] lg:text-[3.2vw] font-light text-[var(--color-text)] leading-tight"
                   style={{ letterSpacing: "-0.02em" }}>
@@ -181,41 +181,40 @@ function GalleryCard({ item, isActive }: { item: typeof GALLERY_ITEMS[0]; isActi
   return (
     <div
       ref={cardRef}
-      className="relative flex-shrink-0 overflow-hidden border transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]"
+      className="relative flex-shrink-0 overflow-hidden border transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
       style={{ 
         width: "clamp(260px, 18vw, 340px)", 
         height: "clamp(350px, 46vh, 450px)",
         borderColor: isActive ? "rgba(202,168,105,0.4)" : "rgba(255,255,255,0.05)",
-        opacity: isActive ? 1 : 0.3,
-        transform: isActive ? "scale(1.03)" : "scale(0.97)",
+        opacity: isActive ? 1 : 0.8, // Inactive cards are now beautifully visible (0.8 instead of 0.3)
+        transform: isActive ? "scale(1.04)" : "scale(0.96)",
       }}
     >
-      {/* Image */}
+      {/* Image in full original colors, no grayscale filter, to prevent harsh color jumps */}
       <Image
         src={item.src}
         alt={item.title}
         fill
         unoptimized
-        className="object-cover transition-all duration-1000"
+        className="object-cover transition-all duration-700"
         style={{ 
-          filter: isActive ? "grayscale(0%)" : "grayscale(40%) blur(1px)",
           transform: isActive ? "scale(1.02)" : "scale(1.0)",
         }}
       />
-      {/* Dynamic light gradient overlay */}
+      {/* Softer light gradient overlay for maximum image visibility */}
       <div 
-        className="absolute inset-0 transition-opacity duration-1000"
+        className="absolute inset-0 transition-opacity duration-700"
         style={{ 
-          background: "linear-gradient(to top, rgba(4,9,12,0.96) 0%, rgba(4,9,12,0.4) 50%, transparent 100%)",
-          opacity: isActive ? 1 : 0.85,
+          background: "linear-gradient(to top, rgba(4,9,12,0.85) 0%, rgba(4,9,12,0.15) 50%, transparent 100%)",
         }} 
       />
 
       {/* Info details */}
       <div 
-        className="absolute bottom-0 left-0 right-0 p-6 lg:p-8 transition-transform duration-700"
+        className="absolute bottom-0 left-0 right-0 p-6 lg:p-8 transition-all duration-500"
         style={{
-          transform: isActive ? "translateY(0)" : "translateY(10px)",
+          transform: isActive ? "translateY(0)" : "translateY(5px)",
+          opacity: isActive ? 1 : 0.75,
         }}
       >
         <p className="text-[9px] tracking-[0.25em] uppercase text-[var(--color-accent)] mb-2">{item.cat}</p>
