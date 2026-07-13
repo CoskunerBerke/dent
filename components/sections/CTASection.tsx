@@ -248,7 +248,7 @@ export default function CTASection() {
                 </button>
               </div>
 
-              <p className="col-span-2 text-[11px] text-center text-[#8c857b] max-w-[520px] mx-auto mt-2 leading-relaxed font-light">
+              <p className="col-span-2 text-[11px] text-center text-[#8c857b] mt-2 leading-relaxed font-light">
                 Gönderdiğiniz bilgiler KVKK kapsamında klinik güvencesindedir.
               </p>
             </form>

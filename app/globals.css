@@ -163,28 +163,28 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 8px;
-  height: 8px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: var(--color-accent);
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%);
-  transition: width 0.3s, height 0.3s, background 0.3s, opacity 0.3s;
+  transition: transform 0.25s ease, background 0.25s ease;
 }
 
 .cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  border: 1px solid rgba(201, 169, 110, 0.5);
+  border: 1px solid rgba(201, 169, 110, 0.35);
   pointer-events: none;
   z-index: 99998;
   transform: translate(-50%, -50%);
-  transition: width 0.4s var(--ease-out-expo), height 0.4s var(--ease-out-expo);
+  transition: width 0.35s cubic-bezier(0.25, 1, 0.5, 1), height 0.35s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease;
 }
 
 /* ── Scroll Progress Bar ────────────────────────────────────── */

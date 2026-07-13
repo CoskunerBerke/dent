@@ -18,19 +18,19 @@ export default function CustomCursor() {
     };
 
     const onEnterLink = () => {
-      if (dotRef.current) dotRef.current.style.transform = "translate(-50%,-50%) scale(3)";
+      if (dotRef.current) dotRef.current.style.transform = "translate(-50%,-50%) scale(2)";
       if (ringRef.current) {
-        ringRef.current.style.width = "60px";
-        ringRef.current.style.height = "60px";
+        ringRef.current.style.width = "42px";
+        ringRef.current.style.height = "42px";
         ringRef.current.style.borderColor = "var(--color-accent)";
       }
     };
     const onLeaveLink = () => {
       if (dotRef.current) dotRef.current.style.transform = "translate(-50%,-50%) scale(1)";
       if (ringRef.current) {
-        ringRef.current.style.width = "40px";
-        ringRef.current.style.height = "40px";
-        ringRef.current.style.borderColor = "rgba(201,169,110,0.5)";
+        ringRef.current.style.width = "28px";
+        ringRef.current.style.height = "28px";
+        ringRef.current.style.borderColor = "rgba(201,169,110,0.35)";
       }
     };
 
