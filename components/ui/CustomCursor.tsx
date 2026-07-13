@@ -10,8 +10,10 @@ export default function CustomCursor() {
   const ring = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number>(0);
 
+  const isTouch = useMediaQuery("(pointer: coarse)");
+
   useEffect(() => {
-    if (isMobile) return;
+    if (isMobile || isTouch) return;
 
     const onMove = (e: MouseEvent) => {
       pos.current = { x: e.clientX, y: e.clientY };
@@ -68,7 +70,7 @@ export default function CustomCursor() {
     };
   }, [isMobile]);
 
-  if (isMobile) return null;
+  if (isMobile || isTouch) return null;
 
   return (
     <>
