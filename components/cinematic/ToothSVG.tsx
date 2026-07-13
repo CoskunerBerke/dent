@@ -7,10 +7,10 @@ interface ToothSVGProps {
 }
 
 /**
- * High-End Studio Sculpted Pearl-Enamel Tooth Visual.
- * Uses advanced SVG gradients, clean anatomical contour curves,
- * double specularity highlights, edge translucency mask, and a soft ambient occlusion shadow
- * to provide a highly realistic 3D feel suitable for luxury dental brands.
+ * Premium Medically Precise & Sculpted Enamel Molar Tooth Visual.
+ * Rebuilt from scratch as a single cohesive, organically unified 3D-shaded body.
+ * Eliminates cartoonish creases and detached floating roots.
+ * Delivers a luxurious, pearl-white enamel finish with realistic studio lighting and specularity.
  */
 const ToothSVG = forwardRef<SVGSVGElement, ToothSVGProps>(
   ({ className = "", glowIntensity = 0.25 }, ref) => {
@@ -20,197 +20,181 @@ const ToothSVG = forwardRef<SVGSVGElement, ToothSVGProps>(
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 320 400"
         className={className}
-        aria-label="Denta premium diş görseli"
+        aria-label="Hakan Saylam premium diş görseli"
         role="img"
         style={{ overflow: "visible" }}
       >
         <defs>
-          {/* Pearl-white enamel base gradient */}
-          <linearGradient id="toothBaseEnamel" x1="20%" y1="0%" x2="80%" y2="100%">
+          {/* Main 3D volumetric gradient for the enamel crown & roots */}
+          <radialGradient id="tooth3DVolume" cx="35%" cy="30%" r="70%">
             <stop offset="0%" stopColor="#ffffff" />
-            <stop offset="30%" stopColor="#faf6ee" />
-            <stop offset="65%" stopColor="#ebdcc5" />
-            <stop offset="90%" stopColor="#d3c0a7" />
-            <stop offset="100%" stopColor="#b49f85" />
+            <stop offset="25%" stopColor="#faf7f2" />
+            <stop offset="60%" stopColor="#eae3d5" />
+            <stop offset="85%" stopColor="#c7bba6" />
+            <stop offset="100%" stopColor="#9e907a" />
+          </radialGradient>
+
+          {/* Enamel specular glaze gradient (for wet/glassy highlight) */}
+          <linearGradient id="enamelGlaze" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="rgba(255, 255, 255, 0.95)" />
+            <stop offset="30%" stopColor="rgba(255, 255, 255, 0.3)" />
+            <stop offset="70%" stopColor="rgba(202, 168, 105, 0.1)" />
+            <stop offset="100%" stopColor="rgba(0, 0, 0, 0)" />
           </linearGradient>
 
-          {/* High-gloss studio spot reflection (left cusp) */}
-          <linearGradient id="spotReflection" x1="0%" y1="0%" x2="50%" y2="100%">
-            <stop offset="0%" stopColor="rgba(255,255,255,1)" />
-            <stop offset="50%" stopColor="rgba(255,255,255,0.4)" />
-            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
-          </linearGradient>
-
-          {/* Soft backfill light reflection */}
-          <linearGradient id="backfillLight" x1="100%" y1="100%" x2="0%" y2="0%">
-            <stop offset="0%" stopColor="rgba(255, 255, 255, 0.5)" />
+          {/* Soft backfill rim lighting from bottom-right */}
+          <linearGradient id="rimLightRight" x1="100%" y1="80%" x2="0%" y2="20%">
+            <stop offset="0%" stopColor="rgba(255, 255, 255, 0.45)" />
+            <stop offset="50%" stopColor="rgba(255, 255, 255, 0.1)" />
             <stop offset="100%" stopColor="rgba(255, 255, 255, 0)" />
           </linearGradient>
 
-          {/* Edge translucency (gives depth to the incisor crown edge) */}
-          <linearGradient id="translucencyOverlay" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="rgba(255,255,255,0.95)" />
-            <stop offset="35%" stopColor="rgba(240,248,250,0.65)" />
-            <stop offset="100%" stopColor="rgba(235,225,210,0)" />
-          </linearGradient>
-
-          {/* Root gradient (warm dentin transition) */}
-          <linearGradient id="rootDentin" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#d3c0a7" />
-            <stop offset="60%" stopColor="#bfa689" />
-            <stop offset="100%" stopColor="#9a8165" />
-          </linearGradient>
-
-          {/* Drop shadow filter to pop the tooth from the background */}
-          <filter id="sculptShadow" x="-20%" y="-20%" width="140%" height="150%">
-            <feDropShadow dx="0" dy="18" stdDeviation="15" floodColor="#04090c" floodOpacity="0.75" />
+          {/* Shadow filter for depth occlusion */}
+          <filter id="sculptedOcclusion" x="-20%" y="-20%" width="140%" height="150%">
+            <feDropShadow dx="0" dy="25" stdDeviation="18" floodColor="#020507" floodOpacity="0.8" />
           </filter>
 
-          {/* High-quality highlight blur */}
-          <filter id="softHighlightGlow" x="-10%" y="-10%" width="120%" height="120%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="6" />
+          {/* Soft highlight blur */}
+          <filter id="studioHighlightBlur" x="-10%" y="-10%" width="120%" height="120%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
           </filter>
         </defs>
 
-        {/* Ambient floor contact shadow */}
-        <ellipse
-          cx="160" cy="385"
-          rx="52" ry="7"
-          fill="#020507"
-          opacity="0.8"
-          style={{ filter: "blur(8px)" }}
-        />
-
-        {/* Dynamic Studio Key Light Background Glow */}
+        {/* Ambient floor shadow */}
         <ellipse
           cx="160"
-          cy="180"
-          rx="120"
-          ry="150"
-          fill="#1c4856"
-          opacity={0.16 * glowIntensity}
-          style={{ filter: "blur(60px)" }}
+          cy="380"
+          rx="65"
+          ry="9"
+          fill="#020507"
+          opacity="0.85"
+          style={{ filter: "blur(10px)" }}
         />
 
-        {/* MAIN TOOTH WITH SCULPTED DEPTH SHADOWS */}
-        <g filter="url(#sculptShadow)">
+        {/* Studio Spotlight Glow behind the tooth */}
+        <circle
+          cx="160"
+          cy="180"
+          r="110"
+          fill="#1c4856"
+          opacity={0.18 * glowIntensity}
+          style={{ filter: "blur(50px)" }}
+        />
 
-          {/* Left Root */}
+        {/* UNIFIED 3D SCULPTED TOOTH BODY */}
+        <g filter="url(#sculptedOcclusion)">
+          
+          {/* 
+            Anatomically unified path representing a high-end molar.
+            Smoothly transitions from the top cusps, down the crown, 
+            into organic, fully integrated roots with no visual gaps.
+          */}
           <path
-            d="M105,270 C97,276 92,298 87,322
-               C83,338 81,354 84,364
-               C86,371 91,373 96,370
-               C104,365 108,350 112,332
-               C115,313 116,291 120,270 Z"
-            fill="url(#rootDentin)"
+            d="M 80,105 
+               C 78,75 100,50 125,55 
+               C 140,58 150,68 160,68 
+               C 170,68 180,58 195,55 
+               C 220,50 242,75 240,105 
+               L 245,190 
+               C 248,225 240,250 230,265 
+               C 220,280 215,310 210,340
+               C 207,358 202,370 195,370
+               C 188,370 185,355 185,335
+               L 182,275
+               C 180,255 175,245 160,245
+               C 145,245 140,255 138,275
+               L 135,335
+               C 135,355 132,370 125,370
+               C 118,370 113,358 110,340
+               C 105,310 100,280 90,265
+               C 80,250 72,225 75,190
+               Z"
+            fill="url(#tooth3DVolume)"
           />
 
-          {/* Right Root */}
+          {/* Enamel Specular Glaze Overlay (Volumetric lighting) */}
           <path
-            d="M215,270 C223,276 228,298 233,322
-               C237,338 239,354 236,364
-               C234,371 229,373 224,370
-               C216,365 212,350 208,332
-               C205,313 204,291 200,270 Z"
-            fill="url(#rootDentin)"
-          />
-
-          {/* Enamel Crown Main Shape */}
-          <path
-            d="M80,25 C80,10 100,0 160,0 C220,0 240,10 240,25
-               L248,170 C252,192 255,212 250,232
-               C245,252 235,262 225,266
-               L215,270 C205,270 200,260 200,250
-               L196,215 C194,200 188,192 160,192
-               C132,192 126,200 124,215
-               L120,250 C120,260 115,270 105,270
-               L95,266 C85,262 75,252 70,232
-               C65,212 68,192 72,170 Z"
-            fill="url(#toothBaseEnamel)"
-          />
-
-          {/* Edge Translucency Overlay (Incisor Edge Gloss) */}
-          <path
-            d="M80,25 C80,10 100,0 160,0 C220,0 240,10 240,25
-               L245,100 L75,100 Z"
-            fill="url(#translucencyOverlay)"
+            d="M 80,105 
+               C 78,75 100,50 125,55 
+               C 140,58 150,68 160,68 
+               C 170,68 180,58 195,55 
+               C 220,50 242,75 240,105 
+               L 245,190 
+               C 248,225 240,250 230,265 
+               C 220,280 215,310 210,340
+               C 207,358 202,370 195,370
+               C 188,370 185,355 185,335
+               L 182,275
+               C 180,255 175,245 160,245
+               C 145,245 140,255 138,275
+               L 135,335
+               C 135,355 132,370 125,370
+               C 118,370 113,358 110,340
+               C 105,310 100,280 90,265
+               C 80,250 72,225 75,190
+               Z"
+            fill="url(#enamelGlaze)"
             opacity="0.8"
-            style={{ mixBlendMode: "screen" }}
-          />
-
-          {/* Glossy Spot Reflection Overlay */}
-          <path
-            d="M80,25 C80,10 100,0 160,0 C220,0 240,10 240,25
-               L248,170 C252,192 255,212 250,232
-               C245,252 235,262 225,266
-               L215,270 C205,270 200,260 200,250
-               L196,215 C194,200 188,192 160,192
-               C132,192 126,200 124,215
-               L120,250 C120,260 115,270 105,270
-               L95,266 C85,262 75,252 70,232
-               C65,212 68,192 72,170 Z"
-            fill="url(#spotReflection)"
-            opacity="0.65"
             style={{ mixBlendMode: "overlay" }}
           />
 
-          {/* Secondary ambient backfill light */}
+          {/* Right side rim light (Highlighting curves and 3D silhouette) */}
           <path
-            d="M80,25 C80,10 100,0 160,0 C220,0 240,10 240,25
-               L248,170 C252,192 255,212 250,232
-               C245,252 235,262 225,266
-               L215,270 C205,270 200,260 200,250
-               L196,215 C194,200 188,192 160,192
-               C132,192 126,200 124,215
-               L120,250 C120,260 115,270 105,270
-               L95,266 C85,262 75,252 70,232
-               C65,212 68,192 72,170 Z"
-            fill="url(#backfillLight)"
-            opacity="0.3"
+            d="M 238,95 C 244,140 244,200 234,240 C 226,270 216,305 208,335"
+            fill="none"
+            stroke="url(#rimLightRight)"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            opacity="0.7"
             style={{ mixBlendMode: "screen" }}
           />
 
-          {/* Soft edge ambient shadow details (crevices) */}
+          {/* Left side soft studio key light highlight */}
           <path
-            d="M130,140 C145,150 175,150 190,140"
-            fill="none"
-            stroke="rgba(110,95,75,0.15)"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-
-          {/* Cusp Sharp Specular Reflection (Left side of enamel) */}
-          <ellipse
-            cx="115"
-            cy="52"
-            rx="16"
-            ry="22"
-            fill="#ffffff"
-            opacity="0.9"
-            filter="url(#softHighlightGlow)"
-          />
-
-          {/* Tiny intense studio light glare dot */}
-          <circle
-            cx="106"
-            cy="42"
-            r="5"
-            fill="#ffffff"
-            opacity="0.95"
-          />
-
-          {/* Right rim light stroke (Clean medical precision highlight) */}
-          <path
-            d="M236,26 C241,46 247,90 247,145
-               C247,185 244,212 237,236
-               C232,248 227,254 223,254"
+            d="M 82,95 C 78,140 76,200 86,240"
             fill="none"
             stroke="#ffffff"
             strokeWidth="2.5"
             strokeLinecap="round"
-            opacity="0.6"
+            opacity="0.5"
           />
 
+          {/* Realistic anatomical groove lines (Not cartoon smiles, but natural occlusion grooves) */}
+          <path
+            d="M 125,120 C 135,135 150,140 160,140 C 170,140 185,135 195,120"
+            fill="none"
+            stroke="rgba(110, 95, 75, 0.2)"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M 160,140 L 160,200"
+            fill="none"
+            stroke="rgba(110, 95, 75, 0.15)"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+
+          {/* Intense glossy spot reflection on the upper left cusp */}
+          <ellipse
+            cx="112"
+            cy="90"
+            rx="14"
+            ry="20"
+            fill="#ffffff"
+            opacity="0.9"
+            filter="url(#studioHighlightBlur)"
+          />
+
+          {/* Pinpoint studio softbox glare dot */}
+          <circle
+            cx="106"
+            cy="80"
+            r="4.5"
+            fill="#ffffff"
+            opacity="0.95"
+          />
+          
         </g>
       </svg>
     );
