@@ -184,6 +184,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   min-height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 .hero-bg {
@@ -204,21 +205,24 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(10,9,8,0.82) 0%,
-    rgba(10,9,8,0.55) 50%,
-    rgba(10,9,8,0.30) 100%
+  background: radial-gradient(
+    circle at center,
+    rgba(10,9,8,0.50) 0%,
+    rgba(10,9,8,0.75) 50%,
+    rgba(10,9,8,0.92) 100%
   );
 }
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 1200px;
+  width: 100%;
+  max-width: 800px;
   margin: 0 auto;
   padding: 120px 24px 80px;
-  max-width: 680px;
-  padding-left: max(24px, calc((100vw - 1200px) / 2 + 24px));
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .hero-tag {
   font-size: 0.78rem;
@@ -244,7 +248,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .hero-subtitle {
   font-size: 1.1rem;
   color: rgba(255,255,255,0.72);
-  max-width: 480px;
+  max-width: 580px;
   line-height: 1.7;
   margin-bottom: 40px;
   opacity: 0;
@@ -254,6 +258,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+  justify-content: center;
   opacity: 0;
   animation: fadeUp 0.8s 0.9s forwards;
 }
