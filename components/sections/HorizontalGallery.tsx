@@ -152,7 +152,7 @@ function GalleryCard({
       className="relative w-[420px] h-[560px] flex-shrink-0 group overflow-hidden"
     >
       <Image
-        src={item.image}
+        src={item.src}
         alt={item.title}
         fill
         unoptimized
@@ -169,7 +169,7 @@ function GalleryCard({
         <h3 className="display-md text-[var(--color-text)] mb-2 group-hover:text-[var(--color-accent)] transition-colors">
           {item.title}
         </h3>
-        <p className="text-body text-[var(--color-muted)] text-sm">{item.description}</p>
+        <p className="text-body text-[var(--color-muted)] text-sm">{item.desc}</p>
       </div>
 
       {/* Number badge */}

@@ -1,11 +1,10 @@
-// ── Tüm site içeriği bu dosyadan yönetilir ──────────────────────────────────
-// Metinleri, hizmetleri, projeleri, iletişim bilgilerini buradan düzenleyin.
+// Metinler, hizmetler, anlaşmalı kurumlar ve iletişim bilgileri bu dosyadan yönetilir.
 
 export const siteConfig = {
-  name: "DİŞ HEKİMİ HAKAN SAYLAM",
-  tagline: "Diş Muayenehanesi",
+  name: "HAKAN SAYLAM DİŞ KLİNİĞİ",
+  tagline: "Sağlıklı Gülüşler, Mutlu Yarınlar",
   description:
-    "Ankara'nın öncü diş muayenehanesi. Uzman kadromuz, ileri teknolojik altyapımız ve kişiye özel tedavi yaklaşımımızla sağlıklı ve estetik gülüşler tasarlıyoruz.",
+    "Ankara YDA Center'da ileri teknoloji, uzman kadromuz ve sterilizasyon standartlarımızla ağız ve diş sağlığınız için en iyi hizmeti sunuyoruz.",
   url: "https://dthakansaylam.com",
   locale: "tr_TR",
   contact: {
@@ -22,178 +21,168 @@ export const siteConfig = {
   },
 };
 
+export const navLinks = [
+  { label: "Ana Sayfa", href: "#top" },
+  { label: "Hakkımızda", href: "#hakkimizda" },
+  { label: "Hizmetlerimiz", href: "#hizmetler" },
+  { label: "Kliniğimiz", href: "#galeri" },
+  { label: "Kurumsal Anlaşmalar", href: "#anlasmalar" },
+  { label: "İletişim", href: "#iletisim" },
+];
+
 export const heroContent = {
-  eyebrow: "Ankara YDA Center",
-  headline: ["Kusursuz", "Gülüşler", "Tasarlıyoruz"],
-  subtext:
-    "İleri teknoloji, sterilizasyon standartları ve kişiselleştirilmiş tedavi yaklaşımıyla Çankaya'daki modern muayenehanemizde diş hekimliğinde yeni bir standart belirliyoruz.",
-  cta: "Randevu Al",
-  ctaSecondary: "Hizmetlerimizi Keşfet",
-  scrollLabel: "Keşfet",
+  eyebrow: "Hakan Saylam Diş Kliniği",
+  title: "Sağlıklı Gülüşler, Mutlu Yarınlar",
+  description:
+    "Modern teknoloji ve deneyimli kadromuzla ağız ve diş sağlığınız için buradayız. Kişiye özel tedavilerle sağlıklı gülüşler tasarlıyoruz.",
+  ctaPrimary: "Randevu Al",
+  ctaSecondary: "Bize Ulaşın",
 };
 
-export const introContent = {
-  eyebrow: "Hakkımızda",
-  lines: [
-    "Güzel gülüşler",
-    "tesadüfen oluşmaz —",
-    "onlar özenle",
-    "tasarlanır.",
-  ],
-  body: "Diş Hekimi Hakan Saylam liderliğindeki kliniğimizde, her hastamızı biricik görüyor, tedavi planını onun hayaline özel şekillendiriyoruz. Estetik diş hekimliğini bir bilim ve sanat olarak benimsiyoruz.",
-  stats: [
-    { value: 25, suffix: "+", label: "Yıllık Deneyim" },
-    { value: 12000, suffix: "+", label: "Mutlu Hasta" },
-    { value: 15, suffix: "+", label: "Teknolojik Cihaz" },
-    { value: 98, suffix: "%", label: "Hasta Memnuniyeti" },
-  ],
-};
+export const features = [
+  {
+    title: "Uzman Kadro",
+    desc: "Deneyimli ve güler yüzlü ekibimizle yanınızdayız.",
+  },
+  {
+    title: "Modern Teknoloji",
+    desc: "Son teknoloji cihazlarla kesin ve konforlu tedavi.",
+  },
+  {
+    title: "Hijyenik Ortam",
+    desc: "Sağlığınız için en yüksek hijyen standartları.",
+  },
+  {
+    title: "Hasta Memnuniyeti",
+    desc: "Önceliğimiz sizin memnuniyetiniz ve güvenliğiniz.",
+  },
+  {
+    title: "Kolay Randevu",
+    desc: "Hızlı ve kolay randevu planlama sistemi.",
+  },
+];
+
+// 2. ve 3. Fotoğraftaki Sigortalar ve Anlaşmalı Kuruluşlar listesi
+export const benefitInsurances = [
+  "Ak Sigorta",
+  "Allianz",
+  "Anadolu Sigorta",
+  "QNB Sigorta",
+  "Liberty Sigorta",
+  "Türkiye Sigorta",
+  "Neova Sigorta",
+  "HDI Sigorta",
+  "Ana Sigorta",
+  "TEB Sigorta",
+  "Türk Nippon Sigorta",
+  "Zurich Sigorta",
+  "Doğa Sigorta",
+  "Eureko Sigorta",
+  "Türkiye Katılım Sigorta",
+  "Ankara Sigorta",
+];
+
+export const benefitCompanies = [
+  "Anadolu Hayat Emeklilik",
+  "Demir Hayat",
+  "NN Hayat ve Emeklilik",
+  "HSBC",
+  "Yapı Kredi",
+  "Magdeburger",
+  "MediSA",
+  "Garanti BBVA Emeklilik",
+  "Türkiye Hayat Emeklilik",
+  "Hepiyi",
+  "Viennalife Emeklilik ve Hayat A.Ş.",
+];
+
+// Carousel logoları için metinsel isimler (SVG logoları bu isimlerle çizilecek)
+export const corporateCarouselLogos = [
+  "Türkiye İş Bankası",
+  "Türk Hava Yolları",
+  "Aselsan",
+  "TCDD Taşımacılık",
+  "Halkbank",
+  "Vakıfbank",
+];
+
+export const insuranceCarouselLogos = [
+  "Allianz",
+  "Axa Sigorta",
+  "Mapfre",
+  "HDI Sigorta",
+  "Anadolu Sigorta",
+  "Zurich Sigorta",
+];
 
 export const services = [
   {
-    id: "muayene",
-    number: "01",
-    category: "Teşhis",
-    title: "Muayene ve Teşhis",
-    description:
-      "Ağız ve diş sağlığınızı detaylı bir şekilde inceleyerek her sorununuz için en doğru ve kişiye özel tedavi planını sunuyoruz.",
-    image: "/images/projects/device.jpg",
-    tag: "Doğru Planlama",
-  },
-  {
-    id: "estetik",
-    number: "02",
-    category: "Estetik",
-    title: "Estetik Diş Hekimliği",
-    description:
-      "Gülümsemenizi yeniden keşfedin! Diş beyazlatma ve porselen kaplama ile dişlerinizin mükemmel görünmesini sağlıyoruz.",
-    image: "/images/projects/entrance.jpg",
-    tag: "Hollywood Gülüşü",
-  },
-  {
-    id: "kanal",
-    number: "03",
-    category: "Endodonti",
-    title: "Kanal Tedavisi",
-    description:
-      "İçsel enfeksiyonları kökünden temizleyerek ağrıdan ve iltihaplardan kalıcı olarak kurtulmanızı sağlıyoruz.",
-    image: "/images/projects/chair.jpg",
-    tag: "Diş Tasarrufu",
-  },
-  {
-    id: "hijyen",
-    number: "04",
-    category: "Koruyucu",
-    title: "Profesyonel Diş Hijyeni",
-    description:
-      "Diş temizliği ile ağız hijyeninizi korumak, diş eti problemlerini önlemek ve dişlerinizin sağlığını uzun süre korumak için gereklidir.",
-    image: "/images/projects/sterilization.jpg",
-    tag: "Sağlıklı Diş Etleri",
+    id: "beyazlatma",
+    title: "Diş Beyazlatma",
+    desc: "Daha beyaz ve ışıltılı bir gülüş.",
   },
   {
     id: "implant",
-    number: "05",
-    category: "Cerrahi",
     title: "İmplant Tedavisi",
-    description:
-      "En son teknolojiyi kullanarak implant tedavisi uyguluyoruz. Uzman ekibimiz, size özel bir tedavi planı oluşturur ve işlemi rahatça tamamlamanızı sağlar.",
-    image: "/images/projects/reception.jpg",
-    tag: "Kalıcı Çözüm",
+    desc: "Kalıcı, doğal ve sağlam çözümler.",
   },
   {
-    id: "ortodonti",
-    number: "06",
-    category: "Ortodonti",
-    title: "Ortodonti",
-    description:
-      "Diş teli ve benzeri tedavilerle, dişlerin düzeltilmesi ve çene yapısının geliştirilmesi için en iyi uzmanlarımız hizmetinizdedir.",
-    image: "/images/projects/lounge.jpg",
-    tag: "Düzgün Hizalama",
+    id: "estetik",
+    title: "Estetik Diş Hekimliği",
+    desc: "Gülüş tasarımı ile estetik dokunuşlar.",
   },
 ];
 
 export const galleryItems = [
   {
-    id: 1,
-    title: "Görüntüleme Cihazı",
-    category: "Görüntüleme",
-    description: "3D Tomografi ve Rayscan ağız yapısı tarama teknolojisi.",
-    image: "/images/projects/device.jpg",
+    id: "entrance",
+    title: "Muayenehane Girişi",
+    category: "Hakan Saylam",
+    desc: "YDA Center'daki prestijli ve modern muayenehane girişimiz ile hastalarımızı karşılıyoruz.",
+    src: "/images/projects/entrance.jpg",
   },
   {
-    id: 2,
-    title: "Klinik Giriş",
-    category: "Muayenehane",
-    description: "Diş Hekimi Hakan Saylam YDA Center modern giriş alanı.",
-    image: "/images/projects/entrance.jpg",
+    id: "device",
+    title: "Rayscan Görüntüleme Cihazı",
+    category: "Teknoloji",
+    desc: "3D tomografi ve dijital tarama teknolojisi ile milimetrik teşhis imkanı sunuyoruz.",
+    src: "/images/projects/device.jpg",
   },
   {
-    id: 3,
-    title: "Hasta Bekleme Alanı",
-    category: "Karşılama",
-    description: "Konforlu oturma köşesi ve şık bekleme salonu.",
-    image: "/images/projects/lounge.jpg",
+    id: "reception",
+    title: "Karşılama Bankosu",
+    category: "Sekretarya",
+    desc: "Kayıt ve danışma işlemlerinizin steril koşullarda, hızlıca yapıldığı karşılama bankomuz.",
+    src: "/images/projects/reception.jpg",
   },
   {
-    id: 4,
-    title: "Sekretarya & Banko",
-    category: "Kayıt",
-    description: "Karşılama bankosu ve sterilizasyon standartları danışması.",
-    image: "/images/projects/reception.jpg",
-  },
-  {
-    id: 5,
+    id: "sterilization",
     title: "Sterilizasyon Laboratuvarı",
     category: "Hijyen",
-    description: "Cihazların ve aletlerin tam otomatik otoklav sterilizasyon odası.",
-    image: "/images/projects/sterilization.jpg",
+    desc: "Avrupa standartlarında tam otomatik otoklav ve sterilizasyon cihazlarımızın yer aldığı hijyen odamız.",
+    src: "/images/projects/sterilization.jpg",
   },
   {
-    id: 6,
-    title: "Tedavi Odası & Ünit",
-    category: "Klinik",
-    description: "En son teknoloji tedavi koltuğu ve aydınlık klinik ünitimiz.",
-    image: "/images/projects/chair.jpg",
+    id: "chair",
+    title: "Klinik Tedavi Odası",
+    category: "Tedavi",
+    desc: "En son teknoloji ünitlerimiz ile konforlu ve acısız tedavilerin gerçekleştirildiği odamız.",
+    src: "/images/projects/chair.jpg",
+  },
+  {
+    id: "corridor",
+    title: "Klinik Geçiş Koridoru",
+    category: "Mimari",
+    desc: "Hastalarımızın konforu ve gizliliği düşünülerek modern akustik cam bölmelerle tasarlanmış ferah klinik koridorumuz.",
+    src: "/images/projects/corridor.jpg",
   },
 ];
 
-export const storySteps = [
-  {
-    step: "01",
-    title: "Teknolojik Analiz",
-    description:
-      "Modern ağız tarayıcılarımızla ağız yapınızı eksiksiz analiz edip tedavi planı hazırlıyoruz.",
-    image: "/images/projects/device.jpg",
-    color: "#04090d",
-    stat: { value: 100, suffix: "%", label: "Dijital Tarama" },
-  },
-  {
-    step: "02",
-    title: "Tam Sterilizasyon",
-    description:
-      "Aletlerimiz her hastadan sonra otoklav cihazlarımızda Avrupa standartlarında sterilize edilir.",
-    image: "/images/projects/sterilization.jpg",
-    color: "#070e12",
-    stat: { value: 100, suffix: "%", label: "Steril Standart" },
-  },
-  {
-    step: "03",
-    title: "Tedavi Süreci",
-    description:
-      "Lüks ve konforlu klinik odalarımızda hekimimiz eşliğinde acısız tedavileri tamamlıyoruz.",
-    image: "/images/projects/chair.jpg",
-    color: "#020507",
-    stat: { value: 25, suffix: "+", label: "Deneyim Yılı" },
-  },
-  {
-    step: "04",
-    title: "Hasta Konforu",
-    description:
-      "Tedavi öncesi ve sonrasında kahve ikram köşemizde bekleme sürenizi keyfe dönüştürüyoruz.",
-    image: "/images/projects/coffee.jpg",
-    color: "#04090d",
-    stat: { value: 98, suffix: "%", label: "Hasta Memnuniyeti" },
-  },
+export const stats = [
+  { value: "20+", label: "Yıllık Deneyim" },
+  { value: "5000+", label: "Mutlu Hasta" },
+  { value: "15+", label: "Uzman Kadro" },
+  { value: "7/24", label: "Destek & İletişim" },
 ];
 
 export const testimonials = [
@@ -201,8 +190,7 @@ export const testimonials = [
     id: 1,
     name: "Murat Özkan",
     title: "Yönetici",
-    quote:
-      "YDA Center'daki muayenehane son derece şık ve steril. Hakan Bey'in tecrübesi sayesinde tedavilerim çok rahat geçti.",
+    quote: "YDA Center'daki muayenehane son derece şık ve steril. Hakan Bey'in tecrübesi sayesinde tedavilerim çok rahat geçti.",
     rating: 5,
     treatment: "Estetik Diş Hekimliği",
   },
@@ -210,24 +198,16 @@ export const testimonials = [
     id: 2,
     name: "Selin Yılmaz",
     title: "Mimar",
-    quote:
-      "İmplant tedavisi için doğru yer olduğunu ilk girdiğiniz an hissettiriyor. Ekip güler yüzlü ve sterilizasyon mükemmel.",
+    quote: "İmplant tedavisi için doğru yer olduğunu ilk girdiğiniz an hissettiriyor. Ekip güler yüzlü ve sterilizasyon mükemmel.",
     rating: 5,
     treatment: "İmplant Tedavisi",
   },
 ];
 
 export const trustStats = [
-  { value: 25, suffix: "+", label: "Yıllık Deneyim" },
-  { value: 12000, suffix: "+", label: "Mutlu Hasta" },
-  { value: 15, suffix: "+", label: "Teknolojik Cihaz" },
+  { value: 20, suffix: "+", label: "Yıllık Deneyim" },
+  { value: 5000, suffix: "+", label: "Mutlu Hasta" },
+  { value: 15, suffix: "+", label: "Uzman Kadro" },
   { value: 98, suffix: "%", label: "Memnuniyet" },
 ];
 
-export const navLinks = [
-  { label: "Hizmetler", href: "#hizmetler" },
-  { label: "Klinik", href: "#galeri" },
-  { label: "Süreç", href: "#hikayemiz" },
-  { label: "Referanslar", href: "#referanslar" },
-  { label: "İletişim", href: "#iletisim" },
-];

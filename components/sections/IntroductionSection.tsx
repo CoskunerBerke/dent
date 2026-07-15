@@ -1,144 +1,148 @@
 "use client";
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion } from "framer-motion";
 import Image from "next/image";
-import AnimatedCounter from "@/components/ui/AnimatedCounter";
-import { introContent } from "@/data/content";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { Check, Sparkles, Shield, Heart, Calendar, Phone } from "lucide-react";
+import { siteConfig } from "@/data/content";
 
 export default function IntroductionSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const imageWrapperRef = useRef<HTMLDivElement>(null);
+  const handleScroll = (id: string) => {
+    const target = document.querySelector(id);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+  const checkPoints = [
+    "Kişiye özel tedavi planlaması",
+    "Ağrısız ve konforlu tedavi süreci",
+    "Kaliteli malzeme ve uzun ömürlü çözümler",
+    "Estetik ve fonksiyonel mükemmel sonuçlar",
+  ];
 
-    const ctx = gsap.context(() => {
-      // Gentle parallax scroll on doctor portrait
-      gsap.to(imageWrapperRef.current, {
-        y: -30,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1,
-        },
-      });
-    }, section);
+  const quickCards = [
+    {
+      icon: <Sparkles className="w-8 h-8 text-[var(--color-accent)]" />,
+      title: "Diş Beyazlatma",
+      desc: "Daha beyaz ve ışıltılı bir gülüş.",
+    },
+    {
+      icon: <Shield className="w-8 h-8 text-[var(--color-accent)]" />,
+      title: "İmplant Tedavisi",
+      desc: "Kalıcı, doğal ve sağlam çözümler.",
+    },
+    {
+      icon: <Heart className="w-8 h-8 text-[var(--color-accent)]" />,
+      title: "Estetik Diş Hekimliği",
+      desc: "Gülüş tasarımı ile estetik dokunuşlar.",
+    },
+  ];
 
-    return () => ctx.revert();
-  }, []);
+  const stats = [
+    { value: "20+", label: "Yıllık Deneyim" },
+    { value: "5000+", label: "Mutlu Hasta" },
+    { value: "15+", label: "Uzman Kadro" },
+    { value: "7/24", label: "Destek & İletişim" },
+  ];
 
   return (
-    <section
-      ref={sectionRef}
-      id="hikayemiz"
-      className="relative py-24 lg:py-36 bg-[#04090d] overflow-hidden"
-      aria-label="Tanıtım bölümü"
-    >
-      {/* Subtle background light spotlight */}
-      <div
-        className="absolute inset-0 opacity-20 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle at 15% 45%, rgba(202,168,105,0.12) 0%, transparent 60%)",
-        }}
-        aria-hidden="true"
-      />
-
-      <div className="max-w-[1440px] mx-auto px-8 lg:px-[64px]">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.3fr] gap-16 lg:gap-[110px] items-center">
+    <section id="hakkimizda" className="w-full bg-[#FAF9F6] py-24 border-t border-[var(--color-border)]">
+      <div className="w-full max-w-[1600px] mx-auto px-6 lg:px-12 space-y-20">
+        
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           
-          {/* Left Column — Hakan Saylam Portrait */}
-          <div className="relative">
-            <div
-              ref={imageWrapperRef}
-              className="relative overflow-hidden border border-[rgba(202,168,105,0.22)] rounded-[8px] bg-[#020507] shadow-2xl"
-              style={{ height: "clamp(480px, 60vh, 680px)" }}
-            >
-              <Image
-                src="/images/projects/hakan_saylam.png"
-                alt="Diş Hekimi Hakan Saylam"
-                fill
-                unoptimized
-                className="object-cover object-top transition-transform duration-[1.5s]"
-                priority
-              />
-              <div 
-                className="absolute inset-0"
-                style={{
-                  background: "linear-gradient(to top, rgba(4,9,12,0.95) 0%, rgba(4,9,12,0.3) 45%, transparent 100%)",
-                }}
-              />
-              
-              {/* Doctor Details Badge */}
-              <div className="absolute bottom-8 left-8">
-                <p className="text-[10px] tracking-[0.25em] uppercase text-[var(--color-accent)] mb-1 font-semibold">
-                  KURUCU HEKİM
-                </p>
-                <h3 className="font-display text-[26px] font-light text-white tracking-wide">
-                  Dt. Hakan Saylam
-                </h3>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column — Professional Content */}
-          <div className="space-y-10">
-            <div>
-              <p className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-4 font-semibold flex items-center gap-3">
-                <span className="w-6 h-px bg-[var(--color-accent)]" />
-                {introContent.eyebrow}
-              </p>
-              
-              <h2 
-                className="font-display text-white tracking-tight mb-8"
-                style={{
-                  fontSize: "clamp(40px, 4vw, 56px)",
-                  lineHeight: "1.1",
-                }}
-              >
-                Gülüşünüzü <span className="italic text-[var(--color-accent)] font-normal">Sağlıkla</span>
+          {/* Left Column - Content */}
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <span className="text-[11px] tracking-[0.35em] uppercase text-[var(--color-accent)] font-semibold block">
+                HAKAN SAYLAM DİŞ KLİNİĞİ
+              </span>
+              <h2 className="font-display text-[36px] sm:text-[48px] lg:text-[56px] font-light text-[var(--color-text)] leading-[1.1] tracking-tight">
+                Gülüşünüzdeki
                 <br />
-                Yeniden Şekillendiriyoruz
+                <span className="italic text-[var(--color-accent)]">Mükemmelliği</span> Keşfedin
               </h2>
-
-              <p 
-                className="text-[#8c857b] leading-relaxed max-w-xl font-light"
-                style={{ fontSize: "16px", lineHeight: "1.75" }}
-              >
-                {introContent.body}
-              </p>
             </div>
 
-            {/* Success Counters Grid */}
-            <div className="grid grid-cols-2 gap-8 lg:gap-12 pt-4 border-t border-white/[0.06]">
-              {introContent.stats.map((stat, i) => (
-                <div key={i}>
-                  <div className="font-display text-[36px] lg:text-[42px] font-light text-[var(--color-accent)] mb-1.5 leading-none">
-                    <AnimatedCounter
-                      value={stat.value}
-                      suffix={stat.suffix}
-                      className="font-display font-light"
-                    />
+            <p className="text-[#6e675f] text-[15px] lg:text-[16px] leading-relaxed font-light">
+              İleri teknoloji, hijyenik ortam ve uzman kadromuzla sizlere en iyi ağız ve diş sağlığı hizmetini sunuyoruz. Her adımda konforunuzu ve sağlığınızı ön planda tutuyoruz.
+            </p>
+
+            {/* Checkpoints */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {checkPoints.map((point) => (
+                <div key={point} className="flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full bg-[var(--color-accent)]/10 flex items-center justify-center text-[var(--color-accent)]">
+                    <Check size={12} strokeWidth={3} />
                   </div>
-                  <p className="text-[10px] tracking-[0.2em] uppercase text-[#8c857b] font-medium">
-                    {stat.label}
-                  </p>
+                  <span className="text-[13px] font-semibold text-[var(--color-text)]">{point}</span>
                 </div>
               ))}
             </div>
 
+            {/* Buttons */}
+            <div className="flex flex-wrap gap-4 pt-2">
+              <button
+                onClick={() => handleScroll("#iletisim")}
+                className="h-[52px] px-8 bg-[var(--color-accent)] hover:bg-[var(--color-accent-light)] text-white text-[12px] tracking-[0.2em] uppercase font-bold rounded-[8px] flex items-center justify-center gap-3 transition-all duration-300 shadow-[0_10px_25px_rgba(184,147,75,0.15)] cursor-pointer"
+              >
+                <Calendar size={14} />
+                Randevu Al
+              </button>
+              <button
+                onClick={() => handleScroll("#iletisim")}
+                className="h-[52px] px-8 bg-white border border-[var(--color-accent)]/30 hover:border-[var(--color-accent)] text-[var(--color-text)] text-[12px] tracking-[0.2em] uppercase font-bold rounded-[8px] flex items-center justify-center gap-3 transition-all duration-300 hover:bg-[var(--color-accent)]/5 cursor-pointer"
+              >
+                <Phone size={14} className="text-[var(--color-accent)]" />
+                Bize Ulaşın
+              </button>
+            </div>
+          </div>
+
+          {/* Right Column - Image */}
+          <div className="relative w-full h-[320px] sm:h-[400px] lg:h-[480px] rounded-[16px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-white">
+            <Image
+              src="/images/projects/chair.jpg"
+              alt="Hakan Saylam Diş Kliniği Klinik Tedavi Odası"
+              fill
+              unoptimized
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#FAF9F6]/20 via-transparent to-transparent" />
           </div>
 
         </div>
+
+        {/* 3 Quick Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {quickCards.map((card) => (
+            <div key={card.title} className="p-8 bg-white border border-[var(--color-border)] rounded-[16px] hover:shadow-[0_15px_45px_rgba(184,147,75,0.06)] hover:-translate-y-1 transition-all duration-300 space-y-4">
+              <div className="w-16 h-16 rounded-full bg-[#FAF9F6] border border-[var(--color-border)] flex items-center justify-center">
+                {card.icon}
+              </div>
+              <div className="space-y-2">
+                <h3 className="font-display text-[18px] lg:text-[22px] font-semibold text-[var(--color-text)]">{card.title}</h3>
+                <p className="text-[13px] text-[#6e675f] font-light leading-relaxed">{card.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Stats Row (Gold banner row) */}
+        <div className="w-full bg-[var(--color-accent)] rounded-[16px] p-8 lg:p-12 shadow-[0_20px_50px_rgba(184,147,75,0.15)] text-white">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-y lg:divide-y-0 lg:divide-x divide-white/20">
+            {stats.map((stat, idx) => (
+              <div key={stat.label} className={`text-center space-y-1 pt-6 lg:pt-0 ${idx > 0 ? "lg:pl-4" : ""}`}>
+                <p className="font-display text-[42px] lg:text-[54px] font-light leading-none tracking-tight">
+                  {stat.value}
+                </p>
+                <p className="text-[11px] tracking-[0.25em] uppercase text-white/80 font-semibold">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );

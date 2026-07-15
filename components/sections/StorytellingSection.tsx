@@ -1,162 +1,88 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import AnimatedCounter from "@/components/ui/AnimatedCounter";
-import { storySteps } from "@/data/content";
-
-gsap.registerPlugin(ScrollTrigger);
+import { CheckCircle2, Award, Heart, Shield } from "lucide-react";
+import { siteConfig } from "@/data/content";
 
 export default function StorytellingSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [activeStep, setActiveStep] = useState(0);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const ctx = gsap.context(() => {
-      // Pin the section and step through each story panel
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top top",
-        end: `+=${storySteps.length * 100}vh`,
-        pin: true,
-        scrub: false,
-        snap: 1 / (storySteps.length - 1),
-        onUpdate: (self) => {
-          const idx = Math.min(
-            Math.floor(self.progress * storySteps.length),
-            storySteps.length - 1
-          );
-          setActiveStep(idx);
-        },
-      });
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
-
-  const step = storySteps[activeStep];
+  const qualifications = [
+    { icon: <Award size={18} className="text-[var(--color-accent)]" />, text: "25+ Yıllık Hekimlik Tecrübesi" },
+    { icon: <Shield size={18} className="text-[var(--color-accent)]" />, text: "Uluslararası Sterilizasyon ve Hijyen Akreditasyonu" },
+    { icon: <Heart size={18} className="text-[var(--color-accent)]" />, text: "Kişiye Özel Doğal Gülüş Tasarımı Yaklaşımı" },
+  ];
 
   return (
-    <section
-      ref={sectionRef}
-      id="hikayemiz"
-      className="relative h-screen overflow-hidden"
-      aria-label="Hikayemiz bölümü"
-    >
-      {/* Animated background */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeStep}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-          className="absolute inset-0"
-          style={{ backgroundColor: step.color }}
-        >
-          <Image
-            src={step.image}
-            alt={step.title}
-            fill
-            unoptimized
-            className="object-cover opacity-20"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-bg)]/90 to-transparent" />
-        </motion.div>
-      </AnimatePresence>
+    <section id="hekim" className="w-full bg-[#FAF9F6] py-24 border-t border-[var(--color-border)]">
+      <div className="w-full max-w-[1600px] mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20 items-center">
+          
+          {/* Left Column — Hakan Saylam Portrait */}
+          <div className="relative">
+            <div
+              className="relative overflow-hidden border border-[var(--color-border)] rounded-[16px] bg-white shadow-[0_20px_50px_rgba(0,0,0,0.04)]"
+              style={{ height: "clamp(480px, 60vh, 650px)" }}
+            >
+              <Image
+                src="/images/projects/hakan_saylam.png"
+                alt="Diş Hekimi Dt. Hakan Saylam"
+                fill
+                unoptimized
+                className="object-cover object-top transition-transform duration-[1.5s] hover:scale-103"
+                priority
+              />
+              <div 
+                className="absolute inset-0"
+                style={{
+                  background: "linear-gradient(to top, rgba(30,27,24,0.9) 0%, rgba(30,27,24,0.2) 40%, transparent 100%)",
+                }}
+              />
+              
+              {/* Doctor Details Badge */}
+              <div className="absolute bottom-8 left-8">
+                <p className="text-[10px] tracking-[0.25em] uppercase text-[var(--color-accent)] mb-1 font-semibold">
+                  KURUCU DİŞ HEKİMİ
+                </p>
+                <h3 className="font-display text-[26px] font-light text-white tracking-wide">
+                  Dt. Hakan Saylam
+                </h3>
+              </div>
+            </div>
+          </div>
 
-      {/* Content */}
-      <div className="relative z-10 h-full flex items-center">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-16 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left text */}
-            <div>
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeStep}
-                  initial={{ y: 40, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -40, opacity: 0 }}
-                  transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-                >
-                  <p className="text-label text-[var(--color-accent)] mb-4 flex items-center gap-4">
-                    <span className="w-8 h-px bg-[var(--color-accent)]" />
-                    Adım {step.step}
-                  </p>
-                  <h2 className="display-lg text-[var(--color-text)] mb-6">{step.title}</h2>
-                  <p className="text-body text-[var(--color-muted)] max-w-md mb-8">
-                    {step.description}
-                  </p>
-
-                  {/* Stat */}
-                  <div className="border-t border-[var(--color-border)] pt-6 inline-block">
-                    <div className="display-md text-[var(--color-accent)]">
-                      <AnimatedCounter
-                        key={`${activeStep}-counter`}
-                        value={step.stat.value}
-                        suffix={step.stat.suffix}
-                        duration={1200}
-                      />
-                    </div>
-                    <p className="text-label text-[var(--color-muted)] mt-1">{step.stat.label}</p>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+          {/* Right Column — Professional Details & Vision */}
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <span className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] font-semibold block">
+                HEKİMİMİZ
+              </span>
+              <h2 className="font-display text-[36px] sm:text-[48px] lg:text-[56px] font-light text-[var(--color-text)] leading-[1.1] tracking-tight">
+                Dt. Hakan Saylam
+                <br />
+                <span className="italic text-[var(--color-accent)] font-normal">Mesleki Tecrübe</span> &amp; Vizyon
+              </h2>
             </div>
 
-            {/* Right — step indicators */}
-            <div className="flex flex-col gap-4">
-              {storySteps.map((s, i) => (
-                <motion.div
-                  key={i}
-                  onClick={() => setActiveStep(i)}
-                  className={`flex items-center gap-6 p-6 border transition-all duration-500 cursor-pointer ${
-                    i === activeStep
-                      ? "border-[var(--color-accent)] bg-[var(--color-accent)]/5"
-                      : "border-[var(--color-border)] hover:border-[var(--color-accent)]/40"
-                  }`}
-                >
-                  <span
-                    className={`text-label transition-colors ${
-                      i === activeStep ? "text-[var(--color-accent)]" : "text-[var(--color-muted)]"
-                    }`}
-                  >
-                    {s.step}
-                  </span>
-                  <div>
-                    <p
-                      className={`font-display text-lg transition-colors ${
-                        i === activeStep ? "text-[var(--color-text)]" : "text-[var(--color-muted)]"
-                      }`}
-                    >
-                      {s.title}
-                    </p>
+            <p className="text-[#6e675f] text-[15px] lg:text-[16px] leading-relaxed font-light">
+              Ankara'nın merkezinde, YDA Center'daki modern muayenehanemizde, hastalarımıza en üst düzey ağız ve diş sağlığı standartlarını sunuyoruz. Estetik diş hekimliği, implantoloji ve protetik tedaviler alanlarında çeyrek asra yaklaşan deneyimimizle, her tedaviyi bir sanat eseri titizliğiyle gerçekleştiriyoruz.
+            </p>
+
+            <p className="text-[#6e675f] text-[15px] lg:text-[16px] leading-relaxed font-light">
+              Gelişen diş hekimliği teknolojilerini yakından takip ediyor, muayenehanemizde 3D tomografi, intraoral tarayıcılar ve en yüksek standartlarda sterilizasyon zinciri (otoklav) kullanarak hatasız teşhis ve hızlı tedavi süreçleri sağlıyoruz.
+            </p>
+
+            {/* Qualifications list */}
+            <div className="space-y-4 pt-4 border-t border-[var(--color-border)]">
+              {qualifications.map((q, idx) => (
+                <div key={idx} className="flex items-center gap-3.5 p-3 bg-white border border-[var(--color-border)] rounded-[8px]">
+                  <div className="w-8 h-8 rounded-full bg-[#FAF9F6] flex items-center justify-center">
+                    {q.icon}
                   </div>
-                  {i === activeStep && (
-                    <motion.div
-                      layoutId="active-indicator"
-                      className="ml-auto w-1.5 h-8 bg-[var(--color-accent)]"
-                    />
-                  )}
-                </motion.div>
+                  <span className="text-[13px] font-semibold text-[var(--color-text)]">{q.text}</span>
+                </div>
               ))}
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Section header */}
-      <div className="absolute top-8 left-6 lg:left-16">
-        <p className="text-label text-[var(--color-muted)] flex items-center gap-4">
-          <span className="w-8 h-px bg-[var(--color-accent)]" />
-          Sürecimiz
-        </p>
+        </div>
       </div>
     </section>
   );

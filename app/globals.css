@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
-/* ── Design Tokens ─────────────────────────────────────────── */
+/* ── Design Tokens (Clean Premium Light Theme) ──────────────── */
 :root {
-  --color-bg: #0a0a0a;
-  --color-surface: #111111;
-  --color-text: #f0ebe3;
-  --color-muted: #8a8278;
-  --color-accent: #c9a96e;
-  --color-accent-light: #dfc08e;
-  --color-border: rgba(201, 169, 110, 0.15);
+  --color-bg: #FAF9F6; /* Warm alabaster off-white */
+  --color-surface: #ffffff; /* Pure white surface */
+  --color-text: #1e1b18; /* Elegant deep charcoal/warm black */
+  --color-muted: #736b63; /* Refined warm taupe */
+  --color-accent: #b8934b; /* Matte gold */
+  --color-accent-light: #cbab65; /* Lighter soft gold */
+  --color-border: rgba(184, 147, 75, 0.15); /* Delicate gold-tinted border */
 
   --font-inter: "Inter", system-ui, sans-serif;
   --font-cormorant: "Cormorant Garamond", Georgia, serif;
@@ -78,7 +78,7 @@ body {
 .text-label {
   font-family: var(--font-inter);
   font-size: clamp(0.6rem, 1vw, 0.7rem);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.25em;
   text-transform: uppercase;
 }
@@ -90,7 +90,7 @@ body {
 
 /* ── Custom Scrollbar ───────────────────────────────────────── */
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
   background: var(--color-bg);
@@ -103,7 +103,7 @@ body {
 /* ── Selection ──────────────────────────────────────────────── */
 ::selection {
   background-color: var(--color-accent);
-  color: var(--color-bg);
+  color: #ffffff;
 }
 
 /* ── Grain Texture ──────────────────────────────────────────── */
@@ -113,12 +113,12 @@ body {
   inset: -200%;
   width: 400%;
   height: 400%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 200px 200px;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.35;
+  opacity: 0.25;
   animation: grain 8s steps(10) infinite;
 }
 
@@ -158,7 +158,7 @@ body {
   cursor: none;
 }
 
-/* ── Custom Cursor ──────────────────────────────────────────── */
+/* ── Custom Cursor (Light Theme Compliant) ──────────────────── */
 .cursor-dot {
   position: fixed;
   top: 0;
@@ -180,7 +180,7 @@ body {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  border: 1px solid rgba(201, 169, 110, 0.35);
+  border: 1px solid rgba(184, 147, 75, 0.45);
   pointer-events: none;
   z-index: 99998;
   transform: translate(-50%, -50%);
@@ -207,15 +207,9 @@ body {
 
 /* ── Scroll Line Animation ───────────────────────────────────── */
 @keyframes scrollLine {
-  0% {
-    transform: translateY(-100%);
-  }
-  50% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(100%);
-  }
+  0% { transform: translateY(-100%); }
+  50% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
 }
 .animate-scroll-line {
   animation: scrollLine 2.2s cubic-bezier(0.76, 0, 0.24, 1) infinite;
@@ -263,4 +257,3 @@ html.lenis body {
 .lenis.lenis-smooth iframe {
   pointer-events: none;
 }
-

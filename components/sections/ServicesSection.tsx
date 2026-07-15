@@ -67,7 +67,7 @@ export default function ServicesSection() {
           <div
             className="absolute inset-0"
             style={{
-              backgroundImage: `url(${services[activeIndex]?.image || ""})`,
+              backgroundImage: "",
               backgroundSize: "cover",
               backgroundPosition: "center",
               filter: "blur(60px) saturate(0)",
@@ -122,7 +122,7 @@ export default function ServicesSection() {
             >
               {/* Number */}
               <span className="text-label text-[var(--color-muted)] group-hover:text-[var(--color-accent)] transition-colors">
-                {service.number}
+                {String(i + 1).padStart(2, "0")}
               </span>
 
               {/* Info */}
@@ -130,7 +130,7 @@ export default function ServicesSection() {
                 {/* Image thumbnail */}
                 <div className="relative w-20 h-20 lg:w-24 lg:h-24 overflow-hidden flex-shrink-0">
                   <Image
-                    src={service.image}
+                    src="/images/projects/chair.jpg"
                     alt={service.title}
                     fill
                     unoptimized
@@ -140,18 +140,18 @@ export default function ServicesSection() {
                 </div>
 
                 <div>
-                  <p className="text-label text-[var(--color-accent)] mb-2">{service.category}</p>
+                  <p className="text-label text-[var(--color-accent)] mb-2">Tedavi</p>
                   <h3 className="display-md text-[var(--color-text)] mb-3 group-hover:text-[var(--color-accent)] transition-colors duration-300">
                     {service.title}
                   </h3>
-                  <p className="text-body text-[var(--color-muted)] max-w-lg">{service.description}</p>
+                  <p className="text-body text-[var(--color-muted)] max-w-lg">{service.desc}</p>
                 </div>
               </div>
 
               {/* Arrow */}
               <div className="flex items-center gap-4">
-                <span className="text-label text-[var(--color-muted)] hidden lg:block border border-[var(--color-border)] px-3 py-1">
-                  {service.tag}
+                <span className="text-label text-[var(--color-muted)] hidden lg:block border border-[var(--color-border)] px-4 py-1.5 rounded-full">
+                  Tedavi
                 </span>
                 <div className="w-12 h-12 border border-[var(--color-border)] group-hover:border-[var(--color-accent)] group-hover:bg-[var(--color-accent)] flex items-center justify-center transition-all duration-300">
                   <ArrowUpRight

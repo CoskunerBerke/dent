@@ -10,30 +10,25 @@ import ScrollProgress from "@/components/ui/ScrollProgress";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 
-// Cinematic System
+// Sections
+const HeroSection = dynamic(() => import("@/components/sections/HeroSection"));
+const CorporateAgreements = dynamic(() => import("@/components/sections/CorporateAgreements"));
+const IntroductionSection = dynamic(() => import("@/components/sections/IntroductionSection"));
+const StorytellingSection = dynamic(() => import("@/components/sections/StorytellingSection"));
+const CinematicGallery = dynamic(() => import("@/components/cinematic/CinematicGallery"));
+const CTASection = dynamic(() => import("@/components/sections/CTASection"));
+
+// Smooth Scroll Provider
 const SmoothScrollProvider = dynamic(
   () => import("@/components/animations/SmoothScrollProvider"),
   { ssr: false }
 );
 
-const CinematicScrollExperience = dynamic(
-  () => import("@/components/cinematic/CinematicScrollExperience"),
-  { ssr: false }
-);
-
-const CinematicGallery = dynamic(
-  () => import("@/components/cinematic/CinematicGallery"),
-  { ssr: false }
-);
-
-// Standard detailed sections
-const CTASection = dynamic(() => import("@/components/sections/CTASection"));
-
 // JSON-LD Schema
 const schema = {
   "@context": "https://schema.org",
   "@type": "Dentist",
-  name: "DİŞ HEKİMİ HAKAN SAYLAM",
+  name: "HAKAN SAYLAM DİŞ KLİNİĞİ",
   description:
     "Ankara YDA Center'da uzman diş hekimliği muayenehanesi. İmplant, estetik diş hekimliği, kanal tedavisi ve ortodonti.",
   url: "https://dthakansaylam.com",
@@ -90,15 +85,26 @@ export default function HomePage() {
           <ScrollProgress />
           <Navigation />
 
-          <main id="main" tabIndex={-1}>
-            {/* The Master Cinematic pinned sequence (600vh) */}
-            <CinematicScrollExperience />
+          <main id="main" className="bg-[#FAF9F6] min-h-screen overflow-x-hidden" tabIndex={-1}>
+            
+            {/* Hero Section + Features Row */}
+            <HeroSection />
 
-            {/* Cinematic Horizontal Gallery */}
+            {/* Corporate & Insurances Agreements Slider (Benefit & Sencard details inside) */}
+            <CorporateAgreements />
+
+            {/* Gülüşünüzdeki Mükemmelliği Keşfedin & 3 Quick Cards & Stats Bar */}
+            <IntroductionSection />
+
+            {/* Hekimimiz Dt. Hakan Saylam Portrait & vision */}
+            <StorytellingSection />
+
+            {/* Clinic internal & tech photos gallery grid */}
             <CinematicGallery />
 
-            {/* Expanded elegant form section */}
+            {/* Appointment Form Section */}
             <CTASection />
+
           </main>
 
           <Footer />
