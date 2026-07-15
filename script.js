@@ -121,30 +121,42 @@ if (form) {
       return;
     }
 
-    submitBtn.textContent = 'WhatsApp\'a Yönlendiriliyor...';
+    submitBtn.textContent = 'Gönderiliyor...';
     submitBtn.disabled = true;
 
-    // Construct WhatsApp message content
-    let waText = `Merhaba, Diş Hekimi Hakan Saylam web sitenizden yeni bir randevu talebi oluşturuldu:\n\n`;
-    waText += `*Ad Soyad:* ${name}\n`;
-    waText += `*Telefon:* ${phone}\n`;
-    if (email) waText += `*E-posta:* ${email}\n`;
-    if (subject) waText += `*Seçilen Tedavi:* ${subject}\n`;
-    if (message) waText += `*Mesaj:* ${message}\n`;
+    // Prepare form data
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('phone', phone);
+    formData.append('email', email);
+    formData.append('subject', subject);
+    formData.append('message', message);
 
-    const waUrl = `https://wa.me/905446911877?text=${encodeURIComponent(waText)}`;
-
-    setTimeout(() => {
-      formNote.textContent = '✓ Randevu talebi WhatsApp\'a aktarıldı. Lütfen mesajı gönderin.';
-      formNote.className = 'form-note success';
-      
-      // Open WhatsApp in a new tab/app window
-      window.open(waUrl, '_blank');
-      
-      form.reset();
+    // Send using Fetch API to PHP backend
+    fetch('send_mail.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'success') {
+        formNote.textContent = '✓ Randevu talebiniz başarıyla iletildi. En kısa sürede size dönüş yapılacaktır.';
+        formNote.className = 'form-note success';
+        form.reset();
+      } else {
+        formNote.textContent = 'Hata: ' + data.message;
+        formNote.className = 'form-note error';
+      }
       submitBtn.textContent = 'Randevu Talebi Gönder';
       submitBtn.disabled = false;
-    }, 1000);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      formNote.textContent = 'E-posta gönderilirken bir hata oluştu. Lütfen doğrudan arayarak randevu alınız.';
+      formNote.className = 'form-note error';
+      submitBtn.textContent = 'Randevu Talebi Gönder';
+      submitBtn.disabled = false;
+    });
   });
 }
 
