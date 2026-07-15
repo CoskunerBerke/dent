@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import { Inter, Cormorant_Garamond } from "next/font/google";
+import { Inter, Cormorant_Garamond, Outfit } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/data/content";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-outfit",
   display: "swap",
 });
 
@@ -85,8 +92,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="tr" className={`${inter.variable} ${cormorant.variable}`}>
-      <body className="grain antialiased">{children}</body>
+    <html lang="tr" className={`${inter.variable} ${cormorant.variable} ${outfit.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col grain">{children}</body>
     </html>
   );
 }

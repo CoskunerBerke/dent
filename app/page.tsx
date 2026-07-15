@@ -81,11 +81,10 @@ export default function HomePage() {
       {/* Main app */}
       {loaded && (
         <SmoothScrollProvider prefersReducedMotion={prefersReducedMotion}>
-          <CustomCursor />
           <ScrollProgress />
           <Navigation />
 
-          <main id="main" className="bg-[#FAF9F6] min-h-screen overflow-x-hidden" tabIndex={-1}>
+          <main id="main" className="bg-white min-h-screen overflow-x-hidden pt-[var(--nav-height)]" tabIndex={-1}>
             
             {/* Hero Section + Features Row */}
             <HeroSection />

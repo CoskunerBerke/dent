@@ -12,6 +12,7 @@
 
   --font-inter: "Inter", system-ui, sans-serif;
   --font-cormorant: "Cormorant Garamond", Georgia, serif;
+  --font-outfit: var(--font-outfit), "Inter", system-ui, sans-serif;
 
   --ease-cinematic: cubic-bezier(0.76, 0, 0.24, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -36,7 +37,7 @@ html {
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
-  font-family: var(--font-inter);
+  font-family: var(--font-outfit);
   font-size: 1rem;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;

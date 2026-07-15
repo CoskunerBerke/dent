@@ -1,47 +1,44 @@
 "use client";
 import Image from "next/image";
-import { CheckCircle2, Award, Heart, Shield } from "lucide-react";
-import { siteConfig } from "@/data/content";
+import { Award, Shield, Heart } from "lucide-react";
 
 export default function StorytellingSection() {
   const qualifications = [
-    { icon: <Award size={18} className="text-[var(--color-accent)]" />, text: "25+ Yıllık Hekimlik Tecrübesi" },
-    { icon: <Shield size={18} className="text-[var(--color-accent)]" />, text: "Uluslararası Sterilizasyon ve Hijyen Akreditasyonu" },
-    { icon: <Heart size={18} className="text-[var(--color-accent)]" />, text: "Kişiye Özel Doğal Gülüş Tasarımı Yaklaşımı" },
+    { icon: <Award size={18} className="text-[var(--color-accent)]" />, text: "25+ Yıllık Hekimlik Tecrübesi ve Akademik Bilgi Birikimi" },
+    { icon: <Shield size={18} className="text-[var(--color-accent)]" />, text: "Uluslararası Sağlık ve Sterilizasyon Standartları Sertifikasyonu" },
+    { icon: <Heart size={18} className="text-[var(--color-accent)]" />, text: "Kişiye Özel Doğal ve Estetik Diş Tasarımı Yaklaşımı" },
   ];
 
   return (
-    <section id="hekim" className="w-full bg-[#FAF9F6] py-24 border-t border-[var(--color-border)]">
-      <div className="w-full max-w-[1600px] mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20 items-center">
+    <section id="hekim" className="w-full bg-white py-16 md:py-24 px-6 border-b border-gray-150">
+      <div className="max-w-7xl mx-auto space-y-16">
+        
+        {/* Main Grid: Portrait left, content right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Left Column — Hakan Saylam Portrait */}
-          <div className="relative">
+          <div className="lg:col-span-5">
             <div
-              className="relative overflow-hidden border border-[var(--color-border)] rounded-[16px] bg-white shadow-[0_20px_50px_rgba(0,0,0,0.04)]"
-              style={{ height: "clamp(480px, 60vh, 650px)" }}
+              className="relative w-full h-[400px] md:h-[550px] rounded-3xl overflow-hidden border border-gray-200 shadow-2xl flex items-center justify-center bg-gray-50"
             >
               <Image
                 src="/images/projects/hakan_saylam.png"
                 alt="Diş Hekimi Dt. Hakan Saylam"
                 fill
                 unoptimized
-                className="object-cover object-top transition-transform duration-[1.5s] hover:scale-103"
+                className="object-cover object-top transition-transform duration-500 hover:scale-103"
                 priority
               />
               <div 
-                className="absolute inset-0"
-                style={{
-                  background: "linear-gradient(to top, rgba(30,27,24,0.9) 0%, rgba(30,27,24,0.2) 40%, transparent 100%)",
-                }}
+                className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10"
               />
               
               {/* Doctor Details Badge */}
-              <div className="absolute bottom-8 left-8">
-                <p className="text-[10px] tracking-[0.25em] uppercase text-[var(--color-accent)] mb-1 font-semibold">
+              <div className="absolute bottom-8 left-8 z-20">
+                <p className="text-[9px] tracking-[0.25em] uppercase text-[var(--color-accent)] mb-1.5 font-bold">
                   KURUCU DİŞ HEKİMİ
                 </p>
-                <h3 className="font-display text-[26px] font-light text-white tracking-wide">
+                <h3 className="text-2xl font-black text-white uppercase tracking-wider">
                   Dt. Hakan Saylam
                 </h3>
               </div>
@@ -49,37 +46,43 @@ export default function StorytellingSection() {
           </div>
 
           {/* Right Column — Professional Details & Vision */}
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <span className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] font-semibold block">
-                HEKİMİMİZ
-              </span>
-              <h2 className="font-display text-[36px] sm:text-[48px] lg:text-[56px] font-light text-[var(--color-text)] leading-[1.1] tracking-tight">
-                Dt. Hakan Saylam
-                <br />
-                <span className="italic text-[var(--color-accent)] font-normal">Mesleki Tecrübe</span> &amp; Vizyon
-              </h2>
+          <div className="lg:col-span-7 flex flex-col gap-6">
+            
+            {/* Skewed Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 rounded text-[var(--color-accent)] text-xs font-bold uppercase tracking-widest -skew-x-6 w-fit">
+              <span className="skew-x-6">Kurucu Hekimimiz</span>
             </div>
 
-            <p className="text-[#6e675f] text-[15px] lg:text-[16px] leading-relaxed font-light">
-              Ankara'nın merkezinde, YDA Center'daki modern muayenehanemizde, hastalarımıza en üst düzey ağız ve diş sağlığı standartlarını sunuyoruz. Estetik diş hekimliği, implantoloji ve protetik tedaviler alanlarında çeyrek asra yaklaşan deneyimimizle, her tedaviyi bir sanat eseri titizliğiyle gerçekleştiriyoruz.
+            <h2 className="text-3xl md:text-4.5xl font-black uppercase text-[var(--color-text)] leading-tight tracking-wide">
+              Dt. Hakan Saylam
+              <br />
+              <span className="text-[var(--color-accent)]">Deneyim &amp; Uzmanlık</span>
+            </h2>
+
+            <p className="text-xs md:text-sm text-[#6e675f] leading-relaxed font-medium">
+              Ankara'nın kalbinde, YDA Center A2 Blok'taki modern muayenehanemizde, hastalarımıza en üst düzey ağız ve diş sağlığı standartlarını sunuyoruz. Estetik diş hekimliği, implantoloji ve protetik tedaviler alanlarında 25 yıla yaklaşan deneyimimizle, her tedaviyi hassasiyet ve uzmanlıkla gerçekleştiriyoruz.
             </p>
 
-            <p className="text-[#6e675f] text-[15px] lg:text-[16px] leading-relaxed font-light">
+            <p className="text-xs md:text-sm text-[#6e675f] leading-relaxed font-medium">
               Gelişen diş hekimliği teknolojilerini yakından takip ediyor, muayenehanemizde 3D tomografi, intraoral tarayıcılar ve en yüksek standartlarda sterilizasyon zinciri (otoklav) kullanarak hatasız teşhis ve hızlı tedavi süreçleri sağlıyoruz.
             </p>
 
-            {/* Qualifications list */}
-            <div className="space-y-4 pt-4 border-t border-[var(--color-border)]">
+            {/* Qualifications list (Quattro Garaj Style) */}
+            <div className="space-y-4 pt-6 border-t border-gray-150">
               {qualifications.map((q, idx) => (
-                <div key={idx} className="flex items-center gap-3.5 p-3 bg-white border border-[var(--color-border)] rounded-[8px]">
-                  <div className="w-8 h-8 rounded-full bg-[#FAF9F6] flex items-center justify-center">
+                <div key={idx} className="flex gap-4 p-4 rounded-xl bg-white border border-gray-200 hover:border-[var(--color-accent)]/35 shadow-sm transition-all duration-300 group">
+                  <div className="flex-shrink-0 p-2 rounded-lg bg-gray-50 border border-gray-200 group-hover:bg-[var(--color-accent)]/10 group-hover:border-[var(--color-accent)]/20 transition-all duration-300 h-fit">
                     {q.icon}
                   </div>
-                  <span className="text-[13px] font-semibold text-[var(--color-text)]">{q.text}</span>
+                  <div className="flex items-center">
+                    <span className="text-xs md:text-sm font-bold text-[var(--color-text)] uppercase tracking-wide">
+                      {q.text}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
+
           </div>
 
         </div>

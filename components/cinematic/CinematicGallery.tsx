@@ -39,59 +39,60 @@ export default function CinematicGallery() {
   return (
     <section
       id="galeri"
-      className="relative bg-white py-24 lg:py-36 overflow-visible border-t border-[var(--color-border)]"
+      className="relative bg-white py-16 md:py-24 px-6 border-b border-gray-150"
       aria-label="Klinik Fotoğraf Galerisi"
     >
-      <div className="w-full px-5 sm:px-8 lg:px-12 xl:px-16">
+      <div className="max-w-7xl mx-auto space-y-16">
         
         {/* Section Header */}
-        <div className="max-w-2xl mb-16 space-y-4">
-          <p className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-3 flex items-center gap-4">
-            <span className="w-8 h-[1px] bg-[var(--color-accent)]" />
-            KLİNİĞİMİZDEN KARELER
-          </p>
-          <h2 className="font-display text-[36px] lg:text-[48px] font-light text-[var(--color-text)] leading-tight tracking-tight">
-            Muayenehanemiz &amp; Teknolojimiz
+        <div className="max-w-3xl space-y-4">
+          
+          {/* Skewed Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 rounded text-[var(--color-accent)] text-xs font-bold uppercase tracking-widest -skew-x-6 w-fit">
+            <span className="skew-x-6">Klinik Galerisi</span>
+          </div>
+
+          <h2 className="text-3xl md:text-4.5xl font-black uppercase text-[var(--color-text)] leading-tight tracking-wide">
+            Klinik Görüntüleri &amp; Cihazlarımız
           </h2>
-          <p className="text-sm text-[#6e675f] leading-relaxed font-light">
-            YDA Center'daki kliniğimizin sterilizasyon laboratuvarını, 3D görüntüleme ünitelerini, karşılama ve tedavi odalarını yakından inceleyin.
+          <p className="text-xs md:text-sm text-[#6e675f] leading-relaxed font-medium">
+            YDA Center'daki kliniğimizin sterilizasyon standartlarını, ileri teknoloji Rayscan tomografi ünitelerimizi ve konforlu bekleme salonumuzu inceleyin.
           </p>
         </div>
 
-        {/* 2-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        {/* 3-Column Grid (Quattro Garaj Style) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {galleryItems.map((item, index) => (
             <div
               key={item.id}
               onClick={() => openLightbox(index)}
-              className="group cursor-pointer space-y-5 bg-[#FAF9F6] border border-[var(--color-border)] p-4 lg:p-5 rounded-[12px] shadow-[0_10px_35px_rgba(0,0,0,0.02)] hover:border-[var(--color-accent)]/45 transition-all duration-500"
+              className="group cursor-pointer flex flex-col justify-between p-5 bg-white border border-gray-200 rounded-2xl hover:border-[var(--color-accent)]/35 hover:shadow-lg transition-all duration-300"
             >
               {/* Image Frame */}
-              <div className="relative w-full h-[240px] sm:h-[300px] lg:h-[360px] xl:h-[400px] rounded-[8px] overflow-hidden border border-white">
+              <div className="relative w-full h-[240px] sm:h-[280px] rounded-xl overflow-hidden border border-gray-100 bg-gray-50 mb-4">
                 <Image
                   src={item.src}
                   alt={item.title}
                   fill
                   unoptimized
-                  className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-103"
+                  className="object-cover transition-transform duration-500 hover:scale-103"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1e1b18]/40 via-transparent to-transparent opacity-60" />
                 
                 {/* Maximize Icon on Hover */}
-                <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[var(--color-accent)] text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-90 group-hover:scale-100 shadow-lg">
-                  <Maximize2 size={13} />
+                <div className="absolute top-4 right-4 w-9 h-9 rounded-lg bg-[var(--color-accent)] text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md">
+                  <Maximize2 size={14} />
                 </div>
               </div>
 
               {/* Info Text */}
-              <div className="space-y-2">
-                <span className="text-[9px] tracking-[0.2em] uppercase text-[var(--color-accent)] font-semibold">
+              <div className="space-y-1">
+                <span className="text-[9px] font-bold uppercase tracking-wider text-[var(--color-accent)]">
                   {item.category}
                 </span>
-                <h3 className="font-display text-lg lg:text-xl font-light text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-300">
+                <h3 className="text-base font-black uppercase text-[var(--color-text)] tracking-wide group-hover:text-[var(--color-accent)] transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-xs text-[#6e675f] leading-relaxed font-light">
+                <p className="text-xs text-[#6e675f] font-light leading-relaxed">
                   {item.desc}
                 </p>
               </div>
@@ -101,7 +102,7 @@ export default function CinematicGallery() {
 
       </div>
 
-      {/* LIGHTBOX MODAL — Fullscreen HD Details View */}
+      {/* LIGHTBOX MODAL */}
       {lightboxIndex !== null && (
         <div className="fixed inset-0 z-[99999] bg-[#1e1b18]/95 backdrop-blur-md flex flex-col items-center justify-center select-none animate-fade-in">
           {/* Close button */}
@@ -135,10 +136,10 @@ export default function CinematicGallery() {
 
           {/* Details Bar at the bottom */}
           <div className="text-center mt-6 z-50 px-4">
-            <p className="text-[10px] tracking-[0.25em] uppercase text-[var(--color-accent)] mb-2">
+            <p className="text-[10px] tracking-[0.25em] uppercase text-[var(--color-accent)] mb-2 font-bold">
               {galleryItems[lightboxIndex].category}
             </p>
-            <h3 className="font-display text-xl lg:text-2xl font-light text-white tracking-wide">
+            <h3 className="text-lg font-black uppercase text-white tracking-wider">
               {galleryItems[lightboxIndex].title}
             </h3>
             <p className="text-xs text-white/40 mt-1 font-mono">

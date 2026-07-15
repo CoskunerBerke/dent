@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, X, Building, Shield, FileText, CheckCircle2, ArrowRight } from "lucide-react";
+import { X, Building, Shield, FileText, CheckCircle2, ArrowRight } from "lucide-react";
 import { benefitInsurances, benefitCompanies } from "@/data/content";
 
 export default function CorporateAgreements() {
@@ -34,99 +34,95 @@ export default function CorporateAgreements() {
   ];
 
   return (
-    <section id="anlasmalar" className="w-full bg-white py-24 border-t border-[var(--color-border)]">
-      <div className="w-full max-w-[1600px] mx-auto px-6 lg:px-12">
+    <section id="anlasmalar" className="w-full bg-[#FAF9F6] py-16 md:py-24 px-6 border-b border-gray-150">
+      <div className="max-w-7xl mx-auto space-y-16">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <p className="text-[10px] tracking-[0.35em] uppercase text-[var(--color-accent)] font-semibold flex items-center justify-center gap-3">
-            <span className="w-8 h-px bg-[var(--color-accent)]" />
-            ANLAŞMALAR
-            <span className="w-8 h-px bg-[var(--color-accent)]" />
-          </p>
-          <h2 className="font-display text-[36px] lg:text-[48px] font-light text-[var(--color-text)] leading-tight tracking-tight">
-            Kurumsal Anlaşmalar
+        <div className="text-center max-w-3xl mx-auto space-y-4">
+          
+          {/* Skewed Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 rounded text-[var(--color-accent)] text-xs font-bold uppercase tracking-widest -skew-x-6 w-fit mx-auto">
+            <span className="skew-x-6">Anlaşmalı Kurumlarımız</span>
+          </div>
+
+          <h2 className="text-3xl md:text-4.5xl font-black uppercase text-[var(--color-text)] leading-tight tracking-wide">
+            Anlaşmalı Kurumlar &amp; Sigortalar
           </h2>
-          <p className="text-[#6e675f] text-sm leading-relaxed font-light">
-            Birçok seçkin kurum, banka ve sigorta şirketiyle anlaşmalı olarak hizmet vermekteyiz.
+          <p className="text-xs md:text-sm text-[#6e675f] leading-relaxed font-medium">
+            Birçok seçkin kamu kuruluşu, özel şirket, banka ve özel sağlık sigorta gruplarıyla indirimli sağlık protokolümüz mevcuttur.
           </p>
         </div>
 
-        {/* Corporate Badges Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+        {/* Corporate Badges Grid (Quattro Garaj Style) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {corporateBadges.map((badge) => (
-            <div key={badge.title} className="p-6 bg-[#FAF9F6] border border-[var(--color-border)] rounded-[12px] hover:border-[var(--color-accent)]/55 transition-all duration-300 group">
+            <div key={badge.title} className="p-6 bg-white border border-gray-200 rounded-xl hover:border-[var(--color-accent)]/35 shadow-sm transition-all duration-300 group">
               <div className="flex gap-4 items-start">
                 <CheckCircle2 size={20} className="text-[var(--color-accent)] mt-0.5 flex-shrink-0" />
                 <div className="space-y-1">
-                  <h3 className="font-display text-[17px] font-semibold text-[var(--color-text)]">{badge.title}</h3>
-                  <p className="text-[12px] text-[#6e675f] font-light leading-relaxed">{badge.desc}</p>
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text)]">{badge.title}</h3>
+                  <p className="text-xs text-[#6e675f] font-light leading-relaxed">{badge.desc}</p>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Sliders Container */}
-        <div className="space-y-16">
+        {/* Partners Sliders (Quattro Garaj Style) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pt-6">
           
-          {/* Slider 1: Corporates */}
-          <div className="space-y-6">
-            <div className="flex justify-between items-center">
-              <h3 className="font-display text-[18px] lg:text-[22px] font-light text-[var(--color-text)] flex items-center gap-2">
-                <Building size={18} className="text-[var(--color-accent)]" />
-                Anlaşmalı Kamu ve Özel Kuruluşlar
-              </h3>
+          {/* Column 1: Corporates */}
+          <div className="space-y-6 bg-white p-8 rounded-2xl border border-gray-200 shadow-sm">
+            <h3 className="text-lg font-bold uppercase tracking-wider text-[var(--color-text)] flex items-center gap-2">
+              <Building size={20} className="text-[var(--color-accent)]" />
+              Kurumsal Anlaşmalar
+            </h3>
+            
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              {carouselCorporates.map((corp) => (
+                <div key={corp} className="h-16 px-4 rounded-lg bg-gray-50 border border-gray-200 flex items-center justify-center hover:border-[var(--color-accent)]/30 transition-colors">
+                  <span className="text-[10px] tracking-wider uppercase font-black text-[#6e675f] text-center">
+                    {corp}
+                  </span>
+                </div>
+              ))}
             </div>
-            <div className="relative overflow-hidden w-full py-4 border-y border-[var(--color-border)]">
-              {/* Carousel Track */}
-              <div className="flex gap-8 justify-around items-center flex-wrap md:flex-nowrap">
-                {carouselCorporates.map((corp) => (
-                  <div key={corp} className="h-16 px-6 rounded-[8px] bg-[#FAF9F6] border border-[var(--color-border)] flex items-center justify-center min-w-[150px] md:min-w-[180px] hover:border-[var(--color-accent)]/30 transition-colors">
-                    <span className="text-[12px] tracking-wider uppercase font-semibold text-[#6e675f] text-center">
-                      {corp}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="text-center pt-2">
+
+            <div className="pt-2">
               <button
                 onClick={() => setActiveModal("corporate")}
-                className="text-[11px] tracking-[0.2em] uppercase font-bold text-[var(--color-accent)] hover:text-[var(--color-accent-light)] flex items-center gap-2 mx-auto cursor-pointer group"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-light)] text-xs font-black uppercase tracking-wider rounded-lg shadow-sm active:scale-95 transition-all duration-200 w-full cursor-pointer"
               >
-                TÜM KURUMSAL ANLAŞMALAR
-                <ArrowRight size={10} className="group-hover:translate-x-1.5 transition-transform" />
+                FİRMALAR &amp; BANKALAR LİSTESİ
+                <ArrowRight size={13} />
               </button>
             </div>
           </div>
 
-          {/* Slider 2: Insurances */}
-          <div className="space-y-6">
-            <div className="flex justify-between items-center">
-              <h3 className="font-display text-[18px] lg:text-[22px] font-light text-[var(--color-text)] flex items-center gap-2">
-                <Shield size={18} className="text-[var(--color-accent)]" />
-                Anlaşmalı Sigorta Şirketleri
-              </h3>
+          {/* Column 2: Insurances */}
+          <div className="space-y-6 bg-white p-8 rounded-2xl border border-gray-200 shadow-sm">
+            <h3 className="text-lg font-bold uppercase tracking-wider text-[var(--color-text)] flex items-center gap-2">
+              <Shield size={20} className="text-[var(--color-accent)]" />
+              Anlaşmalı Sigortalar
+            </h3>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              {carouselInsurances.map((ins) => (
+                <div key={ins} className="h-16 px-4 rounded-lg bg-gray-50 border border-gray-200 flex items-center justify-center hover:border-[var(--color-accent)]/30 transition-colors">
+                  <span className="text-[10px] tracking-wider uppercase font-black text-[#6e675f] text-center">
+                    {ins}
+                  </span>
+                </div>
+              ))}
             </div>
-            <div className="relative overflow-hidden w-full py-4 border-y border-[var(--color-border)]">
-              <div className="flex gap-8 justify-around items-center flex-wrap md:flex-nowrap">
-                {carouselInsurances.map((ins) => (
-                  <div key={ins} className="h-16 px-6 rounded-[8px] bg-[#FAF9F6] border border-[var(--color-border)] flex items-center justify-center min-w-[150px] md:min-w-[180px] hover:border-[var(--color-accent)]/30 transition-colors">
-                    <span className="text-[12px] tracking-wider uppercase font-semibold text-[#6e675f] text-center">
-                      {ins}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="text-center pt-2">
+
+            <div className="pt-2">
               <button
                 onClick={() => setActiveModal("insurance")}
-                className="text-[11px] tracking-[0.2em] uppercase font-bold text-[var(--color-accent)] hover:text-[var(--color-accent-light)] flex items-center gap-2 mx-auto cursor-pointer group"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-light)] text-xs font-black uppercase tracking-wider rounded-lg shadow-sm active:scale-95 transition-all duration-200 w-full cursor-pointer"
               >
-                TÜM SİGORTALAR
-                <ArrowRight size={10} className="group-hover:translate-x-1.5 transition-transform" />
+                SİGORTA ŞİRKETLERİ LİSTESİ
+                <ArrowRight size={13} />
               </button>
             </div>
           </div>
@@ -135,73 +131,59 @@ export default function CorporateAgreements() {
 
       </div>
 
-      {/* Complete lists modal (renders Sencard and Benefit lists from photo 2 and 3) */}
+      {/* Detail Modal */}
       {activeModal !== null && (
         <div className="fixed inset-0 z-[99999] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
-          <div className="bg-white w-full max-w-[800px] max-h-[85vh] rounded-[16px] border border-[var(--color-border)] shadow-[0_25px_60px_rgba(0,0,0,0.15)] flex flex-col overflow-hidden animate-scale-up">
+          <div className="bg-white w-full max-w-[800px] max-h-[85vh] rounded-[24px] border border-gray-200 shadow-2xl flex flex-col overflow-hidden animate-scale-up">
             
             {/* Modal Header */}
-            <div className="p-6 border-b border-[var(--color-border)] flex items-center justify-between bg-[#FAF9F6]">
-              <h3 className="font-display text-[22px] lg:text-[26px] font-light text-[var(--color-text)] flex items-center gap-3">
+            <div className="p-6 border-b border-gray-150 flex items-center justify-between bg-gray-50">
+              <h3 className="text-lg font-black uppercase tracking-wider text-[var(--color-text)] flex items-center gap-3">
                 <FileText className="text-[var(--color-accent)]" />
-                {activeModal === "corporate" ? "Anlaşmalı Firma, Banka ve Kuruluşlar" : "Anlaşmalı Özel Sigorta Şirketleri"}
+                {activeModal === "corporate" ? "Anlaşmalı Kurumlar &amp; Bankalar" : "Anlaşmalı Özel Sigortalar"}
               </h3>
               <button
                 onClick={() => setActiveModal(null)}
-                className="w-10 h-10 rounded-full border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] text-[#6e675f] flex items-center justify-center transition-colors cursor-pointer"
+                className="w-10 h-10 rounded-full border border-gray-200 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] text-[#6e675f] flex items-center justify-center transition-colors cursor-pointer"
               >
                 <X size={18} />
               </button>
             </div>
 
             {/* Modal Scrollable Body */}
-            <div className="p-8 overflow-y-auto space-y-8 max-h-[60vh]">
-              {activeModal === "corporate" ? (
-                <div className="space-y-6">
-                  <p className="text-[13px] text-[#6e675f] font-light">
-                    Aşağıdaki firma, banka ve emeklilik kuruluşları kapsamında çalışanlarına ve üye kart sahiplerine özel indirimli sağlık hizmeti sunmaktayız:
+            <div className="p-8 overflow-y-auto space-y-6 max-h-[60vh]">
+              <p className="text-xs md:text-sm text-[#6e675f] font-medium leading-relaxed">
+                {activeModal === "corporate"
+                  ? "Aşağıdaki banka, firma ve kurumsal emeklilik planları kapsamında anlaşmamız mevcuttur:"
+                  : "Aşağıdaki sigorta şirketleri, tamamlayıcı ve özel sağlık sigortaları kapsamında geçerlidir:"}
+              </p>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {(activeModal === "corporate" ? benefitCompanies : benefitInsurances).map((item, idx) => (
+                  <div key={item} className="flex items-center gap-3.5 p-4 bg-gray-50 border border-gray-200 rounded-xl hover:border-[var(--color-accent)]/30 transition-colors">
+                    <span className="w-6 h-6 rounded-md bg-[var(--color-accent)]/10 text-[var(--color-accent)] flex items-center justify-center text-[11px] font-black border border-[var(--color-accent)]/20">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-xs md:text-sm font-bold text-[var(--color-text)] uppercase tracking-wide">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Sencard and Benefit extra references */}
+              {activeModal === "corporate" && (
+                <div className="p-5 bg-amber-500/5 border border-amber-500/10 rounded-xl space-y-2 mt-4">
+                  <p className="text-xs font-black text-[var(--color-accent)] uppercase tracking-wider">SENCARD &amp; BENEFIT PROTOKOL KAPSAMI</p>
+                  <p className="text-xs text-[#6e675f] leading-relaxed font-light">
+                    Muayenehanemiz, Garanti Bankası BBVA, Yapı Kredi, Viennalife ve Benefit-Sencard üyesi tüm diğer anlaşmalı kurum personellerine özel indirim protokolü uygulamaktadır.
                   </p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {benefitCompanies.map((comp, idx) => (
-                      <div key={comp} className="flex items-center gap-3 p-3.5 bg-[#FAF9F6] border border-[var(--color-border)] rounded-[8px]">
-                        <span className="w-5 h-5 rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)] flex items-center justify-center text-[10px] font-bold font-mono">
-                          {String(idx + 1).padStart(2, "0")}
-                        </span>
-                        <span className="text-[13px] font-semibold text-[var(--color-text)]">{comp}</span>
-                      </div>
-                    ))}
-                  </div>
-                  {/* Sencard and Benefit extra references from image 3 */}
-                  <div className="p-4 bg-amber-500/5 border border-amber-500/10 rounded-[8px] space-y-2 mt-4">
-                    <p className="text-[12px] font-bold text-[var(--color-accent)] uppercase tracking-wider">SENCARD & BENEFIT ANLAŞMA KAPSAMI</p>
-                    <p className="text-[12px] text-[#6e675f] leading-relaxed font-light">
-                      Muayenehanemiz, Garanti Bankası BBVA, Yapı Kredi, Viennalife ve Benefit-Sencard üyesi tüm diğer anlaşmalı kurum personellerine tescilli indirim protokolü uygulamaktadır.
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-6">
-                  <p className="text-[13px] text-[#6e675f] font-light">
-                    Aşağıdaki anlaşmalı sigorta şirketleri, tamamlayıcı ve özel sağlık sigortaları kapsamında muayenehanemizde geçerlidir:
-                  </p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {benefitInsurances.map((ins, idx) => (
-                      <div key={ins} className="flex items-center gap-3 p-3.5 bg-[#FAF9F6] border border-[var(--color-border)] rounded-[8px]">
-                        <span className="w-5 h-5 rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)] flex items-center justify-center text-[10px] font-bold font-mono">
-                          {String(idx + 1).padStart(2, "0")}
-                        </span>
-                        <span className="text-[13px] font-semibold text-[var(--color-text)]">{ins}</span>
-                      </div>
-                    ))}
-                  </div>
                 </div>
               )}
             </div>
 
             {/* Modal Footer */}
-            <div className="p-6 border-t border-[var(--color-border)] bg-[#FAF9F6] text-center">
-              <p className="text-[11px] text-[#6e675f] font-light">
-                Anlaşma detayları ve indirim oranları hakkında bilgi almak için bizimle iletişime geçebilirsiniz.
+            <div className="p-6 border-t border-gray-150 bg-gray-50 text-center">
+              <p className="text-xs text-[#6e675f] font-semibold uppercase tracking-wide">
+                Anlaşma şartları ve tedavi kapsamı hakkında detaylı bilgi için lütfen bizimle iletişime geçin.
               </p>
             </div>
 
