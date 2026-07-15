@@ -1,160 +1,84 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { galleryItems } from "@/data/content";
 
 export default function CinematicGallery() {
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [lightbox, setLightbox] = useState<number | null>(null);
 
-  const openLightbox = (index: number) => {
-    setLightboxIndex(index);
-    document.body.style.overflow = "hidden";
-  };
-
-  const closeLightbox = () => {
-    setLightboxIndex(null);
-    document.body.style.overflow = "";
-  };
-
-  const prevSlide = useCallback(() => {
-    setLightboxIndex((prev) => (prev !== null ? (prev - 1 + galleryItems.length) % galleryItems.length : null));
-  }, []);
-
-  const nextSlide = useCallback(() => {
-    setLightboxIndex((prev) => (prev !== null ? (prev + 1) % galleryItems.length : null));
-  }, []);
+  const open = (i: number) => { setLightbox(i); document.body.style.overflow = "hidden"; };
+  const close = () => { setLightbox(null); document.body.style.overflow = ""; };
+  const prev = useCallback(() => setLightbox((p) => p !== null ? (p - 1 + galleryItems.length) % galleryItems.length : null), []);
+  const next = useCallback(() => setLightbox((p) => p !== null ? (p + 1) % galleryItems.length : null), []);
 
   useEffect(() => {
-    if (lightboxIndex === null) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowLeft") prevSlide();
-      if (e.key === "ArrowRight") nextSlide();
+    if (lightbox === null) return;
+    const h = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightboxIndex, prevSlide, nextSlide]);
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
+  }, [lightbox, prev, next]);
 
   return (
-    <section
-      id="galeri"
-      className="relative bg-white py-16 md:py-24 px-6 border-b border-gray-150"
-      aria-label="Klinik Fotoğraf Galerisi"
-    >
-      <div className="max-w-7xl mx-auto space-y-16">
-        
-        {/* Section Header */}
-        <div className="max-w-3xl space-y-4">
-          
-          {/* Skewed Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 rounded text-[var(--color-accent)] text-xs font-bold uppercase tracking-widest -skew-x-6 w-fit">
-            <span className="skew-x-6">Klinik Galerisi</span>
-          </div>
+    <section id="galeri" className="w-full bg-white py-24 md:py-32 border-b border-gray-150">
+      <div className="max-w-6xl mx-auto px-8 md:px-12">
 
-          <h2 className="text-3xl md:text-4.5xl font-black uppercase text-[var(--color-text)] leading-tight tracking-wide">
-            Klinik Görüntüleri &amp; Cihazlarımız
+        {/* Header */}
+        <div className="mb-14">
+          <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[var(--color-accent)] mb-4">Klinik Galerisi</p>
+          <h2 className="text-4xl md:text-5xl font-black uppercase text-[var(--color-text)] leading-[1.05]">
+            Klinik Görüntüleri<br />&amp; Cihazlarımız
           </h2>
-          <p className="text-xs md:text-sm text-[#6e675f] leading-relaxed font-medium">
-            YDA Center'daki kliniğimizin sterilizasyon standartlarını, ileri teknoloji Rayscan tomografi ünitelerimizi ve konforlu bekleme salonumuzu inceleyin.
+          <p className="mt-5 text-sm text-[#6e675f] max-w-xl leading-relaxed">
+            Sterilizasyon standartlarımızı, 3D tomografi cihazlarımızı ve konforlu tedavi odalarımızı inceleyin.
           </p>
         </div>
 
-        {/* 3-Column Grid (Quattro Garaj Style) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {galleryItems.map((item, index) => (
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {galleryItems.map((item, i) => (
             <div
               key={item.id}
-              onClick={() => openLightbox(index)}
-              className="group cursor-pointer flex flex-col justify-between p-5 bg-white border border-gray-200 rounded-2xl hover:border-[var(--color-accent)]/35 hover:shadow-lg transition-all duration-300"
+              onClick={() => open(i)}
+              className="cursor-pointer group rounded-xl overflow-hidden border border-gray-200 hover:border-[var(--color-accent)]/30 hover:shadow-lg transition-all duration-300 bg-white"
             >
-              {/* Image Frame */}
-              <div className="relative w-full h-[240px] sm:h-[280px] rounded-xl overflow-hidden border border-gray-100 bg-gray-50 mb-4">
+              <div className="relative w-full h-52 bg-gray-100 overflow-hidden">
                 <Image
                   src={item.src}
                   alt={item.title}
                   fill
                   unoptimized
-                  className="object-cover transition-transform duration-500 hover:scale-103"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                
-                {/* Maximize Icon on Hover */}
-                <div className="absolute top-4 right-4 w-9 h-9 rounded-lg bg-[var(--color-accent)] text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md">
-                  <Maximize2 size={14} />
-                </div>
               </div>
-
-              {/* Info Text */}
-              <div className="space-y-1">
-                <span className="text-[9px] font-bold uppercase tracking-wider text-[var(--color-accent)]">
-                  {item.category}
-                </span>
-                <h3 className="text-base font-black uppercase text-[var(--color-text)] tracking-wide group-hover:text-[var(--color-accent)] transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-[#6e675f] font-light leading-relaxed">
-                  {item.desc}
-                </p>
+              <div className="p-5">
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--color-accent)] mb-1">{item.category}</p>
+                <h3 className="text-[14px] font-black uppercase text-[var(--color-text)]">{item.title}</h3>
+                <p className="text-[12px] text-[#6e675f] mt-1.5 leading-relaxed">{item.desc}</p>
               </div>
             </div>
           ))}
         </div>
-
       </div>
 
-      {/* LIGHTBOX MODAL */}
-      {lightboxIndex !== null && (
-        <div className="fixed inset-0 z-[99999] bg-[#1e1b18]/95 backdrop-blur-md flex flex-col items-center justify-center select-none animate-fade-in">
-          {/* Close button */}
-          <button
-            onClick={closeLightbox}
-            className="absolute top-6 right-6 w-12 h-12 rounded-full border border-white/10 bg-white/[0.03] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] text-white flex items-center justify-center transition-colors duration-300 z-50 cursor-pointer"
-            aria-label="Kapat"
-          >
-            <X size={20} />
-          </button>
-
-          {/* Left Navigation Arrow */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-6 w-12 h-12 rounded-full border border-white/10 bg-white/[0.03] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] text-white flex items-center justify-center transition-colors duration-300 z-50 cursor-pointer"
-            aria-label="Önceki"
-          >
-            <ChevronLeft size={22} />
-          </button>
-
-          {/* Large Image Container */}
-          <div className="relative w-[90vw] max-w-[1000px] h-[70vh] flex items-center justify-center p-4">
-            <Image
-              src={galleryItems[lightboxIndex].src}
-              alt={galleryItems[lightboxIndex].title}
-              fill
-              unoptimized
-              className="object-contain"
-            />
+      {/* Lightbox */}
+      {lightbox !== null && (
+        <div className="fixed inset-0 z-[99999] bg-black/90 flex items-center justify-center">
+          <button onClick={close} className="absolute top-6 right-6 w-11 h-11 rounded-full border border-white/20 text-white flex items-center justify-center hover:border-[var(--color-accent)] transition-colors cursor-pointer"><X size={18} /></button>
+          <button onClick={prev} className="absolute left-6 w-11 h-11 rounded-full border border-white/20 text-white flex items-center justify-center hover:border-[var(--color-accent)] transition-colors cursor-pointer"><ChevronLeft size={20} /></button>
+          <div className="relative w-[88vw] max-w-[920px] h-[70vh]">
+            <Image src={galleryItems[lightbox].src} alt={galleryItems[lightbox].title} fill unoptimized className="object-contain" />
           </div>
-
-          {/* Details Bar at the bottom */}
-          <div className="text-center mt-6 z-50 px-4">
-            <p className="text-[10px] tracking-[0.25em] uppercase text-[var(--color-accent)] mb-2 font-bold">
-              {galleryItems[lightboxIndex].category}
-            </p>
-            <h3 className="text-lg font-black uppercase text-white tracking-wider">
-              {galleryItems[lightboxIndex].title}
-            </h3>
-            <p className="text-xs text-white/40 mt-1 font-mono">
-              {(lightboxIndex + 1).toString().padStart(2, "0")} / {galleryItems.length.toString().padStart(2, "0")}
-            </p>
+          <div className="absolute bottom-8 text-center">
+            <p className="text-[10px] tracking-widest text-[var(--color-accent)] uppercase font-black">{galleryItems[lightbox].category}</p>
+            <p className="text-base font-black uppercase text-white mt-1">{galleryItems[lightbox].title}</p>
+            <p className="text-[11px] text-white/40 mt-1">{lightbox + 1} / {galleryItems.length}</p>
           </div>
-
-          {/* Right Navigation Arrow */}
-          <button
-            onClick={nextSlide}
-            className="absolute right-6 w-12 h-12 rounded-full border border-white/10 bg-white/[0.03] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] text-white flex items-center justify-center transition-colors duration-300 z-50 cursor-pointer"
-            aria-label="Sonraki"
-          >
-            <ChevronRight size={22} />
-          </button>
+          <button onClick={next} className="absolute right-6 w-11 h-11 rounded-full border border-white/20 text-white flex items-center justify-center hover:border-[var(--color-accent)] transition-colors cursor-pointer"><ChevronRight size={20} /></button>
         </div>
       )}
     </section>

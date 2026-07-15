@@ -1,106 +1,88 @@
 "use client";
 import Image from "next/image";
-import { Users, Cpu, ShieldCheck, Heart, Calendar, MessageSquare, Phone } from "lucide-react";
-import { heroContent, siteConfig, features } from "@/data/content";
+import { Calendar, MessageSquare, Users, Cpu, ShieldCheck, Heart } from "lucide-react";
+import { siteConfig, features } from "@/data/content";
 
 export default function HeroSection() {
-  const handleScroll = (id: string) => {
-    const target = document.querySelector(id);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
+  const scroll = (id: string) => {
+    document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   const featureIcons = [
-    <Users key="users" className="w-6 h-6 text-[var(--color-accent)]" />,
-    <Cpu key="cpu" className="w-6 h-6 text-[var(--color-accent)]" />,
-    <ShieldCheck key="shield" className="w-6 h-6 text-[var(--color-accent)]" />,
-    <Heart key="heart" className="w-6 h-6 text-[var(--color-accent)]" />,
-    <Calendar key="calendar" className="w-6 h-6 text-[var(--color-accent)]" />,
+    <Users key="u" className="w-5 h-5 text-[var(--color-accent)]" />,
+    <Cpu key="c" className="w-5 h-5 text-[var(--color-accent)]" />,
+    <ShieldCheck key="s" className="w-5 h-5 text-[var(--color-accent)]" />,
+    <Heart key="h" className="w-5 h-5 text-[var(--color-accent)]" />,
   ];
 
   return (
-    <section id="top" className="w-full bg-white border-b border-gray-150 py-12 md:py-20 px-6 overflow-hidden">
-      <div className="max-w-7xl mx-auto space-y-16">
-        
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Left Text Column */}
-          <div className="lg:col-span-6 flex flex-col gap-6">
-            
-            {/* Skewed Badge (Quattro Garaj & RN Vize Style) */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 rounded text-[var(--color-accent)] text-xs font-bold uppercase tracking-widest -skew-x-6 w-fit">
-              <span className="skew-x-6">YDA Center Ankara Diş Muayenehanesi</span>
-            </div>
+    <section id="top" className="w-full bg-white border-b border-gray-150 py-20 md:py-28">
+      <div className="max-w-6xl mx-auto px-8 md:px-12">
 
-            {/* Heading in Uppercase & Black Weight */}
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase text-[var(--color-text)] leading-tight tracking-wide">
-              Sağlıklı Gülüşler,
-              <br />
-              Mutlu Yarınlar
-            </h1>
+        {/* ── Main grid ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-            <p className="text-xs md:text-sm text-[#6e675f] leading-relaxed max-w-xl font-medium">
-              Diş Hekimi Hakan Saylam liderliğinde; modern teknoloji, tam sterilizasyon standartları ve kişiye özel hekim yaklaşımıyla Çankaya'daki modern kliniğimizde hizmetinizdeyiz.
+          {/* Left */}
+          <div className="flex flex-col gap-8">
+            <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[var(--color-accent)]">
+              YDA Center · Ankara
             </p>
 
-            {/* Buttons with Active Scale Effect */}
-            <div className="flex flex-col sm:flex-row gap-4 mt-2">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase text-[var(--color-text)] leading-[1.05]">
+              Sağlıklı<br />Gülüşler,<br />Mutlu Yarınlar
+            </h1>
+
+            <p className="text-sm text-[#6e675f] leading-relaxed max-w-md">
+              Diş Hekimi Hakan Saylam liderliğinde; modern teknoloji, tam sterilizasyon
+              standartları ve kişiye özel yaklaşımıyla Çankaya'da hizmetinizdeyiz.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <button
-                onClick={() => handleScroll("#iletisim")}
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-light)] text-xs font-black uppercase tracking-wider rounded-lg shadow-md active:scale-95 transition-all duration-200 cursor-pointer"
+                onClick={() => scroll("#iletisim")}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-light)] text-xs font-black uppercase tracking-wider rounded-lg shadow-md active:scale-95 transition-all duration-200 cursor-pointer"
               >
-                <Calendar size={15} />
+                <Calendar size={14} />
                 Randevu Al
               </button>
               <a
-                href={`https://wa.me/905446911877?text=Merhaba,%20di%C5%9F%20tedavisi%20ve%20randevu%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum.`}
+                href={`https://wa.me/905446911877?text=Merhaba,%20randevu%20almak%20istiyorum.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#25D366] text-white hover:bg-[#1ebd5b] text-xs font-black uppercase tracking-wider rounded-lg shadow-md active:scale-95 transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#25D366] text-white hover:bg-[#1ebd5b] text-xs font-black uppercase tracking-wider rounded-lg shadow-md active:scale-95 transition-all duration-200"
               >
-                <MessageSquare size={15} />
-                WhatsApp Danışma
+                <MessageSquare size={14} />
+                WhatsApp
               </a>
             </div>
-
           </div>
 
-          {/* Right Image Column */}
-          <div className="lg:col-span-6">
-            <div className="relative w-full h-[320px] md:h-[450px] rounded-3xl overflow-hidden border border-gray-200 shadow-2xl flex items-center justify-center bg-gray-50">
-              <Image
-                src="/images/projects/entrance.jpg"
-                alt="Hakan Saylam Diş Kliniği Giriş Alanı"
-                fill
-                unoptimized
-                className="object-cover transition-all duration-500 hover:scale-103"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10" />
-            </div>
+          {/* Right */}
+          <div className="relative w-full h-[360px] md:h-[480px] rounded-2xl overflow-hidden border border-gray-200 shadow-xl">
+            <Image
+              src="/images/projects/entrance.jpg"
+              alt="Hakan Saylam Diş Kliniği"
+              fill
+              unoptimized
+              className="object-cover"
+              priority
+            />
           </div>
-
         </div>
 
-        {/* Advantage Cards Grid (Quattro Garaj Style) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-8 border-t border-gray-150">
-          {features.slice(0, 4).map((item, index) => (
+        {/* ── Feature cards ── */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-16 pt-12 border-t border-gray-150">
+          {features.slice(0, 4).map((item, i) => (
             <div
               key={item.title}
-              className="flex gap-4 p-5 rounded-xl bg-white border border-gray-200 hover:border-[var(--color-accent)]/35 shadow-sm transition-all duration-300 group"
+              className="flex gap-3 p-5 rounded-xl bg-[#FAFAFA] border border-gray-200 hover:border-[var(--color-accent)]/30 transition-colors duration-200"
             >
-              <div className="flex-shrink-0 p-2.5 rounded-lg bg-gray-50 border border-gray-200 group-hover:bg-[var(--color-accent)]/10 group-hover:border-[var(--color-accent)]/20 transition-all duration-300 h-fit">
-                {featureIcons[index]}
+              <div className="flex-shrink-0 p-2 rounded-lg bg-white border border-gray-200 h-fit">
+                {featureIcons[i]}
               </div>
-              <div className="flex flex-col">
-                <h3 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text)]">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-[#6e675f] mt-2 leading-relaxed font-light">
-                  {item.desc}
-                </p>
+              <div>
+                <p className="text-[12px] font-black uppercase text-[var(--color-text)]">{item.title}</p>
+                <p className="text-[11px] text-[#6e675f] mt-1 leading-snug">{item.desc}</p>
               </div>
             </div>
           ))}
