@@ -111,6 +111,9 @@ if (form) {
 
     const name = document.getElementById('name').value.trim();
     const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value.trim();
 
     if (!name || !phone) {
       formNote.textContent = 'Lütfen ad soyad ve telefon numaranızı girin.';
@@ -118,17 +121,30 @@ if (form) {
       return;
     }
 
-    /* Simulate sending */
-    submitBtn.textContent = 'Gönderiliyor...';
+    submitBtn.textContent = 'WhatsApp\'a Yönlendiriliyor...';
     submitBtn.disabled = true;
 
+    // Construct WhatsApp message content
+    let waText = `Merhaba, Diş Hekimi Hakan Saylam web sitenizden yeni bir randevu talebi oluşturuldu:\n\n`;
+    waText += `*Ad Soyad:* ${name}\n`;
+    waText += `*Telefon:* ${phone}\n`;
+    if (email) waText += `*E-posta:* ${email}\n`;
+    if (subject) waText += `*Seçilen Tedavi:* ${subject}\n`;
+    if (message) waText += `*Mesaj:* ${message}\n`;
+
+    const waUrl = `https://wa.me/905446911877?text=${encodeURIComponent(waText)}`;
+
     setTimeout(() => {
-      formNote.textContent = '✓ Mesajınız alındı! En kısa sürede sizi arayacağız.';
+      formNote.textContent = '✓ Randevu talebi WhatsApp\'a aktarıldı. Lütfen mesajı gönderin.';
       formNote.className = 'form-note success';
+      
+      // Open WhatsApp in a new tab/app window
+      window.open(waUrl, '_blank');
+      
       form.reset();
       submitBtn.textContent = 'Randevu Talebi Gönder';
       submitBtn.disabled = false;
-    }, 1200);
+    }, 1000);
   });
 }
 
