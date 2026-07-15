@@ -10,56 +10,60 @@ export default function StorytellingSection() {
   ];
 
   return (
-    <section id="hekim" className="w-full bg-[#FAFAFA] py-24 md:py-32 border-b border-gray-150">
-      <div className="max-w-6xl mx-auto px-8 md:px-12">
+    <section id="hekim" className="w-full bg-white py-20 md:py-28">
+      <div className="max-w-5xl mx-auto px-6 md:px-10">
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-          {/* Portrait */}
-          <div className="relative w-full h-[380px] md:h-[520px] rounded-2xl overflow-hidden border border-gray-200 shadow-xl">
-            <Image
-              src="/images/projects/hakan_saylam.png"
-              alt="Dt. Hakan Saylam"
-              fill
-              unoptimized
-              className="object-cover object-top"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-            <div className="absolute bottom-8 left-8">
-              <p className="text-[10px] tracking-[0.25em] uppercase text-[var(--color-accent)] mb-1 font-black">Kurucu Diş Hekimi</p>
-              <h3 className="text-2xl font-black text-white uppercase">Dt. Hakan Saylam</h3>
-            </div>
-          </div>
-
-          {/* Text */}
-          <div className="flex flex-col gap-7">
-            <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[var(--color-accent)]">
-              Hekimimiz
-            </p>
-            <h2 className="text-4xl md:text-5xl font-black uppercase text-[var(--color-text)] leading-[1.05]">
-              Deneyim &amp;<br />Uzmanlık
-            </h2>
-            <p className="text-sm text-[#6e675f] leading-relaxed">
-              Ankara YDA Center'daki muayenehanemizde estetik diş hekimliği, implantoloji ve protetik tedaviler alanında 25 yıla yaklaşan deneyimimizle hizmet veriyoruz. Her tedaviyi hassasiyet ve uzmanlıkla gerçekleştiriyoruz.
-            </p>
-            <p className="text-sm text-[#6e675f] leading-relaxed">
-              3D tomografi, intraoral tarayıcılar ve otoklav sterilizasyon sistemleriyle hatasız teşhis ve hızlı tedavi süreçleri sağlıyoruz.
-            </p>
-
-            <div className="space-y-3 pt-2 border-t border-gray-150">
-              {quals.map((q, i) => (
-                <div key={i} className="flex gap-4 p-4 bg-white border border-gray-200 rounded-xl hover:border-[var(--color-accent)]/30 transition-colors">
-                  <div className="flex-shrink-0 p-2 rounded-lg bg-[#FAFAFA] border border-gray-200 h-fit">
-                    {q.icon}
-                  </div>
-                  <span className="text-[13px] font-bold text-[var(--color-text)] leading-snug self-center">{q.text}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
+        {/* ── Başlık – merkez ── */}
+        <div className="text-center mb-12">
+          <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[var(--color-accent)] mb-4">
+            Hekimimiz
+          </p>
+          <h2 className="text-4xl md:text-6xl font-black uppercase text-[var(--color-text)] leading-tight">
+            Dt. Hakan Saylam
+          </h2>
         </div>
+
+        {/* ── Hekim Fotoğrafı – tam genişlik ── */}
+        <div className="relative w-full h-[380px] md:h-[560px] rounded-2xl overflow-hidden border border-gray-200 shadow-xl mb-12">
+          <Image
+            src="/images/projects/hakan_saylam.png"
+            alt="Dt. Hakan Saylam"
+            fill
+            unoptimized
+            className="object-cover object-top"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          <div className="absolute bottom-8 left-8 right-8">
+            <p className="text-[10px] tracking-[0.25em] uppercase text-[var(--color-accent)] mb-1 font-black">
+              Kurucu Diş Hekimi
+            </p>
+            <p className="text-2xl md:text-3xl font-black text-white uppercase">Dt. Hakan Saylam</p>
+          </div>
+        </div>
+
+        {/* ── Açıklama ── */}
+        <div className="max-w-3xl mx-auto text-center mb-12">
+          <p className="text-base text-[#6e675f] leading-relaxed mb-4">
+            Ankara YDA Center'daki muayenehanemizde estetik diş hekimliği, implantoloji ve protetik tedaviler alanında 25 yıla yaklaşan deneyimimizle hizmet veriyoruz. Her tedaviyi hassasiyet ve uzmanlıkla gerçekleştiriyoruz.
+          </p>
+          <p className="text-base text-[#6e675f] leading-relaxed">
+            3D tomografi, intraoral tarayıcılar ve otoklav sterilizasyon sistemleriyle hatasız teşhis ve hızlı tedavi süreçleri sağlıyoruz.
+          </p>
+        </div>
+
+        {/* ── Nitelikler ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {quals.map((q, i) => (
+            <div key={i} className="flex flex-col items-center gap-3 p-6 bg-[#FAFAFA] border border-gray-200 rounded-xl text-center hover:border-[var(--color-accent)]/30 transition-colors">
+              <div className="p-3 rounded-xl bg-white border border-gray-200">
+                {q.icon}
+              </div>
+              <span className="text-sm font-bold text-[var(--color-text)] leading-snug">{q.text}</span>
+            </div>
+          ))}
+        </div>
+
       </div>
     </section>
   );

@@ -13,74 +13,71 @@ export default function CorporateAgreements() {
   const current = TABS.find((t) => t.key === active)!;
 
   return (
-    <section id="anlasmalar" className="w-full bg-[#FAFAFA] py-24 md:py-32">
-      <div className="max-w-6xl mx-auto px-8 md:px-12">
+    <section id="anlasmalar" className="w-full bg-[var(--color-text)] py-20 md:py-28">
+      <div className="max-w-5xl mx-auto px-6 md:px-10">
 
-        {/* ── Header ── */}
-        <div className="mb-16">
+        {/* ── Başlık ── */}
+        <div className="text-center mb-14">
           <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[var(--color-accent)] mb-4">
-            Kurumsal Anlaşmalar
+            Kurumsal Protokol
           </p>
-          <h2 className="text-4xl md:text-5xl font-black uppercase text-[var(--color-text)] leading-tight">
-            Anlaşmalı<br />Kurum &amp; Sigortalar
+          <h2 className="text-4xl md:text-6xl font-black uppercase text-white leading-tight mb-5">
+            Anlaşmalı Kurum<br />&amp; Sigortalar
           </h2>
-          <p className="mt-5 text-sm text-[#6e675f] max-w-xl leading-relaxed">
-            Aşağıdaki sigorta şirketleri ve kurumsal firmalar ile indirimli sağlık protokolümüz mevcuttur. Kurumunuz listede yer alıyorsa bizi arayın.
+          <p className="text-sm text-white/60 max-w-xl mx-auto leading-relaxed">
+            Aşağıdaki sigorta şirketleri ve kurumsal firmalar kapsamında indirimli tedavi protokolümüzden yararlanabilirsiniz.
           </p>
         </div>
 
-        {/* ── Tabs ── */}
-        <div className="flex gap-2 mb-12 border-b border-gray-200">
+        {/* ── Sekmeler ── */}
+        <div className="flex justify-center gap-3 mb-10">
           {TABS.map((tab) => {
             const Icon = tab.icon;
             return (
               <button
                 key={tab.key}
                 onClick={() => setActive(tab.key)}
-                className={`flex items-center gap-2 px-6 py-3.5 text-xs font-black uppercase tracking-wider border-b-2 transition-all duration-200 cursor-pointer -mb-px ${
+                className={`flex items-center gap-2 px-7 py-3 text-sm font-black uppercase tracking-wider rounded-full transition-all duration-200 cursor-pointer ${
                   active === tab.key
-                    ? "border-[var(--color-accent)] text-[var(--color-accent)]"
-                    : "border-transparent text-[#6e675f] hover:text-[var(--color-text)]"
+                    ? "bg-[var(--color-accent)] text-white"
+                    : "bg-white/10 text-white/60 hover:bg-white/20 hover:text-white"
                 }`}
               >
-                <Icon size={14} />
+                <Icon size={15} />
                 {tab.label}
-                <span className="ml-1 text-[10px] font-bold text-[#9e9e9e]">
-                  ({tab.items.length})
-                </span>
+                <span className="text-[11px] opacity-70">({tab.items.length})</span>
               </button>
             );
           })}
         </div>
 
-        {/* ── Partner Grid — fully visible, no modal ── */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+        {/* ── Firma Grid'i ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
           {current.items.map((name, idx) => (
             <div
               key={name}
-              className="flex items-center gap-3 px-5 py-4 bg-white border border-gray-200 rounded-xl hover:border-[var(--color-accent)]/40 hover:shadow-sm transition-all duration-200"
+              className="flex items-center gap-4 px-6 py-5 bg-white/[0.06] border border-white/10 rounded-xl hover:bg-white/10 hover:border-[var(--color-accent)]/50 transition-all duration-200"
             >
-              <span className="text-[10px] font-black text-[var(--color-accent)] min-w-[22px]">
+              <span className="text-[13px] font-black text-[var(--color-accent)] min-w-[28px]">
                 {String(idx + 1).padStart(2, "0")}
               </span>
-              <span className="text-[13px] font-bold text-[var(--color-text)] leading-snug">
-                {name}
-              </span>
+              <span className="text-base font-bold text-white leading-snug">{name}</span>
             </div>
           ))}
         </div>
 
-        {/* ── Bottom note ── */}
-        <p className="mt-10 text-[11px] text-[#6e675f] font-semibold uppercase tracking-widest text-center">
-          Anlaşma kapsamı ve tedavi detayları için{" "}
+        {/* ── Alt not ── */}
+        <div className="mt-12 text-center">
+          <p className="text-sm text-white/50 mb-3">
+            Kurumunuz listede yer alıyorsa anlaşma kapsamı için bizi arayın
+          </p>
           <a
             href="tel:03125020230"
-            className="text-[var(--color-accent)] underline underline-offset-2"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--color-accent)] text-white text-sm font-black uppercase tracking-wider rounded-lg hover:bg-[var(--color-accent-light)] active:scale-95 transition-all"
           >
             0 (312) 502 02 30
-          </a>{" "}
-          numaralı hattımızı arayabilirsiniz.
-        </p>
+          </a>
+        </div>
 
       </div>
     </section>
