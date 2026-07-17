@@ -68,7 +68,7 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 
-document.querySelectorAll('.service-card, .about-grid, .gallery-item, .ins-col, .contact-card').forEach(el => {
+document.querySelectorAll('.service-card, .about-grid, .gallery-item, .ins-col, .contact-card, .tzh-callout').forEach(el => {
   el.classList.add('reveal');
   revealObserver.observe(el);
 });
