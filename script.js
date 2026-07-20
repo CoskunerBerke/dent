@@ -121,10 +121,26 @@ if (form) {
       return;
     }
 
-    submitBtn.textContent = 'Gönderiliyor...';
-    submitBtn.disabled = true;
+    // Format WhatsApp Message
+    const formattedMessage = `Merhaba, web siteniz üzerinden randevu talebi oluşturmak istiyorum:
 
-    // Prepare form data
+*Ad Soyad:* ${name}
+*Telefon:* ${phone}
+*E-posta:* ${email ? email : 'Belirtilmedi'}
+*İlgi Alanı / Tedavi:* ${subject}
+*Mesaj:* ${message ? message : 'Belirtilmedi'}`;
+
+    const whatsappUrl = `https://wa.me/905446911877?text=${encodeURIComponent(formattedMessage)}`;
+
+    // Open WhatsApp in a new tab (not blocked by pop-up blockers since it's synchronous)
+    window.open(whatsappUrl, '_blank');
+
+    // Show instant success feedback and reset the form
+    formNote.textContent = '✓ Randevu talebiniz alındı, WhatsApp\'a yönlendiriliyorsunuz...';
+    formNote.className = 'form-note success';
+    form.reset();
+
+    // Background email dispatch so the assistant also logs it in their mailbox
     const formData = new FormData();
     formData.append('name', name);
     formData.append('phone', phone);
@@ -132,30 +148,16 @@ if (form) {
     formData.append('subject', subject);
     formData.append('message', message);
 
-    // Send using Fetch API to PHP backend
     fetch('send_mail.php', {
       method: 'POST',
       body: formData
     })
     .then(response => response.json())
     .then(data => {
-      if (data.status === 'success') {
-        formNote.textContent = '✓ Randevu talebiniz başarıyla iletildi. En kısa sürede size dönüş yapılacaktır.';
-        formNote.className = 'form-note success';
-        form.reset();
-      } else {
-        formNote.textContent = 'Hata: ' + data.message;
-        formNote.className = 'form-note error';
-      }
-      submitBtn.textContent = 'Randevu Talebi Gönder';
-      submitBtn.disabled = false;
+      console.log('Background mail status:', data);
     })
     .catch(error => {
-      console.error('Error:', error);
-      formNote.textContent = 'E-posta gönderilirken bir hata oluştu. Lütfen doğrudan arayarak randevu alınız.';
-      formNote.className = 'form-note error';
-      submitBtn.textContent = 'Randevu Talebi Gönder';
-      submitBtn.disabled = false;
+      console.error('Background mail error:', error);
     });
   });
 }
