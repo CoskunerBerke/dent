@@ -52,11 +52,10 @@ A lightweight, framework-free clinic site in Turkish. Patients can learn about t
 No build step or dependencies.
 
 ```bash
-# Static preview (the email relay will not run)
-open index.html
+# Static preview: open index.html in a browser (the email relay will not run)
 
 # Full preview including send_mail.php (requires PHP; mail() must be configured to actually send)
-php -S localhost:8000
+php -S localhost:8000   # then visit http://localhost:8000
 ```
 
 ### Configuration
